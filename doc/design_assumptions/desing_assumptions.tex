@@ -1,0 +1,49 @@
+\documentclass[a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[polish]{babel}
+\usepackage{polski}
+\usepackage[margin=0.9in]{geometry}
+
+\author{Marcin Ochman \\* \textit{200546}}
+\title{ Projekt z Wizualizacji Danych Sensorycznych \\* 
+	\huge{\uppercase{\textbf{Computer Monitor}}}}
+\date{}
+
+\begin{document}
+	\maketitle
+	
+	\section{Osoby uczestniczące w projekcie}
+		Projekt zostanie wykonany przez \textit{Marcina Ochmana}.
+		
+	\section{Założenia projektowe}
+	Celem projektu jest napisanie aplikacji \textit{,,Computer Monitor''} przeznaczoną na komputery osobiste, która:
+	\begin{itemize}
+		\item pozwala na monitorowanie pracy komputera(ów), z którym(i) komputer jest połączony poprzez sieć
+		\item pracuje w różnych trybach:
+		\begin{enumerate}
+			\item tryb wizualizacji
+			\item tryb raportowania
+			\item połączenie dwóch poprzednich trybów
+		\end{enumerate}
+		\item potrafi zapamiętać ustawienia użytkownika, w tym m.in. tryb działania aplikacji
+		\item posiada przejrzysty, intuicyjny, atrakcyjny oraz konfigurowalny interfejs użytkownika
+		\item pomimo realizowanej komunikacji poprzez sieć, jest wysoce 
+		interaktywna
+		\item docelową platformą jest system Linux, jednak zostaną poczynione wszelkie starania, aby aplikacja działała również na systemach Windows
+	\end{itemize}
+	
+	\section{Opis poszczególnych trybów pracy}
+	Poniżej zostały opisane poszczególne tryby pracy aplikacji.
+	
+	\subsection{Tryb wizualizacji}
+		W tym trybie program prezentuje dane, które są pobierane poprzez sieć. Pozwala na śledzenie wartości poszczególnych wielkości opisujących stan komputera oraz prezentowanie danych na wykresach - zależności czasowe oraz diagramach - monitorowanie i alarmowanie poprawności funkcjonowania systemu, zużycie zasobów komputera. Progi alarmowe można również zdefiniować samodzielnie.
+	
+	\subsection{Tryb raportowania}
+		Program działający w trybie raportowania ma za zadanie śledzenie pracy komputera oraz wysyłanie zebranych informacji poprzez sieć. Użytkownik ma możliwość wyboru danych, które zostaną wysłane. Aplikacja będzie działać w systemowym zasobniku.
+	
+	\subsection{Tryb łączony}
+		Jest to połączenie dwóch poprzednich trybów. Pozwala na jednoczesne wizualizowanie aktualnego stanu komputera, na którym została uruchomiona aplikacja oraz wysyłanie zebranych informacji poprzez sieć.
+	
+	
+\end{document}
