@@ -10,27 +10,18 @@
 #include <iostream>
 #include <QApplication>
 #include "ComputerMonitorMainWindow.hpp"
-#include <QPropertyAnimation>
-#include <QPushButton>
-//#include <QQuickView>
-
+#include <QQuickView>
+#include <QQmlApplicationEngine>
 
 int main(int argc, char* argv[])
 {
-	//QQuickView view;
+	QApplication app(argc,argv);
+    QQmlApplicationEngine engine;
+    engine.load(QUrl("qrc:qml/ComputerMonitorMainWindow.qml"));
+    QObject* topObject=engine.rootObjects().value(0);
+    QQuickWindow* wnd = qobject_cast<QQuickWindow*>(topObject);
+    wnd->show();
 
-	QApplication app(argc, argv);
-	QPushButton button("Animated Button");
-	button.show();
-
-	QPropertyAnimation animation(&button, "geometry");
-	animation.setDuration(10000);
-
-	animation.setKeyValueAt(0, QRect(0, 0, 100, 30));
-	animation.setKeyValueAt(0.8, QRect(250, 250, 100, 30));
-	animation.setKeyValueAt(1, QRect(0, 0, 100, 30));
-
-	animation.start();
 	return app.exec();
 }
 
