@@ -1,0 +1,2 @@
+add_subdirectory(SystemMonitoringLib)
+add_subdirectory(SystemMonitoringNetworkLib)
