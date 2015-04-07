@@ -12,9 +12,11 @@
 #include "ComputerMonitorMainWindow.hpp"
 #include <QQuickView>
 #include <QQmlApplicationEngine>
+#include <sensors/sensors.h>
 
 int main(int argc, char* argv[])
 {
+	sensors_init(0);
 	QApplication app(argc,argv);
     QQmlApplicationEngine engine;
     engine.load(QUrl("qrc:qml/ComputerMonitorMainWindow.qml"));
@@ -22,6 +24,8 @@ int main(int argc, char* argv[])
     QQuickWindow* wnd = qobject_cast<QQuickWindow*>(topObject);
     wnd->show();
 
+//    ComputerMonitorMainWindow mainWindow;
+//    mainWindow.show();
 	return app.exec();
 }
 
