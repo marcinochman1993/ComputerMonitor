@@ -18,14 +18,8 @@ int main(int argc, char* argv[])
 {
 	sensors_init(0);
 	QApplication app(argc,argv);
-    QQmlApplicationEngine engine;
-    engine.load(QUrl("qrc:qml/ComputerMonitorMainWindow.qml"));
-    QObject* topObject=engine.rootObjects().value(0);
-    QQuickWindow* wnd = qobject_cast<QQuickWindow*>(topObject);
-    wnd->show();
 
-//    ComputerMonitorMainWindow mainWindow;
-//    mainWindow.show();
+    ComputerMonitorMainWindow mainWindow;
+    mainWindow.show();
 	return app.exec();
 }
-
