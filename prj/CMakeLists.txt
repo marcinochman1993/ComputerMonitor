@@ -1,33 +1,45 @@
+# -------- definicja zmiennych  ---------
+set(UI_INC_DIR ${CMAKE_CURRENT_BINARY_DIR}/ui/inc/)
+set(INC_DIR inc/ inc/gui/  
+  ${CMAKE_CURRENT_BINARY_DIR}/${UI_INC_DIR}
+  lib/SystemMonitoringLib/inc
+  lib/SystemMonitoringNetworkLib/inc)
+set(QT5_COMPONENTS Widgets Quick Core)
+set(ADDITIONAL_LIBS Qt5::Widgets Qt5::Quick Qt5::Core 
+  QCustomPlot SystemMonitoringNetworkLib
+  SystemMonitoringLib)
+# -------- dodanie podkatalogu  ---------
 add_subdirectory(lib)
 
-find_package(Qt5 COMPONENTS Widgets Quick Core)
-find_library(SENSORS_LIBS sensors)
+# -------- znajdowanie potrzebnych bibliotek ---------
+find_package(Qt5 COMPONENTS ${QT5_COMPONENTS})
 
+# -------- ustawienia kompilacji  ---------
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
-
+set(QT5_WRAP_UI_DIR ${UI_INC_DIR})
 if(UNIX)
-	add_definitions("-std=c++11")
-        if(DEBUG)
-            add_definitions("-g")
-        endif(DEBUG)
+  add_definitions("-std=c++11 -pedantic -Wall")
 endif(UNIX)
 
-include_directories(inc)
+include_directories(${INC_DIR})
 
+# -------- pliki potrzebne do kompilacji  ---------
 file(GLOB SOURCES src/*.cpp)
 file(GLOB FORMS ui/*.ui)
 file(GLOB RSRCS rsrc/*.qrc)
-file(GLOB QML_SRCS rsrc/qml/*.qml)
+file(GLOB QOBJECT_HEADERS inc//gui/*.hpp)
 
-#set(computer_monitor_BIN_PATH "${CMAKE_CURRENT_SOURCE_DIR}/app")
-set(QOBJECT_HEADERS inc/ComputerMonitorMainWindow.hpp)
-
+# -------- uruchomienie moc, uic, rcc  ---------
 qt5_wrap_cpp(computer_monitor_HEADERS_MOC ${QOBJECT_HEADERS} )
-qt5_wrap_ui(computer_monitor_FORMS_HEADERS ${FORMS} )
+qt5_wrap_ui(computer_monitor_FORMS_HEADERS ${FORMS})
 qt5_add_resources(computer_monitor_RSRCS ${RSRCS})
 
+# -------- niestety nie da się zmusić makra qt5_wrap_cpp -------
+# -------- aby wygenerował pliki do odpowiedniego folderu -------
 
+# -------- ustawienia kompilacji  ---------
 add_executable(computer_monitor ${SOURCES} ${computer_monitor_HEADERS_MOC}
-        ${computer_monitor_FORMS_HEADERS} ${computer_monitor_RSRCS} ${QML_SRCS})
+  ${computer_monitor_FORMS_HEADERS} ${computer_monitor_RSRCS} ${QML_SRCS})
 
-target_link_libraries(computer_monitor Qt5::Widgets Qt5::Quick Qt5::Core ${SENSORS_LIBS} QCustomPlot)
+# -------- konsolidacja  ---------
+target_link_libraries(computer_monitor ${ADDITIONAL_LIBS} )

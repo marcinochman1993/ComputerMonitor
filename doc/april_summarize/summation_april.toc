@@ -1,0 +1,10 @@
+\select@language {polish}
+\contentsline {section}{\numberline {1}Wprowadzenie}{2}
+\contentsline {section}{\numberline {2}Lista wykonanych zada\IeC {\'n} w projekcie}{2}
+\contentsline {section}{\numberline {3}Szczeg\IeC {\'o}\IeC {\l }owy opis wykonanych zada\IeC {\'n}}{2}
+\contentsline {subsection}{\numberline {3.1}Stworzenie zal\IeC {\k a}\IeC {\.z}ka aplikacji}{2}
+\contentsline {subsubsection}{\numberline {3.1.1}Struktura folder\IeC {\'o}w projektu}{2}
+\contentsline {subsubsection}{\numberline {3.1.2}Architektura aplikacji}{2}
+\contentsline {subsection}{\numberline {3.2}Biblioteka \textit {SystemMonitoringLib}}{2}
+\contentsline {section}{\numberline {4}Nast\IeC {\k e}pne zadania do wykonania}{2}
+\contentsline {section}{\numberline {5}Podsumowanie}{2}

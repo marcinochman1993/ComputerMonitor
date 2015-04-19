@@ -8,16 +8,16 @@
 #ifndef COMPUTERMONITORLIB_PROCESSORINFO_HPP_
 #define COMPUTERMONITORLIB_PROCESSORINFO_HPP_
 
-#include <string>
+#include "HardwareInfo.hpp"
 
-class ProcessorInfo
+
+class ProcessorInfo: public HardwareInfo
 {
 	public:
 		double frequency(unsigned int coreNum) const;
 		double maxFrequency(unsigned int coreNum) const;
-		double voltage(unsigned int coreNum) const;
-		double temperature(unsigned int coreNum) const;
-		const std::string& name() const { return m_name; }
+		std::string name() const override { return m_name; }
+		double usage(unsigned int coreNum) const;
 	private:
 		std::string m_name;
 };

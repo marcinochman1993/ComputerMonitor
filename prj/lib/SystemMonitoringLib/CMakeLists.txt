@@ -1,5 +1,24 @@
+# ------- definicja zmiennych --------
+set(SystemMonitoringLib_NAME "SystemMonitoringLib")
+set(SystemMonitoringLib_INC_DIRS inc/)
+
+# -------- znalezienie dodatkowych bibliotek --------
+if(UNIX)
+  find_library(SENSORS_LIBS sensors)
+endif(UNIX)
+
+# ------- ustawianie opcji kompilacji -----
+if(UNIX)
+  add_definitions("-std=c++11 -pedantic -Wall")
+endif(UNIX)
+
+# ------- dodawanie źródeł biblioteki --------
 file(GLOB SystemMonitoringLib_SOURCES src/*.cpp)
 
-include_directories(inc)
+# ------- foldery plików nagłówkowych --------
+include_directories(${SystemMonitoringLib_INC_DIRS})
 
-add_library(SystemMonitoringLib ${SystemMonitoringLib_SOURCES}) 
+# ------- dodanie biblioteki do kompilacji ------
+add_library(${SystemMonitoringLib_NAME} ${SystemMonitoringLib_SOURCES})
+
+target_link_libraries(${SystemMonitoringLib_NAME} ${SENSORS_LIBS}) 

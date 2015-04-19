@@ -13,13 +13,16 @@
 #include <QQuickView>
 #include <QQmlApplicationEngine>
 #include <sensors/sensors.h>
+#include "SensorInfo.hpp"
 
 int main(int argc, char* argv[])
 {
-	sensors_init(0);
-	QApplication app(argc,argv);
-
-    ComputerMonitorMainWindow mainWindow;
-    mainWindow.show();
-	return app.exec();
+//  sensors_init(0);
+//  QApplication app(argc, argv);
+//
+//  ComputerMonitorMainWindow mainWindow;
+//  mainWindow.show();
+//  return app.exec();
+  for(const auto& i:SensorInfo::allSensors())
+    std::cout<<i<<std::endl;
 }
