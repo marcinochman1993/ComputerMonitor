@@ -49,16 +49,13 @@ bool SensorInfo::initAllSensors()
       while ((subfeature = sensors_get_all_subfeatures(chipName, feature,
           &subfeatureNum)) != 0)
       {
-        double value;
         if ((subfeature->flags & SENSORS_MODE_R)
-            && (subfeature->type == SENSORS_SUBFEATURE_TEMP_INPUT)) // sprawdzenie czy wartość można odczytać
+            && (((subfeature->type == SENSORS_SUBFEATURE_TEMP_INPUT)
+                || (subfeature->type == SENSORS_SUBFEATURE_IN_INPUT))
+            || (subfeature->type == SENSORS_SUBFEATURE_POWER_INPUT)
+            || (subfeature->type == SENSORS_SUBFEATURE_FAN_INPUT))) // sprawdzenie czy wartość można odczytać
         {
-
-          if (sensors_get_value(chipName, subfeature->number, &value) < 0)
             s_sensorsVector.push_back(SensorInfo(chipName, subfeature));
-          else
-            s_sensorsVector.push_back(SensorInfo(chipName, subfeature, value));
-
         }
       }
     }
@@ -69,6 +66,6 @@ bool SensorInfo::initAllSensors()
 
 std::ostream& operator<<(std::ostream& os, const SensorInfo& sensor)
 {
-  os<<sensor.name()<<":"<<sensor.value();
+  os << sensor.name() << ":" << sensor.value();
   return os;
 }

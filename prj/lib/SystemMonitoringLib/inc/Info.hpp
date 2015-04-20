@@ -8,11 +8,17 @@
 #ifndef INFO_HPP_
 #define INFO_HPP_
 
+#include <chrono>
+
+
 class Info
 {
   public:
-    virtual bool update() { return true; };
+    virtual bool update() {  m_lastUpdated=std::chrono::system_clock::now(); return true; };
+    virtual const std::chrono::system_clock::time_point & lastUpdated() const { return m_lastUpdated; };
     virtual ~Info() { }
+  private:
+    std::chrono::system_clock::time_point m_lastUpdated;
 };
 
 

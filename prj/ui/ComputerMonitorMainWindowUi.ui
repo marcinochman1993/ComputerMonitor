@@ -63,6 +63,11 @@
        <attribute name="title">
         <string>Sensors Info</string>
        </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="SensorsWidget" name="widget_2" native="true"/>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="tab_4">
        <attribute name="title">
@@ -138,6 +143,14 @@
    </property>
   </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>SensorsWidget</class>
+   <extends>QWidget</extends>
+   <header>SensorsWidget.hpp</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>

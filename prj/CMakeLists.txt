@@ -1,6 +1,6 @@
 # -------- definicja zmiennych  ---------
 set(UI_INC_DIR ${CMAKE_CURRENT_BINARY_DIR}/ui/inc/)
-set(INC_DIR inc/ inc/gui/  
+set(INC_DIR inc/ inc/gui/ inc/models
   ${CMAKE_CURRENT_BINARY_DIR}/${UI_INC_DIR}
   lib/SystemMonitoringLib/inc
   lib/SystemMonitoringNetworkLib/inc)
@@ -24,9 +24,9 @@ endif(UNIX)
 include_directories(${INC_DIR})
 
 # -------- pliki potrzebne do kompilacji  ---------
-file(GLOB SOURCES src/*.cpp)
-file(GLOB FORMS ui/*.ui)
-file(GLOB RSRCS rsrc/*.qrc)
+file(GLOB_RECURSE SOURCES src/*.cpp)
+file(GLOB_RECURSE FORMS ui/*.ui)
+file(GLOB_RECURSE RSRCS rsrc/*.qrc)
 file(GLOB QOBJECT_HEADERS inc//gui/*.hpp)
 
 # -------- uruchomienie moc, uic, rcc  ---------
@@ -40,6 +40,8 @@ qt5_add_resources(computer_monitor_RSRCS ${RSRCS})
 # -------- ustawienia kompilacji  ---------
 add_executable(computer_monitor ${SOURCES} ${computer_monitor_HEADERS_MOC}
   ${computer_monitor_FORMS_HEADERS} ${computer_monitor_RSRCS} ${QML_SRCS})
+
+add_dependencies(computer_monitor doc)
 
 # -------- konsolidacja  ---------
 target_link_libraries(computer_monitor ${ADDITIONAL_LIBS} )
