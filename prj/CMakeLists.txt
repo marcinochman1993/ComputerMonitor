@@ -3,9 +3,10 @@ set(UI_INC_DIR ${CMAKE_CURRENT_BINARY_DIR}/ui/inc/)
 set(INC_DIR inc/ inc/gui/ inc/models
   ${CMAKE_CURRENT_BINARY_DIR}/${UI_INC_DIR}
   lib/SystemMonitoringLib/inc
-  lib/SystemMonitoringNetworkLib/inc)
-set(QT5_COMPONENTS Widgets Quick Core)
-set(ADDITIONAL_LIBS Qt5::Widgets Qt5::Quick Qt5::Core 
+  lib/SystemMonitoringNetworkLib/inc
+  lib/QCustomPlot/)
+set(QT5_COMPONENTS Widgets Quick Core PrintSupport)
+set(ADDITIONAL_LIBS Qt5::Widgets Qt5::Quick Qt5::Core Qt5::PrintSupport
   QCustomPlot SystemMonitoringNetworkLib
   SystemMonitoringLib)
 # -------- dodanie podkatalogu  ---------

@@ -9,13 +9,16 @@
 #define COMPUTERINFO_HPP_
 
 #include "Info.hpp"
-#include "SensorInfo.hpp"
+#include "SensorsVector.hpp"
 
 class ComputerInfo: public Info
 {
   public:
-    //bool update() override;
-    const std::vector<SensorInfo>& allSensors() { return SensorInfo::allSensors(); }
+    ComputerInfo(): m_sensors(SensorInfo::allSensors()) { }
+    bool update() override;
+    const SensorsVector& allSensors() const { return m_sensors; }
+  private:
+    SensorsVector m_sensors;
 };
 
 

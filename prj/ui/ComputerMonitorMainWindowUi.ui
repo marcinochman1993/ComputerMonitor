@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
+    <width>1126</width>
     <height>600</height>
    </rect>
   </property>
@@ -83,7 +83,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>1126</width>
      <height>20</height>
     </rect>
    </property>
@@ -151,7 +151,9 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../rsrc/AppResources.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>actionExit</sender>

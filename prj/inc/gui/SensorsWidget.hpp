@@ -22,6 +22,7 @@ class SensorsWidget: public QWidget, Ui::UiSensorsWidget
       auto model = new AllSensorsModel();
       model->computerInfo(new ComputerInfo());
       tableView->setModel(model);
+      tableView->resizeColumnsToContents();
     }
 };
 

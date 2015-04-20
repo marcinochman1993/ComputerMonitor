@@ -1,12 +1,12 @@
 /*
- * SensorsList.hpp
+ * SensorsVector.hpp
  *
  *  Created on: Apr 20, 2015
  *      Author: mochman
  */
 
-#ifndef SENSORSLIST_HPP_
-#define SENSORSLIST_HPP_
+#ifndef SENSORSVECTOR_HPP_
+#define SENSORSVECTOR_HPP_
 
 #include <vector>
 #include "SensorInfo.hpp"
@@ -14,8 +14,9 @@
 class SensorsVector: public std::vector<SensorInfo>, public Info
 {
   public:
+    SensorsVector(const std::vector<SensorInfo>& sensors):std::vector<SensorInfo>(sensors) { }
     bool update() override;
 };
 
 
-#endif /* PRJ_LIB_SYSTEMMONITORINGLIB_INC_SENSORSLIST_HPP_ */
+#endif /* SENSORSVECTOR_HPP_ */
