@@ -41,7 +41,5 @@ qt5_add_resources(computer_monitor_RSRCS ${RSRCS})
 add_executable(computer_monitor ${SOURCES} ${computer_monitor_HEADERS_MOC}
   ${computer_monitor_FORMS_HEADERS} ${computer_monitor_RSRCS} ${QML_SRCS})
 
-add_dependencies(computer_monitor doc)
-
 # -------- konsolidacja  ---------
 target_link_libraries(computer_monitor ${ADDITIONAL_LIBS} )

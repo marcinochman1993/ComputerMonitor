@@ -15,7 +15,7 @@ class ComputerInfo: public Info
 {
   public:
     //bool update() override;
-    static const std::vector<SensorInfo>& allSensors() { return SensorInfo::allSensors(); }
+    const std::vector<SensorInfo>& allSensors() { return SensorInfo::allSensors(); }
 };
 
 
