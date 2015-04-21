@@ -14,8 +14,7 @@
 class HardwareInfo: public Info
 {
   public:
-    virtual std::string name() const { return std::string(""); }
+    virtual std::string name() const { return std::string(); }
 };
 
-
-#endif /* PRJ_LIB_SYSTEMMONITORINGLIB_INC_HARDWAREINFO_HPP_ */
+#endif /* HARDWAREINFO_HPP_ */

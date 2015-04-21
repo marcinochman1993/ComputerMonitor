@@ -9,13 +9,14 @@
 #define INFO_HPP_
 
 #include <chrono>
-
+#include <string>
 
 class Info
 {
   public:
     virtual bool update() {  m_lastUpdated=std::chrono::system_clock::now(); return true; };
     virtual const std::chrono::system_clock::time_point & lastUpdated() const { return m_lastUpdated; };
+    virtual std::string name() const { return std::string(); }
     virtual ~Info() { }
   private:
     std::chrono::system_clock::time_point m_lastUpdated;

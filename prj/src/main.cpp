@@ -12,21 +12,26 @@
 #include <QSplashScreen>
 #include <QTimer>
 #include "SensorInfo.hpp"
+#include "ModeSelectionDialog.hpp"
 
 int main(int argc, char* argv[])
 {
   const int SPLASH_SCREEN_TIME_MS = 2500;
   QApplication app(argc, argv);
 
-  QSplashScreen* splashScreen = new QSplashScreen();
-  splashScreen->setPixmap(QPixmap(":/images/images/splash.png"));
+//  QSplashScreen* splashScreen = new QSplashScreen();
+//  splashScreen->setPixmap(QPixmap(":/images/images/splash.png"));
 
   ComputerMonitorMainWindow mainWindow;
-  splashScreen->show();
+//  splashScreen->show();
 
-  QTimer::singleShot(SPLASH_SCREEN_TIME_MS, splashScreen, SLOT(close()));
-  QTimer::singleShot(SPLASH_SCREEN_TIME_MS, &mainWindow, SLOT(show()));
+//  QTimer::singleShot(SPLASH_SCREEN_TIME_MS, splashScreen, SLOT(close()));
+//  QTimer::singleShot(SPLASH_SCREEN_TIME_MS, &mainWindow, SLOT(show()));
 
-//  mainWindow.show();
+  ModeSelectionDialog dialog;
+    dialog.exec();
+
+    mainWindow.show();
+
   return app.exec();
 }
