@@ -11,6 +11,9 @@
 #include <chrono>
 #include <string>
 
+/*!
+ *
+ */
 class Info
 {
   public:

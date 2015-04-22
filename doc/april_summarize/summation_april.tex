@@ -30,7 +30,6 @@
 
 W ciągu miesiąca tj. 18.03-23.04 zostało wykonanych wiele prac nad aplikacją. W tym dokumencie opisano wykonane i przewidywane na następny miesiąc zadania oraz komentarz autora na temat postępów prac nad aplikacją.
 
-
 \section{Lista wykonanych zadań w projekcie}
 
 W poniższej tabeli zostały zebrane zadania, które udało się zrealizować do dnia 23.04.2015r.
@@ -54,20 +53,27 @@ W poniższej tabeli zostały zebrane zadania, które udało się zrealizować do
 \section{Szczegółowy opis wykonanych zadań}
 
 \subsection{Opracowanie architektury aplikacji}
-Program będzie opierać się na bibliotekach \textit{Qt5} i \textit{QCustomPlot}, które posłużą do prezentacji danych oraz dwóch autorskich bibliotek, które zostały opisane w następnych punktach: \textit{SystemMonitoringLib} oraz \textit{SystemMonitoringNetworkLib}. Biblioteki monitorujące będą komunikować się z wartswą prezentacji za pomocą odpowiedniej klasy pośredniczącej. Aplikacja została napisana przy wykorzystaniu wzorca projektowego \textit{MVC}. Diagram budowy aplikacji został przedstawiony na rysunku \ref{diagram_budowy_aplikacji}, a diagramy klas zostały przedstawione na rysunku \ref{diagram_klas}.
+Program będzie opierać się na bibliotekach \textit{Qt5} i \textit{QCustomPlot}, które posłużą do prezentacji danych oraz dwóch autorskich bibliotek, które zostały opisane w następnych punktach: \textit{SystemMonitoringLib}. Biblioteki monitorujące będą komunikować się z warstwą prezentacji za pomocą odpowiedniej klasy pośredniczącej. Aplikacja została napisana przy wykorzystaniu wzorca projektowego \textit{MVC}. Diagram budowy aplikacji został przedstawiony na rysunku \ref{diagram_budowy_aplikacji}, a diagramy klas zostały przedstawione na rysunkach \ref{diagram_klas_system_monitoring} oraz \ref{diagram_klas_gui}.
 
-%\begin{figure}[h]
-%	\centering
-%	\includegraphics{img/diagramBudowyAplikacji.png}
-%\end{figure}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\linewidth]{img/diagramBudowyAplikacji.png}
+\end{figure}
 
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.75\paperheight, angle=90]{img/diagramKlas.png}
-	\caption{Diagram UML stworzonych klas}
+	\caption{Diagram UML stworzonych klas niezwiązanych z interfejsem użytkownika}
+	\label{diagram_klas_system_monitoring}
 \end{figure}
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.75\paperheight, angle=90]{img/diagramKlasGui.png}
+	\caption{Diagram UML stworzonych klas}
+	\label{diagram_klas_gui}
+\end{figure}
 
 \subsection{Stworzenie zalążka aplikacji}
 
@@ -94,7 +100,7 @@ W głównym folderze aplikacji znajdują się dwa foldery: \textit{doc} oraz \te
 \end{tabularx}
 
 \label{opis_folderow_prj}
-\caption{title}
+\caption{Opis poszczególnych folderów w katalogu \textit{prj/}}
 \end{table}
 
 \subsubsection{Proces kompilacji oraz opis narzędzia \textit{CMake}}
@@ -102,7 +108,7 @@ Program \textit{CMake} to wieloplatformowy system do budowania aplikacji. Dzięk
 znajdowanie odpowiednich plików nagłówkowych oraz bibliotek oraz kompilacja na różnych platformach (m.in. Linux i Windows). Każdy folder zawiera w sobie plik \textit{CMakeLists.txt}, który definiuje w jaki sposób ma zachować się program budujący.Dzięki niemu, oszczędzono wiele czasu na kompilację oraz konsolidację programu używającego bibliotek \textit{Boost} oraz \textit{Qt5}. Najpierw budowane są biblioteki, a następnie cały program. Wszystko zostaje skonsolidowane. Istnieje również możliwość wygenerowania dokumentacji, wystarczy, że zbudujemy cel \textit{doc}.
 
 \subsection{Biblioteka \textit{SystemMonitoringLib}}
-Jest to biblioteka do monitorowania lokalnego komputera. Pozwala na pobieranie odczytów z czujników, informacji o procesorze takich jak częstotliwość taktowania poszczególnych rdzeni, zużycie procesora, o pamięci RAM (dostępna pamięć, zużycie) oraz informacje o poszczególnych procesach. Na komputerze z uruchominionym systemem \textit{Linux}, biblioteka do zbierania informacji o komputerze używa innej biblioteki - \textit{sensorslib} oraz przetwarze pliki m.in. \textit{/proc/stat/}, \textit{/proc/cpuinfo}
+Jest to biblioteka do monitorowania lokalnego komputera oraz wysyłania informacji przez sieć. Pozwala na pobieranie odczytów z czujników, informacji o procesorze takich jak częstotliwość taktowania poszczególnych rdzeni, zużycie procesora, o pamięci RAM (dostępna pamięć, zużycie) oraz informacje o poszczególnych procesach. Na komputerze z uruchominionym systemem \textit{Linux}, biblioteka do zbierania informacji o komputerze używa innej biblioteki - \textit{sensorslib} oraz przetwarze pliki m.in. \textit{/proc/stat/}, \textit{/proc/cpuinfo}
 
 \subsection{Interfejs użytkownika}
 Roczpoczęto prace nad wizualizowaniem danych  odczytanych z czujników dostępnych na płycie głównej.
@@ -116,6 +122,7 @@ W widoku tabelki mamy możliwość podglądania aktualnych wartości odczytanych
 \end{figure}
 
 
+
 \section{Następne zadania do wykonania - aktualizacja planu pracy}
 Ze względu na to, że niektóre zadania zostały wykonane ponad plan,a pewna część zadań z planu została nie zrealizowana należało zastosować poprawki w planie pracy nad aplikacją. Tabela \ref{planPracy} przedstawia zaktualizowany plan pracy.
 
@@ -124,12 +131,11 @@ Ze względu na to, że niektóre zadania zostały wykonane ponad plan,a pewna cz
 			\begin{tabularx}{0.8\textwidth}{|c|c|c|X|}
 				\hline
 				Od & Do & Osiągnięty kamień milowy & Opis \\ \hline
-				23.03 & 29.03 &  & Zaprojektowanie interfejsu biblioteki do monitorowania komputera \\ \hline
-				20.04 & 26.04 &  & Zapoznanie się z metodami programowania sieciowego i dostępnymi bibliotekami oraz  rozpoczęcie implementacji biblioteki sieciowej\\ \hline
-				27.04 & 03.05 &  & Implementacja biblioteki sieciowej \\ \hline
+				20.04 & 26.04 &  & Zapoznanie się z metodami programowania sieciowego i dostępnymi bibliotekami oraz  rozpoczęcie implementacji biblioteki sieciowej, prace nad biblioteką monitorującą\\ \hline
+				27.04 & 03.05 & 1 & Implementacja biblioteki sieciowej oraz finalizacja prac nad biblioteką monitorującą \\ \hline
 				04.05 & 10.05 & 2 & Zakończenie prac nad biblioteką sieciową oraz kontynuacja projektowania interfejsu użytkownika \\ \hline
 				11.05 & 17.05 &    & Dalsze projektowanie interfejsu użytkownika oraz jego implementacja \\ \hline
-				18.05 & 24.05 &  & Implementacja interfejsu użytkownika \\ \hline
+				18.05 & 24.05 &  &  \\ \hline
 				25.03 & 31.03 & 3 & Implementacja interfejsu użytkownika oraz połączenie logiki programu z interfejsem \\ \hline
 				01.06 & 07.06 & 4 & Łączenie aplikacji graficznej z bibliotekami oraz początek testów aplikacji \\ \hline
 				07.06 & 13.06 &  & Ostateczne testy aplikacji \\ \hline

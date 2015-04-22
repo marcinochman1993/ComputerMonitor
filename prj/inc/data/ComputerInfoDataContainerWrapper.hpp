@@ -26,7 +26,6 @@ class ComputerInfoDataContainerWrapper: public QObject, public Info
 
     signals:
     void dataUpdated();
-
 };
 
 #endif /* COMPUTERINFODATACONTAINERWRAPPER_HPP_ */
