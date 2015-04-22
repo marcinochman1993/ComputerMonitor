@@ -10,6 +10,8 @@
 
 #include "Info.hpp"
 #include "SensorsVector.hpp"
+#include "RamInfo.hpp"
+#include "ProcessorInfo.hpp"
 
 class ComputerInfo: public Info
 {
@@ -17,6 +19,7 @@ class ComputerInfo: public Info
     ComputerInfo(): m_sensors(SensorInfo::allSensors()) { }
     bool update() override;
     const SensorsVector& allSensors() const { return m_sensors; }
+
   private:
     SensorsVector m_sensors;
 };

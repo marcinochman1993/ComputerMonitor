@@ -11,7 +11,7 @@
 #include <QObject>
 #include "ComputerInfoDataContainer.hpp"
 
-class ComputerInfoDataContainerWrapper: public QObject
+class ComputerInfoDataContainerWrapper: public QObject, public Info
 {
     Q_OBJECT
 

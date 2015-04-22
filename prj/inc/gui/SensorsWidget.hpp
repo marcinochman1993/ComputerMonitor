@@ -18,17 +18,19 @@ class SensorsWidget: public QWidget, Ui::UiSensorsWidget
 
   public:
     SensorsWidget(QWidget* parent = nullptr)
-    : QWidget(parent) { init(); }
+    : QWidget(parent),m_currentRow(-1) { init(); }
     void computerInfoData(ComputerInfoDataContainerWrapper* computerInfoData);
 
 
   private slots:
   void onSelectionRowChanged(const QItemSelection &, const QItemSelection &);
+  void updatePlot();
 
   private:
     void init();
     QCustomPlot* customPlotWidget() { return customPlot; }
-
+    const ComputerInfoDataContainerWrapper* m_compInfo;
+    int m_currentRow;
 };
 
 #endif /* SENSORSWIDGET_HPP_ */

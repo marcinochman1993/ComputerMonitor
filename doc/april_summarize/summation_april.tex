@@ -3,7 +3,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{polski}
 \usepackage[polish]{babel}
-\usepackage[margin=1.2in]{geometry}
+\usepackage[margin=1in]{geometry}
 \usepackage{lmodern}
 \usepackage{tabularx}
 \usepackage{graphicx}
@@ -102,11 +102,11 @@ Program \textit{CMake} to wieloplatformowy system do budowania aplikacji. Dzięk
 znajdowanie odpowiednich plików nagłówkowych oraz bibliotek oraz kompilacja na różnych platformach (m.in. Linux i Windows). Każdy folder zawiera w sobie plik \textit{CMakeLists.txt}, który definiuje w jaki sposób ma zachować się program budujący.Dzięki niemu, oszczędzono wiele czasu na kompilację oraz konsolidację programu używającego bibliotek \textit{Boost} oraz \textit{Qt5}. Najpierw budowane są biblioteki, a następnie cały program. Wszystko zostaje skonsolidowane. Istnieje również możliwość wygenerowania dokumentacji, wystarczy, że zbudujemy cel \textit{doc}.
 
 \subsection{Biblioteka \textit{SystemMonitoringLib}}
-Jest to biblioteka do monitorowania lokalnego komputera. Pozwala na pobieranie odczytów z czujników, informacji o procesorze takich jak częstotliwość taktowania poszczególnych rdzeni, zużycie procesora, o pamięci RAM (dostępna pamięć, zużycie) oraz informacje o poszczególnych procesach. 
+Jest to biblioteka do monitorowania lokalnego komputera. Pozwala na pobieranie odczytów z czujników, informacji o procesorze takich jak częstotliwość taktowania poszczególnych rdzeni, zużycie procesora, o pamięci RAM (dostępna pamięć, zużycie) oraz informacje o poszczególnych procesach. Na komputerze z uruchominionym systemem \textit{Linux}, biblioteka do zbierania informacji o komputerze używa innej biblioteki - \textit{sensorslib} oraz przetwarze pliki m.in. \textit{/proc/stat/}, \textit{/proc/cpuinfo}
 
 \subsection{Interfejs użytkownika}
 Roczpoczęto prace nad wizualizowaniem danych  odczytanych z czujników dostępnych na płycie głównej.
-W widoku tablki mamy możliwość podglądania aktualnych wartości odczytanych wielkości. Zrzut ekranu przedstawiającego aktualny stan interfejsu użytkownika został pokazany na rysunku \ref{wygladAplikacji}.
+W widoku tabelki mamy możliwość podglądania aktualnych wartości odczytanych wielkości. Zrzut ekranu przedstawiającego aktualny stan interfejsu użytkownika został pokazany na rysunku \ref{wygladAplikacji}.
 
 \begin{figure}[h]
 	\centering
@@ -117,10 +117,29 @@ W widoku tablki mamy możliwość podglądania aktualnych wartości odczytanych 
 
 
 \section{Następne zadania do wykonania - aktualizacja planu pracy}
+Ze względu na to, że niektóre zadania zostały wykonane ponad plan,a pewna część zadań z planu została nie zrealizowana należało zastosować poprawki w planie pracy nad aplikacją. Tabela \ref{planPracy} przedstawia zaktualizowany plan pracy.
 
+\begin{table}[h]
+			\centering
+			\begin{tabularx}{0.8\textwidth}{|c|c|c|X|}
+				\hline
+				Od & Do & Osiągnięty kamień milowy & Opis \\ \hline
+				23.03 & 29.03 &  & Zaprojektowanie interfejsu biblioteki do monitorowania komputera \\ \hline
+				20.04 & 26.04 &  & Zapoznanie się z metodami programowania sieciowego i dostępnymi bibliotekami oraz  rozpoczęcie implementacji biblioteki sieciowej\\ \hline
+				27.04 & 03.05 &  & Implementacja biblioteki sieciowej \\ \hline
+				04.05 & 10.05 & 2 & Zakończenie prac nad biblioteką sieciową oraz kontynuacja projektowania interfejsu użytkownika \\ \hline
+				11.05 & 17.05 &    & Dalsze projektowanie interfejsu użytkownika oraz jego implementacja \\ \hline
+				18.05 & 24.05 &  & Implementacja interfejsu użytkownika \\ \hline
+				25.03 & 31.03 & 3 & Implementacja interfejsu użytkownika oraz połączenie logiki programu z interfejsem \\ \hline
+				01.06 & 07.06 & 4 & Łączenie aplikacji graficznej z bibliotekami oraz początek testów aplikacji \\ \hline
+				07.06 & 13.06 &  & Ostateczne testy aplikacji \\ \hline
+			\end{tabularx}
+			\caption{Tabela przedstawiająca kamienie milowe}
+			\label{tabela_harmonogram}
+		\end{table}
 
 \section{Podsumowanie}
-Ze względu na dużą liczbę innych projektów, prace nad aplikacją są lekko opóźnione, jednak zostaną poczynione wszelkie starania aby do następnego terminu oddania prac wszystko zostało nadrobione. 
-Pozytywną informacją jest fakt, że zostały już rozpoczęte prace nad iterfejsem użytkownika.
+Ze względu na dużą liczbę innych projektów, prace nad aplikacją są lekko opóźnione - około tygodnia, jednak zostaną poczynione wszelkie starania aby do następnego terminu oddania prac wszystko zostało nadrobione. 
+Pozytywną informacją jest fakt, że zostały już rozpoczęte prace nad interfejsem użytkownika, czego początkowy plan pracy nie uwzględniał.
 
 \end{document}

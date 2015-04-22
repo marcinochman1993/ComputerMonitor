@@ -9,4 +9,4 @@
 \contentsline {subsection}{\numberline {3.3}Biblioteka \textit {SystemMonitoringLib}}{3}
 \contentsline {subsection}{\numberline {3.4}Interfejs u\IeC {\.z}ytkownika}{3}
 \contentsline {section}{\numberline {4}Nast\IeC {\k e}pne zadania do wykonania - aktualizacja planu pracy}{3}
-\contentsline {section}{\numberline {5}Podsumowanie}{3}
+\contentsline {section}{\numberline {5}Podsumowanie}{4}
