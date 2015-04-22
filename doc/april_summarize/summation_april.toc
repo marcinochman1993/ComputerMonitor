@@ -2,9 +2,11 @@
 \contentsline {section}{\numberline {1}Wprowadzenie}{2}
 \contentsline {section}{\numberline {2}Lista wykonanych zada\IeC {\'n} w projekcie}{2}
 \contentsline {section}{\numberline {3}Szczeg\IeC {\'o}\IeC {\l }owy opis wykonanych zada\IeC {\'n}}{2}
-\contentsline {subsection}{\numberline {3.1}Stworzenie zal\IeC {\k a}\IeC {\.z}ka aplikacji}{2}
-\contentsline {subsubsection}{\numberline {3.1.1}Struktura folder\IeC {\'o}w projektu}{2}
-\contentsline {subsubsection}{\numberline {3.1.2}Architektura aplikacji}{2}
-\contentsline {subsection}{\numberline {3.2}Biblioteka \textit {SystemMonitoringLib}}{2}
-\contentsline {section}{\numberline {4}Nast\IeC {\k e}pne zadania do wykonania}{2}
-\contentsline {section}{\numberline {5}Podsumowanie}{2}
+\contentsline {subsection}{\numberline {3.1}Opracowanie architektury aplikacji}{2}
+\contentsline {subsection}{\numberline {3.2}Stworzenie zal\IeC {\k a}\IeC {\.z}ka aplikacji}{2}
+\contentsline {subsubsection}{\numberline {3.2.1}Struktura folder\IeC {\'o}w projektu}{2}
+\contentsline {subsubsection}{\numberline {3.2.2}Proces kompilacji oraz opis narz\IeC {\k e}dzia \textit {CMake}}{2}
+\contentsline {subsection}{\numberline {3.3}Biblioteka \textit {SystemMonitoringLib}}{3}
+\contentsline {subsection}{\numberline {3.4}Interfejs u\IeC {\.z}ytkownika}{3}
+\contentsline {section}{\numberline {4}Nast\IeC {\k e}pne zadania do wykonania - aktualizacja planu pracy}{3}
+\contentsline {section}{\numberline {5}Podsumowanie}{3}

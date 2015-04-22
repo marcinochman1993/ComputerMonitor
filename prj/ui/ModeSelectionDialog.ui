@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>240</width>
+    <width>335</width>
     <height>185</height>
    </rect>
   </property>
@@ -30,7 +30,7 @@
       <item>
        <widget class="QRadioButton" name="radioButton">
         <property name="text">
-         <string>Visualisation</string>
+         <string>Visualisation from Other Computer</string>
         </property>
         <property name="checked">
          <bool>true</bool>
@@ -50,7 +50,7 @@
       <item>
        <widget class="QRadioButton" name="radioButton_3">
         <property name="text">
-         <string>Both</string>
+         <string>Reporting and Visualisation in this Computer</string>
         </property>
        </widget>
       </item>

@@ -5,9 +5,11 @@
  *      Author: mochman
  */
 
-#ifndef COMPUTERMONITORLIB_PROCESSORINFO_HPP_
-#define COMPUTERMONITORLIB_PROCESSORINFO_HPP_
+#ifndef PROCESSORINFO_HPP_
+#define PROCESSORINFO_HPP_
 
+#include <vector>
+#include <fstream>
 #include "HardwareInfo.hpp"
 
 
@@ -15,11 +17,15 @@ class ProcessorInfo: public HardwareInfo
 {
 	public:
 		double frequency(unsigned int coreNum) const;
-		double maxFrequency(unsigned int coreNum) const;
 		std::string name() const override { return m_name; }
 		double usage(unsigned int coreNum) const;
+		unsigned int coresNumber() const;
+		bool update() override;
 	private:
+		bool parseCoreInfo(std::ifstream& procInfoFile);
 		std::string m_name;
+		std::vector<double> m_usage;
+		std::vector<double> m_freq;
 };
 
-#endif /* COMPUTERMONITORLIB_PROCESSORINFO_HPP_ */
+#endif /* PROCESSORINFO_HPP_ */

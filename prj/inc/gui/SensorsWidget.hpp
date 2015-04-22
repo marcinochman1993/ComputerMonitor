@@ -14,16 +14,21 @@
 
 class SensorsWidget: public QWidget, Ui::UiSensorsWidget
 {
+    Q_OBJECT
+
   public:
     SensorsWidget(QWidget* parent = nullptr)
-        : QWidget(parent)
-    {
-      setupUi(this);
-      auto model = new AllSensorsModel();
-      model->computerInfo(new ComputerInfo());
-      tableView->setModel(model);
-      tableView->resizeColumnsToContents();
-    }
+    : QWidget(parent) { init(); }
+    void computerInfoData(ComputerInfoDataContainerWrapper* computerInfoData);
+
+
+  private slots:
+  void onSelectionRowChanged(const QItemSelection &, const QItemSelection &);
+
+  private:
+    void init();
+    QCustomPlot* customPlotWidget() { return customPlot; }
+
 };
 
 #endif /* SENSORSWIDGET_HPP_ */

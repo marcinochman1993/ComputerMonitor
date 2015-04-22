@@ -8,30 +8,48 @@
 #include <iostream>
 #include <QApplication>
 #include "ComputerMonitorMainWindow.hpp"
-#include <sensors/sensors.h>
 #include <QSplashScreen>
 #include <QTimer>
-#include "SensorInfo.hpp"
 #include "ModeSelectionDialog.hpp"
+#include "ProcessorInfo.hpp"
+#include <thread>
+#include <chrono>
+#include "ComputerInfoDataContainerWrapper.hpp"
 
 int main(int argc, char* argv[])
 {
   const int SPLASH_SCREEN_TIME_MS = 2500;
   QApplication app(argc, argv);
 
-//  QSplashScreen* splashScreen = new QSplashScreen();
-//  splashScreen->setPixmap(QPixmap(":/images/images/splash.png"));
+  QSplashScreen* splashScreen = new QSplashScreen();
+  splashScreen->setPixmap(QPixmap(":/images/images/splash.png"));
 
   ComputerMonitorMainWindow mainWindow;
-//  splashScreen->show();
+  ComputerInfo computerInfo;
+  ComputerInfoDataContainer dataContainer(&computerInfo);
+  ComputerInfoDataContainerWrapper* dataWrapper=new ComputerInfoDataContainerWrapper();
+  dataWrapper->data(&dataContainer);
 
-//  QTimer::singleShot(SPLASH_SCREEN_TIME_MS, splashScreen, SLOT(close()));
-//  QTimer::singleShot(SPLASH_SCREEN_TIME_MS, &mainWindow, SLOT(show()));
-
+  mainWindow.computerInfoData(dataWrapper);
   ModeSelectionDialog dialog;
-    dialog.exec();
+  dialog.exec();
 
-    mainWindow.show();
+  QTimer::singleShot(SPLASH_SCREEN_TIME_MS, splashScreen, SLOT(close()));
+  QTimer::singleShot(SPLASH_SCREEN_TIME_MS, &mainWindow, SLOT(show()));
+
+  std::thread updateThread([&dataWrapper]()
+  {
+    while(true)
+    {
+      dataWrapper->update();
+      std::this_thread::sleep_for(std::chrono::seconds(1));
+    }
+  });
+
+  updateThread.detach();
+
+  splashScreen->show();
 
   return app.exec();
+
 }

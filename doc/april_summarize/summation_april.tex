@@ -3,10 +3,12 @@
 \usepackage[utf8]{inputenc}
 \usepackage{polski}
 \usepackage[polish]{babel}
-\usepackage[margin=0.9in]{geometry}
+\usepackage[margin=1.2in]{geometry}
 \usepackage{lmodern}
-
-\usepackage[pdftex]{graphicx}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\newcounter{counter}
+\newcommand\rownumber{\stepcounter{counter}\arabic{counter}}
 
 \title{\textbf{Podsumowanie prac z projektu WDS - kwiecień 2015}}
 \author{Marcin Ochman - 200546}
@@ -26,22 +28,99 @@
 
 \section{Wprowadzenie}
 
-W trakcie miesiąca zostało wykonanych wiele prac nad aplikacją.
+W ciągu miesiąca tj. 18.03-23.04 zostało wykonanych wiele prac nad aplikacją. W tym dokumencie opisano wykonane i przewidywane na następny miesiąc zadania oraz komentarz autora na temat postępów prac nad aplikacją.
 
 
 \section{Lista wykonanych zadań w projekcie}
 
+W poniższej tabeli zostały zebrane zadania, które udało się zrealizować do dnia 23.04.2015r.
+
+\begin{table}[h]
+\centering
+\begin{tabularx}{0.7\linewidth}{ |c|X| }
+			\hline 
+			\rownumber & Opracowano architekturę aplikacji - użyte biblioteki oraz 
+						 klasy do napisania\\ \hline
+			\rownumber & Utworzono strukturę katalogów aplikacji \\ \hline
+			\rownumber & Aplikacja buduje się przy pomocy wieloplatformowego narzędzia 
+						 \textit{CMake} - napisanie plików potrzebnych do poprawnej kompilacji \\ \hline
+			\rownumber & Rozpoczęto pracę nad biblioteką \textit{SystemMonitoringLib} \\ \hline
+			\rownumber & Rozpoczęto pracę nad interfejsem użytkownika \\ \hline
+			\rownumber & Rozpoczęta pracę nad komunikacją pomiędzy biblioteką \textit{SystemMonitoringLib} oraz interfejsem użytkownika \\ \hline
+	\end{tabularx}
+	\caption{Tabela prac nad aplikacją}
+\end{table}
+
 \section{Szczegółowy opis wykonanych zadań}
+
+\subsection{Opracowanie architektury aplikacji}
+Program będzie opierać się na bibliotekach \textit{Qt5} i \textit{QCustomPlot}, które posłużą do prezentacji danych oraz dwóch autorskich bibliotek, które zostały opisane w następnych punktach: \textit{SystemMonitoringLib} oraz \textit{SystemMonitoringNetworkLib}. Biblioteki monitorujące będą komunikować się z wartswą prezentacji za pomocą odpowiedniej klasy pośredniczącej. Aplikacja została napisana przy wykorzystaniu wzorca projektowego \textit{MVC}. Diagram budowy aplikacji został przedstawiony na rysunku \ref{diagram_budowy_aplikacji}, a diagramy klas zostały przedstawione na rysunku \ref{diagram_klas}.
+
+%\begin{figure}[h]
+%	\centering
+%	\includegraphics{img/diagramBudowyAplikacji.png}
+%\end{figure}
+
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.75\paperheight, angle=90]{img/diagramKlas.png}
+	\caption{Diagram UML stworzonych klas}
+\end{figure}
+
 
 \subsection{Stworzenie zalążka aplikacji}
 
+Zalążek aplikacji wymagał kilku pomniejszych kroków do wykonania:
+\begin{itemize}
+	\item utworzenie struktury folderów projektu
+	\item napisanie skryptów kompilujących i konsolidujących aplikację
+\end{itemize}
+Opis poszczególnych zadań znajduje się poniżej.
+
 \subsubsection{Struktura folderów projektu}
-\subsubsection{Architektura aplikacji}
+W głównym folderze aplikacji znajdują się dwa foldery: \textit{doc} oraz \textit{prj}. Pierwszy zawiera wszelkie pliki przechowujące informacje o dokumentacji, a drugi zawiera kody źródłowe aplikacji. W folderze \textit{prj} można wyróżnić kilka folderów. Ich krótki opis zebrano w tabeli \ref{opis_folderow_pr}.
+
+\begin{table}
+\centering
+\begin{tabularx}{0.7\linewidth}{|c|X|}
+	\hline
+	inc & przechowuje wszystkie pliki nagłówkowe, które nie należą do bibliotek \\ \hline
+	src & zawiera pliki źródłowe, które nie należą do bibliotek \\ \hline
+	lib & przechowuje pliki źródłowe oraz nagłówkowe bibliotek, każda biblioteka jest umieszczona 
+		  w innym folderze. W każdym z folderów jest są pliki nagłówkowe oraz źródłowe \\ \hline
+	ui & znajdują się w nim wszystkie pliki  programu QtDesigner \\ \hline
+	rsrc  & zawiera zasoby aplikacji \\ \hline
+\end{tabularx}
+
+\label{opis_folderow_prj}
+\caption{title}
+\end{table}
+
+\subsubsection{Proces kompilacji oraz opis narzędzia \textit{CMake}}
+Program \textit{CMake} to wieloplatformowy system do budowania aplikacji. Dzięki niemu łatwe staje się
+znajdowanie odpowiednich plików nagłówkowych oraz bibliotek oraz kompilacja na różnych platformach (m.in. Linux i Windows). Każdy folder zawiera w sobie plik \textit{CMakeLists.txt}, który definiuje w jaki sposób ma zachować się program budujący.Dzięki niemu, oszczędzono wiele czasu na kompilację oraz konsolidację programu używającego bibliotek \textit{Boost} oraz \textit{Qt5}. Najpierw budowane są biblioteki, a następnie cały program. Wszystko zostaje skonsolidowane. Istnieje również możliwość wygenerowania dokumentacji, wystarczy, że zbudujemy cel \textit{doc}.
 
 \subsection{Biblioteka \textit{SystemMonitoringLib}}
+Jest to biblioteka do monitorowania lokalnego komputera. Pozwala na pobieranie odczytów z czujników, informacji o procesorze takich jak częstotliwość taktowania poszczególnych rdzeni, zużycie procesora, o pamięci RAM (dostępna pamięć, zużycie) oraz informacje o poszczególnych procesach. 
 
-\section{Następne zadania do wykonania}
+\subsection{Interfejs użytkownika}
+Roczpoczęto prace nad wizualizowaniem danych  odczytanych z czujników dostępnych na płycie głównej.
+W widoku tablki mamy możliwość podglądania aktualnych wartości odczytanych wielkości. Zrzut ekranu przedstawiającego aktualny stan interfejsu użytkownika został pokazany na rysunku \ref{wygladAplikacji}.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\linewidth]{img/wygladAplikacji.png}
+	\caption{Wygląd aplikacji \textit{ComputerMonitor}}
+	\label{wygladAplikacji}
+\end{figure}
+
+
+\section{Następne zadania do wykonania - aktualizacja planu pracy}
+
 
 \section{Podsumowanie}
+Ze względu na dużą liczbę innych projektów, prace nad aplikacją są lekko opóźnione, jednak zostaną poczynione wszelkie starania aby do następnego terminu oddania prac wszystko zostało nadrobione. 
+Pozytywną informacją jest fakt, że zostały już rozpoczęte prace nad iterfejsem użytkownika.
 
 \end{document}

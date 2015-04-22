@@ -18,16 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
-      </property>
-      <property name="documentMode">
-       <bool>false</bool>
-      </property>
-      <property name="tabsClosable">
-       <bool>false</bool>
-      </property>
-      <property name="movable">
-       <bool>true</bool>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -74,7 +65,7 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_4">
         <item>
-         <widget class="SensorsWidget" name="widget_2" native="true"/>
+         <widget class="SensorsWidget" name="sensorsWidget" native="true"/>
         </item>
        </layout>
       </widget>
@@ -121,8 +112,16 @@
      <string>Options</string>
     </property>
    </widget>
+   <widget class="QMenu" name="menuMode">
+    <property name="title">
+     <string>Mode</string>
+    </property>
+    <addaction name="actionVisualisation"/>
+    <addaction name="actionReporting"/>
+   </widget>
    <addaction name="menuExit"/>
    <addaction name="menuReports"/>
+   <addaction name="menuMode"/>
    <addaction name="menuOptions"/>
    <addaction name="menuHelp"/>
   </widget>
@@ -149,6 +148,16 @@
   <action name="actionStop_Reporting">
    <property name="text">
     <string>Stop Reporting</string>
+   </property>
+  </action>
+  <action name="actionVisualisation">
+   <property name="text">
+    <string>Visualisation</string>
+   </property>
+  </action>
+  <action name="actionReporting">
+   <property name="text">
+    <string>Reporting</string>
    </property>
   </action>
  </widget>

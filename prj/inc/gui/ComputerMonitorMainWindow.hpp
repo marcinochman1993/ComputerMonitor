@@ -10,15 +10,16 @@
 
 #include <QMainWindow>
 #include "ui_ComputerMonitorMainWindowUi.h"
+#include "ComputerInfoDataContainerWrapper.hpp"
 
-class ComputerMonitorMainWindow: public QMainWindow
+class ComputerMonitorMainWindow: public QMainWindow, Ui::ComputerMonitorMainWindowUi
 {
   Q_OBJECT
 
   public:
-    ComputerMonitorMainWindow(QWidget* parent = 0): QMainWindow(parent) { m_ui.setupUi(this); }
-  private:
-    Ui::ComputerMonitorMainWindowUi m_ui;
+    ComputerMonitorMainWindow(QWidget* parent = 0): QMainWindow(parent) { setupUi(this); }
+    void computerInfoData(ComputerInfoDataContainerWrapper* compInfo);
+
 };
 
 #endif /* COMPUTERMONITORMAINWINDOW_HPP_ */
