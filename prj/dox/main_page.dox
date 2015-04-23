@@ -4,31 +4,32 @@
 
   \section opis_aplikacji Opis aplikacji
  
-  \textit{,,Computer Monitor''} przeznaczoną na komputery osobiste, która:
-	\begin{itemize}
-		\item pozwala na monitorowanie pracy komputera(ów), z którym(i) komputer jest połączony poprzez sieć
-		\item pracuje w różnych trybach:
-		\begin{itemize}
-			\item tryb wizualizacji
-			\item tryb raportowania
-			\item połączenie dwóch poprzednich trybów
-		\end{itemize}
-		\item potrafi zapamiętać ustawienia użytkownika, w tym m.in. tryb działania aplikacji, układy okien, ustawienia wykresów itp.
-		\item posiada przejrzysty, intuicyjny, atrakcyjny oraz konfigurowalny interfejs użytkownika rozumiany w następujący sposób:
-		\begin{itemize}
-			\item będą wyraźnie zaznaczone różne kategorie monitorowanych wielkości np. procesor, karta graficzna, pamięć \uppercase{ram}
-			\item zaimplementowanie animacji
-			\item dostosowywanie wykresów np. skala osi czasu
-			 
-		\end{itemize}
-		\item pomimo realizowanej komunikacji poprzez sieć oraz innych zadań, jest wysoce 
-		interaktywna
-		\item docelową platformą jest system Linux, jednak zostaną poczynione wszelkie starania, aby aplikacja działała również na systemach Windows
-	\end{itemize}
- 
+  "Computer Monitor" to aplikacja przeznaczona na komputery osobiste, która:
+		- pozwala na monitorowanie pracy komputera(ów), z którym(i) komputer jest połączony poprzez sieć
+		- pracuje w różnych trybach:
+		  - tryb wizualizacji
+		  - tryb raportowania
+		  - połączenie dwóch poprzednich trybów
+		
+		- potrafi zapamiętać ustawienia użytkownika, w tym m.in. tryb działania aplikacji, układy okien, ustawienia wykresów itp.
+		- posiada przejrzysty, intuicyjny, atrakcyjny oraz konfigurowalny interfejs użytkownika rozumiany w następujący sposób:
+		
   \section budowa_aplikacji Architektura aplikacji
 
- Program będzie opierać się na bibliotekach Qt5 i QCustomPlot, które posłużą do prezentacji danych oraz autorskiej biblioteki, która została opisana w następnych punktach: SystemMonitoringLib. Biblioteki monitorujące będą komunikować się z warstwą prezentacji za pomocą odpowiedniej klasy pośredniczącej. Diagram budowy aplikacji został przedstawiony na rysunku \ref{diagram_budowy_aplikacji}, a diagramy klas zostały przedstawione na rysunkach \ref{diagram_klas_system_monitoring} oraz \ref{diagram_klas_gui}.
-  \subsection step1 Step 1: Opening the box
- 
+Program będzie opierać się na bibliotekach Qt5 i QCustomPlot, które posłużą do
+prezentacji danych oraz autorskiej biblioteki do monitorowania komputera, która
+ została opisana w następnych punktach: SystemMonitoringLib. Biblioteka 
+monitorująca będzie komunikować się z warstwą prezentacji za pomocą odpowiednie
+klasy pośredniczącej. Aplikacja została napisana przy wykorzystaniu wzorca 
+projektowego \textit{MVC}. Diagram budowy aplikacji został przedstawiony na 
+rysunku \ref{diagram_budowy_aplikacji}, a diagramy klas zostały przedstawione
+na rysunkach \ref diagram_klas_system_monitoring oraz \ref diagram_klas_gui.
+
+
+\image html diagramBudowyAplikacji.png
+
+\section proces_kompilacji Proces kompilacji oraz opis narzędzia CMake
+
+Program \textit{CMake} to wieloplatformowy system do budowania aplikacji. Dzięki niemu łatwe staje się
+znajdowanie odpowiednich plików nagłówkowych oraz bibliotek oraz kompilacja na różnych platformach (m.in. Linux i Windows). Każdy folder zawiera w sobie plik \textit{CMakeLists.txt}, który definiuje w jaki sposób ma zachować się program budujący.Dzięki niemu, oszczędzono wiele czasu na kompilację oraz konsolidację programu używającego bibliotek \textit{Boost} oraz \textit{Qt5}. Najpierw budowane są biblioteki, a następnie cały program. Wszystko zostaje skonsolidowane. Istnieje również możliwość wygenerowania dokumentacji, wystarczy, że zbudujemy cel \textit{doc}. 
  */
