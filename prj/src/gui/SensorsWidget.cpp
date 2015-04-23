@@ -30,8 +30,8 @@ void SensorsWidget::onSelectionRowChanged(const QItemSelection & selected,
 {
   static int mult = 0;
   auto customPlot = customPlotWidget();
-  customPlot->clearGraphs();
-  customPlot->addGraph();
+  if (customPlot->graphCount() <= 0)
+    customPlot->addGraph();
   customPlot->graph(0)->setPen(QPen(Qt::blue)); // line color blue for first graph
   customPlot->addGraph();
 
