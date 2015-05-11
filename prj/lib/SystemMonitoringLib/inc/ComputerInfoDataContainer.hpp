@@ -12,9 +12,23 @@
 #include <chrono>
 #include "ComputerInfo.hpp"
 
+/*!
+ * \brief Klasa zbierająca informacje o pracy komputera
+ *
+ * Pozwala zapisywać wszystkie monitorowane wielkości do wektorów
+ * Pobieranie wielkości odbywa się za pomocą klasy ComputerInfo
+ */
 class ComputerInfoDataContainer: public Info
 {
   public:
+    /*!
+     * \brief Konstruktor pozwalający ustawić obiekt do monitorowania zasobów komputera
+     *
+     * \param computerInfo - wskaźnik na obiekt do monitorowania systemu, domyślnie jest ustawiony na nullptr
+     *
+     *
+     *
+     */
     ComputerInfoDataContainer(ComputerInfo* computerInfo = nullptr):m_computerInfo(computerInfo) { }
 //    const std::vector<double>& frequencyData(int coreNum = 0) const;
     const std::vector<double>& sensorsData(int sensorNum=0) const;

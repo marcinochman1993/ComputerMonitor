@@ -11,10 +11,25 @@
 #include <vector>
 #include "SensorInfo.hpp"
 
+/*!
+ * \brief Klasa przechowująca czujniki
+ *
+ * Umożliwia aktualizację odczytów czujników
+ */
 class SensorsVector: public std::vector<SensorInfo>, public Info
 {
   public:
+    /*!
+     * \brief Konstruktor klasy dodający czujniki
+     *
+     * \param sensors -wektor czujników, które mają być monitorowane
+     */
     SensorsVector(const std::vector<SensorInfo>& sensors):std::vector<SensorInfo>(sensors) { }
+    /*!
+     * \brief Metoda aktualizuje odczyty z sensorów
+     *
+     * \return Jeśli wszystkie odczyty powiodą się to zwracana jest wartość true, w.p.p. false
+     */
     bool update() override;
 };
 
