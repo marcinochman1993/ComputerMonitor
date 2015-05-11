@@ -20,16 +20,13 @@ Program będzie opierać się na bibliotekach Qt5 i QCustomPlot, które posłuż
 prezentacji danych oraz autorskiej biblioteki do monitorowania komputera, która
  została opisana w następnych punktach: SystemMonitoringLib. Biblioteka 
 monitorująca będzie komunikować się z warstwą prezentacji za pomocą odpowiednie
-klasy pośredniczącej. Aplikacja została napisana przy wykorzystaniu wzorca 
-projektowego \textit{MVC}. Diagram budowy aplikacji został przedstawiony na 
-rysunku \ref{diagram_budowy_aplikacji}, a diagramy klas zostały przedstawione
-na rysunkach \ref diagram_klas_system_monitoring oraz \ref diagram_klas_gui.
+klasy pośredniczącej. Architektura aplikacji została pokazana na rysunku poniżej.
 
 
 \image html diagramBudowyAplikacji.png
 
 \section proces_kompilacji Proces kompilacji oraz opis narzędzia CMake
 
-Program \textit{CMake} to wieloplatformowy system do budowania aplikacji. Dzięki niemu łatwe staje się
-znajdowanie odpowiednich plików nagłówkowych oraz bibliotek oraz kompilacja na różnych platformach (m.in. Linux i Windows). Każdy folder zawiera w sobie plik \textit{CMakeLists.txt}, który definiuje w jaki sposób ma zachować się program budujący.Dzięki niemu, oszczędzono wiele czasu na kompilację oraz konsolidację programu używającego bibliotek \textit{Boost} oraz \textit{Qt5}. Najpierw budowane są biblioteki, a następnie cały program. Wszystko zostaje skonsolidowane. Istnieje również możliwość wygenerowania dokumentacji, wystarczy, że zbudujemy cel \textit{doc}. 
+Program CMake to wieloplatformowy system do budowania aplikacji. Dzięki niemu łatwe staje się
+znajdowanie odpowiednich plików nagłówkowych oraz bibliotek oraz kompilacja na różnych platformach (m.in. Linux i Windows). Każdy folder zawiera w sobie plik CMakeLists.txt, który definiuje w jaki sposób ma zachować się program budujący.Dzięki niemu, oszczędzono wiele czasu na kompilację oraz konsolidację programu używającego bibliotek Boost oraz Qt5. Najpierw budowane są biblioteki, a następnie cały program. Wszystko zostaje skonsolidowane. Istnieje również możliwość wygenerowania dokumentacji, wystarczy, że zbudujemy cel doc. 
  */

@@ -58,10 +58,11 @@ class SensorInfo: public HardwareInfo
     }
 
     /*!
-     * \brief Metoda pobiera wartość z czujnika.
+     * \brief Metoda aktualizująca wartość z czujnika.
      *
      *Odziedziczona metoda z klasy Info, aktualizująca odczyty z czujnika.
      *
+     * \return Wartość określająca czy odczyt z sensorów się powiódł
      */
     bool update() override;
 
@@ -70,6 +71,8 @@ class SensorInfo: public HardwareInfo
      *
      * Odziedziczona metoda z klasy HardwareInfo, pozwala otrzymać nazwę urządzenia,
      * w tym wypadku czujnika.
+     *
+     * \return Nazwa czujnika
      */
     std::string name() const override
     {
@@ -94,6 +97,8 @@ class SensorInfo: public HardwareInfo
      * \brief Statyczna metoda pozwalająca zainicjować sensory
      *
      * Pobiera informacje o wszystkich sensorach i zapisuje je w s_sensorsVector.
+     *
+     * \return Zwracana wartość określa czy inicjalizacja się powiodła.
      */
     static bool initAllSensors();
 

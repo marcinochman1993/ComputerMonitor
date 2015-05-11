@@ -7,12 +7,13 @@
 
 #include "ComputerInfoDataContainerWrapper.hpp"
 
-
 bool ComputerInfoDataContainerWrapper::update()
 {
-  m_dataContainer->update();
-  emit dataUpdated();
-  return Info::update();
+  if (m_dataContainer->update() && Info::update())
+  {
+    emit dataUpdated();
+    return true;
+  }
+  return false;
 }
-
 

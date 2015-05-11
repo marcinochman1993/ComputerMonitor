@@ -11,5 +11,7 @@
 bool ComputerInfo::update()
 {
   m_sensors.update();
+
+  return Info::update();
 }
 
