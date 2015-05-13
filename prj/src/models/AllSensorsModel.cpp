@@ -22,8 +22,8 @@ QVariant AllSensorsModel::data(const QModelIndex &index, int role) const
   if (!index.isValid() || m_computerInfoData == nullptr)
     return QVariant();
 
-  int row = index.row();
-  int column = index.column();
+  unsigned row = index.row();
+  unsigned column = index.column();
 
   switch (role)
   {

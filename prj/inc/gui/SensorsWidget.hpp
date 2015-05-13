@@ -18,13 +18,12 @@ class SensorsWidget: public QWidget, Ui::UiSensorsWidget
 
   public:
     SensorsWidget(QWidget* parent = nullptr)
-    : QWidget(parent),m_currentRow(-1) { init(); }
+    : QWidget(parent), m_currentRow(-1) { init(); }
     void computerInfoData(ComputerInfoDataContainerWrapper* computerInfoData);
 
-
   private slots:
-  void onSelectionRowChanged(const QItemSelection &, const QItemSelection &);
-  void updatePlot();
+    void onSelectionRowChanged(const QItemSelection &, const QItemSelection &);
+    void updatePlot();
 
   private:
     void init();

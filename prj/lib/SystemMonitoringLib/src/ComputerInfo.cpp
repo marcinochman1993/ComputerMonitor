@@ -7,11 +7,12 @@
 
 #include "ComputerInfo.hpp"
 
-
 bool ComputerInfo::update()
 {
-  m_sensors.update();
-
+  if (!m_sensors.update())
+    return false;
+  if (!m_allProcesses.update())
+    return false;
   return Info::update();
 }
 

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_kjMPMNXuEeSoaIusWqOT0g" name="model">
+  <packagedElement xmi:type="uml:Class" xmi:id="_n0ox0NXuEeSoaIusWqOT0g" name="ComputerInfo">
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_4dSmINXuEeSoaIusWqOT0g" name="update" concurrency="concurrent"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_0iLeoNXyEeSoaIusWqOT0g" name="ProcessorInfo">
+    <generalization xmi:type="uml:Generalization" xmi:id="_QT5SENXzEeSoaIusWqOT0g" general="_DEmmQNXzEeSoaIusWqOT0g"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_nXSVMNXzEeSoaIusWqOT0g" name="currentFrequency"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_kNpP0NZYEeSvlKWbesaQrQ" name="coresNum"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_7XpRQNZYEeSvlKWbesaQrQ" name="maxFrequency"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_-wA7QNZYEeSvlKWbesaQrQ" name="voltage"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_KXNEANZdEeSvlKWbesaQrQ" name="temperature"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_1uh9ANXyEeSoaIusWqOT0g" name="RamInfo">
+    <generalization xmi:type="uml:Generalization" xmi:id="_UeqpYNXzEeSoaIusWqOT0g" general="_DEmmQNXzEeSoaIusWqOT0g"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_-IjY0NY7EeSVhe4zn57Z4w" name="totalAvailableMemory"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_eDT0gNZYEeSvlKWbesaQrQ" name="availableMemory"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_hXXmQNZYEeSvlKWbesaQrQ" name="voltage"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_TPy1UNZdEeSvlKWbesaQrQ" name="temperature"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_4UerkNXyEeSoaIusWqOT0g" name="GraphicsInfo">
+    <generalization xmi:type="uml:Generalization" xmi:id="_VVsYANXzEeSoaIusWqOT0g" general="_DEmmQNXzEeSoaIusWqOT0g"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_3ypZINZbEeSvlKWbesaQrQ" name="gpuFrequency"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="__JwwoNZbEeSvlKWbesaQrQ" name="maxGpuFrequency"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_PJfjwNZcEeSvlKWbesaQrQ" name="vRamAvailable"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_Xsd08NZdEeSvlKWbesaQrQ" name="gpuTemperature"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_aohWYNZdEeSvlKWbesaQrQ" name="TotalVRam"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_DEmmQNXzEeSoaIusWqOT0g" name="HardwareInfo">
+    <generalization xmi:type="uml:Generalization" xmi:id="_edSOoNXzEeSoaIusWqOT0g" general="_ETVqQNXzEeSoaIusWqOT0g"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_ETVqQNXzEeSoaIusWqOT0g" name="Info">
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_Ir60ENXzEeSoaIusWqOT0g" name="update"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_R5KPwNbwEeS3iPaKuKcpPA" name="CoreInfo"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_2kckkNbzEeS3iPaKuKcpPA" name="CoreInfoList"/>
+</uml:Model>

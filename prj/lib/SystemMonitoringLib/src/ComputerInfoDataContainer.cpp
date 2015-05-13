@@ -9,19 +9,42 @@
 
 bool ComputerInfoDataContainer::update()
 {
-  m_computerInfo->update();
+  if (!m_computerInfo->update())
+    return false;
+
   m_time.push_back(m_computerInfo->lastUpdated());
   if (m_sensorsValues.empty())
     init();
 
+  saveUpdatedSensorsValueInVec();
+  saveUpdatedProcessesValuesInVec();
+
+  return Info::update();
+}
+
+void ComputerInfoDataContainer::saveUpdatedSensorsValueInVec()
+{
   int i = 0;
   for (auto& sensor : m_sensorsValues)
   {
     sensor.second.push_back(computerInfo().allSensors()[i].value());
     i++;
   }
+}
 
-  return Info::update();
+void ComputerInfoDataContainer::saveUpdatedProcessesValuesInVec()
+{
+  for (const auto& procPair : computerInfo().allProcesses().processesMap())
+  {
+    auto it = m_ramUsage.find(procPair.first);
+    if (it == m_ramUsage.end())
+    {
+    }
+    else
+    {
+
+    }
+  }
 }
 
 void ComputerInfoDataContainer::init()
@@ -36,7 +59,7 @@ void ComputerInfoDataContainer::init()
 }
 
 const std::vector<double>& ComputerInfoDataContainer::sensorsData(
-    int sensorNum) const
+    unsigned sensorNum) const
 {
   if (sensorNum >= m_sensorsValues.size())
     throw "There's no sensor with that index";
@@ -47,4 +70,15 @@ const std::vector<double>& ComputerInfoDataContainer::sensorsData(
     throw "There's no sensor with that index";
 
   return it->second;
+}
+
+const std::vector<double>& ComputerInfoDataContainer::ramUsage(
+    unsigned processId) const
+{
+
+  auto it = m_ramUsage.find(processId);
+  if (it != m_ramUsage.end())
+    return it->second.first[RAM_INDEX];
+
+  throw "There's no process with that id";
 }

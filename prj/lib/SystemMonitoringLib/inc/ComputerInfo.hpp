@@ -12,6 +12,7 @@
 #include "SensorsVector.hpp"
 #include "RamInfo.hpp"
 #include "ProcessorInfo.hpp"
+#include "AllProcessesInfo.hpp"
 
 /*!
  * \brief Klasa reprezentująca informacje o komputerze
@@ -37,17 +38,29 @@ class ComputerInfo: public Info
      */
     bool update() override;
     /*!
-     * \brief Pozwala dostać się do zbioru wszystkich wektorów
+     * \brief Pozwala dostać się do zbioru wszystkich czujników
      *
      * \return Zwraca wektor czujników dostępnych na komputerze.
      */
     const SensorsVector& allSensors() const { return m_sensors; }
+
+    /*!
+     * \brief Pozwala dostać się do zbioru wszystkich procesów
+     *
+     * \return Zwraca zbiór procesów dostępnych na komputerze.
+     */
+    const AllProcessesInfo& allProcesses() const { return m_allProcesses; }
 
   private:
     /*!
      * \brief Pole przechowujące czujniki
      */
     SensorsVector m_sensors;
+
+    /*!
+     * \brief Pole przechowujące czujniki
+     */
+    AllProcessesInfo m_allProcesses;
 };
 
 

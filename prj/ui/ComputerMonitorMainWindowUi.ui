@@ -18,8 +18,18 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>2</number>
+       <number>3</number>
       </property>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>Sensors Info</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="SensorsWidget" name="sensorsWidget" native="true"/>
+        </item>
+       </layout>
+      </widget>
       <widget class="QWidget" name="tab">
        <attribute name="title">
         <string>Processor Info</string>
@@ -59,20 +69,15 @@
         <string>Memory Info</string>
        </attribute>
       </widget>
-      <widget class="QWidget" name="tab_2">
-       <attribute name="title">
-        <string>Sensors Info</string>
-       </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_4">
-        <item>
-         <widget class="SensorsWidget" name="sensorsWidget" native="true"/>
-        </item>
-       </layout>
-      </widget>
       <widget class="QWidget" name="tab_4">
        <attribute name="title">
-        <string>Network Info</string>
+        <string>Processes</string>
        </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_5">
+        <item>
+         <widget class="ProcessesWidget" name="processesWidget" native="true"/>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>
@@ -166,6 +171,12 @@
    <class>SensorsWidget</class>
    <extends>QWidget</extends>
    <header>SensorsWidget.hpp</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ProcessesWidget</class>
+   <extends>QWidget</extends>
+   <header>ProcessesWidget.hpp</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

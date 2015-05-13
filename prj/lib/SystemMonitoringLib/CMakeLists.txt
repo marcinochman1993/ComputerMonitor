@@ -22,4 +22,4 @@ include_directories(${SystemMonitoringLib_INC_DIRS} ${Boost_INCLUDE_DIRS})
 # ------- dodanie biblioteki do kompilacji ------
 add_library(${SystemMonitoringLib_NAME} ${SystemMonitoringLib_SOURCES})
 
-target_link_libraries(${SystemMonitoringLib_NAME} ${SENSORS_LIBS} ${Boost_LIBRARIES}) 
+target_link_libraries(${SystemMonitoringLib_NAME} ${SENSORS_LIBS} ${Boost_LIBRARIES} -lboost_system) # błąd w wyszukiwaniu bibliotek do BOOST

@@ -1,33 +1,38 @@
 /*
- * SensorsWidget.cpp
+ * ProcessesWidget.cpp
  *
- *  Created on: Apr 21, 2015
+ *  Created on: May 13, 2015
  *      Author: mochman
  */
 
-#include "SensorsWidget.hpp"
+#include "ProcessesWidget.hpp"
 
-void SensorsWidget::computerInfoData(ComputerInfoDataContainerWrapper* compInfo)
+void ProcessesWidget::init()
+{
+  m_ui.setupUi(this);
+}
+
+void ProcessesWidget::computerInfoData(
+    ComputerInfoDataContainerWrapper* compInfo)
 {
   if (compInfo == nullptr)
     return;
 
-  auto model = new AllSensorsModel();
-  model->computerInfoData(compInfo);
-  tableView->setModel(model);
-  tableView->resizeColumnsToContents();
-  QItemSelectionModel *selectionModel = tableView->selectionModel();
-  m_compInfo = compInfo;
-
+  m_model = new AllProcessesModel(this);
+  m_model->computerInfoData(compInfo);
+  m_ui.allProcessesTable->setModel(m_model);
+  QItemSelectionModel *selectionModel =
+    m_ui.allProcessesTable->selectionModel();
   connect(selectionModel,
       SIGNAL(selectionChanged (const QItemSelection &, const QItemSelection &)),
       this,
       SLOT(
           onSelectionRowChanged(const QItemSelection &, const QItemSelection &)));
+  m_compInfo = compInfo;
   connect(compInfo, SIGNAL(dataUpdated()), this, SLOT(updatePlot()));
 }
 
-void SensorsWidget::onSelectionRowChanged(const QItemSelection & selected,
+void ProcessesWidget::onSelectionRowChanged(const QItemSelection & selected,
     const QItemSelection &)
 {
   auto customPlot = customPlotWidget();
@@ -37,8 +42,10 @@ void SensorsWidget::onSelectionRowChanged(const QItemSelection & selected,
   customPlot->addGraph();
 
   m_currentRow = selected.indexes()[0].row();
+  std::cout << m_currentRow << std::endl;
   QVector<double> y0 = QVector<double>::fromStdVector(
-      m_compInfo->dataContainer()->sensorsData(m_currentRow)), x;
+      m_compInfo->dataContainer()->ramUsage(
+          m_model->processIdByIndex(m_currentRow))), x;
   for (int i = 0; i < y0.size(); i++)
     x.push_back(i);
   customPlot->graph(0)->setData(x, y0);
@@ -46,18 +53,14 @@ void SensorsWidget::onSelectionRowChanged(const QItemSelection & selected,
   customPlot->replot();
 }
 
-void SensorsWidget::updatePlot()
+void ProcessesWidget::updatePlot()
 {
+  auto customPlot = customPlotWidget();
   if (customPlot->graphCount() == 0 || m_currentRow == -1)
     return;
   customPlot->graph(0)->addData(
-      m_compInfo->dataContainer()->sensorsData(m_currentRow).size(),
-      m_compInfo->dataContainer()->sensorsData(m_currentRow).back());
+      m_compInfo->dataContainer()->ramUsage(m_currentRow).size(),
+      m_compInfo->dataContainer()->ramUsage(m_currentRow).back());
   customPlot->graph(0)->rescaleAxes();
   customPlot->replot();
-}
-
-void SensorsWidget::init()
-{
-  setupUi(this);
 }

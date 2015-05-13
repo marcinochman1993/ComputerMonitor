@@ -14,7 +14,7 @@ add_subdirectory(lib)
 
 # -------- znajdowanie potrzebnych bibliotek ---------
 find_package(Qt5 COMPONENTS ${QT5_COMPONENTS})
-
+find_package(Boost COMPONENTS filesystem REQUIRED)
 # -------- ustawienia kompilacji  ---------
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(QT5_WRAP_UI_DIR ${UI_INC_DIR})
@@ -43,4 +43,4 @@ add_executable(computer_monitor ${SOURCES} ${computer_monitor_HEADERS_MOC}
   ${computer_monitor_FORMS_HEADERS} ${computer_monitor_RSRCS} ${QML_SRCS})
 
 # -------- konsolidacja  ---------
-target_link_libraries(computer_monitor ${ADDITIONAL_LIBS} )
+target_link_libraries(computer_monitor ${ADDITIONAL_LIBS} ${Boost_LIBRARIES})

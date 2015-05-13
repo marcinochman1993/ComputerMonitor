@@ -11,9 +11,23 @@
 #include <string>
 #include "Info.hpp"
 
+/*!
+ * \brief Klasa opisująca urządzenie fizyczne w komputerze
+ *
+ * Wprowadza własności wspólne dla urządzenia. Klasa służy do dziedziczenia.
+ *
+ */
 class HardwareInfo: public Info
 {
   public:
+
+    /*!
+     * \brief Metoda określająca nazwę urządzenia
+     *
+     * Jest to metoda wirtualna, każde urządzenie tj. klasa pochodna powinna przeciążyc tę metodę
+     *
+     * \return Nazwa urządzenia
+     */
     virtual std::string name() const { return std::string(); }
 };
 
