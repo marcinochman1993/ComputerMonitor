@@ -44,7 +44,7 @@ void ProcessesWidget::onSelectionRowChanged(const QItemSelection & selected,
   m_currentRow = selected.indexes()[0].row();
   std::cout << m_currentRow << std::endl;
   QVector<double> y0 = QVector<double>::fromStdVector(
-      m_compInfo->dataContainer()->ramUsage(
+      m_compInfo->dataContainer()->cpuUsage(
           m_model->processIdByIndex(m_currentRow))), x;
   for (int i = 0; i < y0.size(); i++)
     x.push_back(i);
@@ -58,9 +58,10 @@ void ProcessesWidget::updatePlot()
   auto customPlot = customPlotWidget();
   if (customPlot->graphCount() == 0 || m_currentRow == -1)
     return;
+  unsigned processId = m_model->processIdByIndex(m_currentRow);
   customPlot->graph(0)->addData(
-      m_compInfo->dataContainer()->ramUsage(m_currentRow).size(),
-      m_compInfo->dataContainer()->ramUsage(m_currentRow).back());
+      m_compInfo->dataContainer()->cpuUsage(processId).size(),
+      m_compInfo->dataContainer()->cpuUsage(processId).back());
   customPlot->graph(0)->rescaleAxes();
   customPlot->replot();
 }

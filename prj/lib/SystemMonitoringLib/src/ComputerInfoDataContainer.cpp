@@ -7,6 +7,9 @@
 
 #include "ComputerInfoDataContainer.hpp"
 
+using namespace std;
+using namespace std::chrono;
+
 bool ComputerInfoDataContainer::update()
 {
   if (!m_computerInfo->update())
@@ -36,13 +39,25 @@ void ComputerInfoDataContainer::saveUpdatedProcessesValuesInVec()
 {
   for (const auto& procPair : computerInfo().allProcesses().processesMap())
   {
-    auto it = m_ramUsage.find(procPair.first);
-    if (it == m_ramUsage.end())
+    auto it = m_processes.find(procPair.first);
+    if (it == m_processes.end())
     {
+      vector<vector<double>> vectorOfValues;
+      vectorOfValues.resize(MONITORED_VALUES_NUM);
+      vectorOfValues[CPU_INDEX].push_back(procPair.second.cpuUsage());
+      vector<system_clock::time_point> vectorOfTime;
+      vectorOfTime.push_back(computerInfo().lastUpdated());
+
+      auto innerPair = make_pair(move(vectorOfValues), move(vectorOfTime));
+
+      auto outerPait = make_pair(procPair.first, move(innerPair));
+
+      m_processes.insert(outerPait);
     }
     else
     {
-
+//      std::cout<<it->second.first.size()<<std::endl;
+      it->second.first[CPU_INDEX].push_back(procPair.second.cpuUsage());
     }
   }
 }
@@ -72,13 +87,12 @@ const std::vector<double>& ComputerInfoDataContainer::sensorsData(
   return it->second;
 }
 
-const std::vector<double>& ComputerInfoDataContainer::ramUsage(
+const std::vector<double>& ComputerInfoDataContainer::cpuUsage(
     unsigned processId) const
 {
-
-  auto it = m_ramUsage.find(processId);
-  if (it != m_ramUsage.end())
-    return it->second.first[RAM_INDEX];
+  auto it = m_processes.find(processId);
+  if (it != m_processes.end())
+    return it->second.first[CPU_INDEX];
 
   throw "There's no process with that id";
 }

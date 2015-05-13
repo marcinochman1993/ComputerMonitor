@@ -40,7 +40,7 @@ class ComputerInfoDataContainer: public Info
      */
     const std::vector<std::chrono::system_clock::time_point>& time() const { return m_time; }
 
-    const std::vector<double>& ramUsage(unsigned processId) const;
+    const std::vector<double>& cpuUsage(unsigned processId) const;
 
     const std::vector<std::chrono::system_clock::time_point>& ramTime(unsigned processId) const;
 
@@ -98,7 +98,7 @@ class ComputerInfoDataContainer: public Info
      * Kluczem jest id procesu, a wartość to para wektorów przechowujących wartości oraz czasy
      */
     std::map<unsigned, std::pair<std::vector<std::vector<double>>,
-        std::vector<std::chrono::system_clock::time_point>>> m_ramUsage;
+        std::vector<std::chrono::system_clock::time_point>>> m_processes;
 
     /*!
      * \brief Pole przechowujące czasy, kiedy zostały dokonane pomiary
@@ -111,7 +111,8 @@ class ComputerInfoDataContainer: public Info
      */
     ComputerInfo* m_computerInfo;
 
-    static const unsigned RAM_INDEX = 0;
+    static const unsigned CPU_INDEX = 0;
+    static const unsigned MONITORED_VALUES_NUM = 1;
 };
 
 #endif /* COMPUTERINFODATACONTAINER_HPP_ */
