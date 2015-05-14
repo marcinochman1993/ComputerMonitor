@@ -42,6 +42,10 @@ class ComputerInfoDataContainer: public Info
 
     const std::vector<double>& cpuUsage(unsigned processId) const;
 
+    const std::vector<double>& coreUsage(unsigned coreId) const;
+
+    const std::vector<double>& frequency(unsigned coreId) const;
+
     const std::vector<std::chrono::system_clock::time_point>& ramTime(unsigned processId) const;
 
     void clear(); //todo do zaimplementowania
@@ -72,7 +76,7 @@ class ComputerInfoDataContainer: public Info
 
     void saveUpdatedSensorsValueInVec();
     void saveUpdatedProcessesValuesInVec();
-
+    void saveUpdatedProcessorValues();
 
     /*!
      * \brief Kontener przechowujący częstotliwości poszczególnych rdzeni
@@ -100,6 +104,9 @@ class ComputerInfoDataContainer: public Info
     std::map<unsigned, std::pair<std::vector<std::vector<double>>,
         std::vector<std::chrono::system_clock::time_point>>> m_processes;
 
+
+    std::map<unsigned, std::vector<std::vector<double>>> m_processorValues;
+
     /*!
      * \brief Pole przechowujące czasy, kiedy zostały dokonane pomiary
      */
@@ -112,6 +119,9 @@ class ComputerInfoDataContainer: public Info
     ComputerInfo* m_computerInfo;
 
     static const unsigned CPU_INDEX = 0;
+    static const unsigned PROCESSOR_FREQ_INDEX = 0;
+    static const unsigned PROCESSOR_COREUSAGE_INDEX = 1;
+    static const unsigned PROCESSOR_MONITORED_VALUES_NUM = 2;
     static const unsigned MONITORED_VALUES_NUM = 1;
 };
 

@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>3</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
@@ -36,31 +36,7 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <widget class="QGroupBox" name="groupBox">
-          <property name="title">
-           <string>General</string>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_3">
-           <item>
-            <widget class="QTableView" name="tableView_2"/>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item>
-         <widget class="QGroupBox" name="groupBox_2">
-          <property name="title">
-           <string>Usage</string>
-          </property>
-          <layout class="QHBoxLayout" name="horizontalLayout">
-           <item>
-            <widget class="QTableView" name="tableView"/>
-           </item>
-           <item>
-            <widget class="QWidget" name="widget" native="true"/>
-           </item>
-          </layout>
-         </widget>
+         <widget class="ProcessorWidget" name="processorWidget" native="true"/>
         </item>
        </layout>
       </widget>
@@ -68,6 +44,11 @@
        <attribute name="title">
         <string>Memory Info</string>
        </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <widget class="RamWidget" name="widget_2" native="true"/>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="tab_4">
        <attribute name="title">
@@ -177,6 +158,18 @@
    <class>ProcessesWidget</class>
    <extends>QWidget</extends>
    <header>ProcessesWidget.hpp</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ProcessorWidget</class>
+   <extends>QWidget</extends>
+   <header>ProcessorWidget.hpp</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>RamWidget</class>
+   <extends>QWidget</extends>
+   <header>RamWidget.hpp</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

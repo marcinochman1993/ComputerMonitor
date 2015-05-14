@@ -21,6 +21,7 @@ bool ComputerInfoDataContainer::update()
 
   saveUpdatedSensorsValueInVec();
   saveUpdatedProcessesValuesInVec();
+  saveUpdatedProcessorValues();
 
   return Info::update();
 }
@@ -55,9 +56,28 @@ void ComputerInfoDataContainer::saveUpdatedProcessesValuesInVec()
       m_processes.insert(outerPait);
     }
     else
-    {
-//      std::cout<<it->second.first.size()<<std::endl;
       it->second.first[CPU_INDEX].push_back(procPair.second.cpuUsage());
+  }
+}
+
+void ComputerInfoDataContainer::saveUpdatedProcessorValues()
+{
+  const ProcessorInfo& processor = m_computerInfo->processor();
+  for (int i = 0; i < m_computerInfo->processor().coresNumber(); i++)
+  {
+    auto it = m_processorValues.find(i);
+    if (it != m_processorValues.end())
+    {
+      it->second[PROCESSOR_FREQ_INDEX].push_back(processor.frequency(i));
+      it->second[PROCESSOR_COREUSAGE_INDEX].push_back(processor.usage(i));
+    }
+    else
+    {
+      std::vector<std::vector<double>> vectorOfValues;
+      vectorOfValues.resize(PROCESSOR_MONITORED_VALUES_NUM);
+      vectorOfValues[PROCESSOR_COREUSAGE_INDEX].push_back(processor.usage(i));
+      vectorOfValues[PROCESSOR_FREQ_INDEX].push_back(processor.frequency(i));
+      m_processorValues.insert(make_pair(i, move(vectorOfValues)));
     }
   }
 }
@@ -95,4 +115,24 @@ const std::vector<double>& ComputerInfoDataContainer::cpuUsage(
     return it->second.first[CPU_INDEX];
 
   throw "There's no process with that id";
+}
+
+const std::vector<double>& ComputerInfoDataContainer::coreUsage(
+    unsigned coreId) const
+{
+  auto it = m_processorValues.find(coreId);
+  if (it != m_processorValues.end())
+    return it->second[PROCESSOR_COREUSAGE_INDEX];
+
+  throw "There's no core with that id";
+}
+
+const std::vector<double>& ComputerInfoDataContainer::frequency(
+    unsigned coreId) const
+{
+  auto it = m_processorValues.find(coreId);
+  if (it != m_processorValues.end())
+    return it->second[PROCESSOR_FREQ_INDEX];
+
+  throw "There's no core with that id";
 }

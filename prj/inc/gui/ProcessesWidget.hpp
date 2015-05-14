@@ -23,6 +23,8 @@ class ProcessesWidget: public QWidget
   private:
     void init();
     QCustomPlot* customPlotWidget() { return m_ui.customPlot; }
+    void addDataTypeToCombo();
+    void adjustPlotBound();
     Ui::UiProcessesWidget m_ui;
     const ComputerInfoDataContainerWrapper* m_compInfo;
     int m_currentRow;

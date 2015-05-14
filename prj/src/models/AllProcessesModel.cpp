@@ -34,7 +34,7 @@ QVariant AllProcessesModel::data(const QModelIndex &index, int role) const
 QVariant AllProcessesModel::headerData(int section, Qt::Orientation orientation,
     int role) const
 {
-  const vector<QString> HEADER_TITLES = { tr("Id"), tr("Ram Usage") };
+  const vector<QString> HEADER_TITLES = { tr("Id"), tr("Cpu Usage [%]") };
 
   if (role == Qt::DisplayRole)
   {
@@ -85,6 +85,9 @@ void AllProcessesModel::dataUpdated()
       }
     }
   }
+
+  emit dataChanged(index(0, 0),
+      index(compInfo().allProcesses().size(), COLUMNS_NUM));
 }
 
 unsigned AllProcessesModel::processIdByIndex(unsigned index) const
@@ -106,6 +109,8 @@ QVariant AllProcessesModel::getData(unsigned row, unsigned column) const
       {
         case 0:
           return proc.id();
+        case 1:
+          return proc.cpuUsage();
       }
 
     }

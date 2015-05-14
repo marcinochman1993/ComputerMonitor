@@ -7,9 +7,28 @@
 
 #include "ProcessesWidget.hpp"
 
+using namespace std;
+
 void ProcessesWidget::init()
 {
   m_ui.setupUi(this);
+  addDataTypeToCombo();
+  m_ui.allProcessesTable->horizontalHeader()->setSectionResizeMode(
+      QHeaderView::Stretch);
+}
+
+void ProcessesWidget::addDataTypeToCombo()
+{
+  vector<QString> dataTypesString = { tr("CpuUsage [%]") };
+  for (int i = 0; i < 1; i++)
+    m_ui.dataTypeCombo->addItem(dataTypesString[i]);
+}
+
+void ProcessesWidget::adjustPlotBound()
+{
+  auto customPlot = customPlotWidget();
+  customPlot->graph(0)->rescaleAxes();
+  //todo zaimplementować
 }
 
 void ProcessesWidget::computerInfoData(
@@ -62,6 +81,9 @@ void ProcessesWidget::updatePlot()
   customPlot->graph(0)->addData(
       m_compInfo->dataContainer()->cpuUsage(processId).size(),
       m_compInfo->dataContainer()->cpuUsage(processId).back());
-  customPlot->graph(0)->rescaleAxes();
+
+  adjustPlotBound();
+
+  adjustPlotBound();
   customPlot->replot();
 }

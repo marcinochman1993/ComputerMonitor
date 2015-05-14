@@ -12,5 +12,6 @@ void ComputerMonitorMainWindow::computerInfoData(
 {
   sensorsWidget->computerInfoData(compInfo);
   processesWidget->computerInfoData(compInfo);
+  processorWidget->computerInfoData(compInfo);
 }
 

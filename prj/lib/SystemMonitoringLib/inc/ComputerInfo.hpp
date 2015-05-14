@@ -13,6 +13,7 @@
 #include "RamInfo.hpp"
 #include "ProcessorInfo.hpp"
 #include "AllProcessesInfo.hpp"
+#include "ProcessorInfo.hpp"
 
 /*!
  * \brief Klasa reprezentująca informacje o komputerze
@@ -51,6 +52,8 @@ class ComputerInfo: public Info
      */
     const AllProcessesInfo& allProcesses() const { return m_allProcesses; }
 
+    const ProcessorInfo& processor() const { return m_processor; }
+
   private:
     /*!
      * \brief Pole przechowujące czujniki
@@ -61,6 +64,8 @@ class ComputerInfo: public Info
      * \brief Pole przechowujące czujniki
      */
     AllProcessesInfo m_allProcesses;
+
+    ProcessorInfo m_processor;
 };
 
 

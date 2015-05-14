@@ -24,7 +24,7 @@ class ComputerInfoDataContainerWrapper: public QObject, public Info
   private:
     ComputerInfoDataContainer* m_dataContainer;
 
-    signals:
+  signals:
     void dataUpdated();
     void beforeDataUpdate();
 };

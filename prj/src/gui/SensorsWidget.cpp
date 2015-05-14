@@ -15,7 +15,6 @@ void SensorsWidget::computerInfoData(ComputerInfoDataContainerWrapper* compInfo)
   auto model = new AllSensorsModel();
   model->computerInfoData(compInfo);
   tableView->setModel(model);
-  tableView->resizeColumnsToContents();
   QItemSelectionModel *selectionModel = tableView->selectionModel();
   m_compInfo = compInfo;
 
@@ -60,4 +59,5 @@ void SensorsWidget::updatePlot()
 void SensorsWidget::init()
 {
   setupUi(this);
+  tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }

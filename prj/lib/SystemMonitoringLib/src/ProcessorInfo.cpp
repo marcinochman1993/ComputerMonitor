@@ -7,6 +7,7 @@
 
 #include <sstream>
 #include "ProcessorInfo.hpp"
+#include <map>
 #include <set>
 #include <iostream> // todo usunąć
 using namespace std;
@@ -17,6 +18,13 @@ double ProcessorInfo::frequency(unsigned int coreNum) const
     throw "Processor hasn't got so many cores";
 
   return m_freq[coreNum];
+}
+
+double ProcessorInfo::usage(unsigned int coreNum) const
+{
+  if (coreNum < m_usage.size())
+    return m_usage[coreNum];
+  throw "There's no core with that id";
 }
 
 bool ProcessorInfo::update()
@@ -33,7 +41,7 @@ bool ProcessorInfo::parseCpuInfoFile()
   ifstream procInfoFile("/proc/cpuinfo");
   if (!procInfoFile)
     return false;
-  std::set<int> repeatedCores;
+  std::map<unsigned, double> repeatedCores;
   while (procInfoFile)
   {
     string line;
@@ -53,15 +61,16 @@ bool ProcessorInfo::parseCpuInfoFile()
         iss >> coreId;
 
         if (repeatedCores.find(coreId) == repeatedCores.end())
-          repeatedCores.insert(coreId);
+          repeatedCores.insert(make_pair(coreId, frequency));
       }
       getline(procInfoFile, line);
     }
 
-    if (m_freq.size() < coreId)
-      m_freq.push_back(frequency);
   }
   m_coresNum = repeatedCores.size();
+  m_freq.resize(coresNumber());
+  for (const auto& it : repeatedCores)
+    m_freq[it.first] = it.second;
   return true;
 }
 
@@ -92,10 +101,11 @@ bool ProcessorInfo::parseCpuStatFile()
       if (m_lastBusyTime[coreId] > 0.0 && m_lastTotalTime[coreId] > 0.0)
         usagePercent = (busyTime - m_lastBusyTime[coreId])
           / static_cast<double>(totalTime - m_lastTotalTime[coreId]) * 100.0;
+
       m_lastBusyTime[coreId] = busyTime;
       m_lastTotalTime[coreId] = totalTime;
       if (m_usage.size() == 0)
-        m_usage.resize(coreId);
+        m_usage.resize(coresNumber());
       m_usage[coreId] = usagePercent;
       coreId++;
       if (coreId >= coresNumber())

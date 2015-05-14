@@ -7,8 +7,17 @@
 \usepackage{lmodern}
 \usepackage{tabularx}
 \usepackage{graphicx}
+\usepackage{hyperref}
 \newcounter{counter}
 \newcommand\rownumber{\stepcounter{counter}\arabic{counter}}
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
 
 \title{\textbf{Podsumowanie prac z projektu WDS - kwiecień 2015}}
 \author{Marcin Ochman - 200546}
@@ -65,10 +74,11 @@
 
 \section{Wstęp raportu}
 
-W ciągu miesiąca tj. 18.03-23.04 zostało wykonanych wiele prac nad aplikacją. W tym dokumencie opisano wykonane i przewidywane na następny miesiąc zadania oraz komentarz autora na temat postępów prac nad aplikacją.
+W ciągu miesiąca tj. 23.04.2015-14.05.2015 zostało wykonanych wiele prac nad aplikacją. W tym dokumencie opisano wykonane i przewidywane na następny miesiąc zadania oraz komentarz autora na temat postępów prac nad aplikacją.
 
 \section{Lista wykonanych zadań w projekcie}
 
+\subsection{Pierwszy termin kontrolny prac nad aplikacją - wstępne rezultaty}
 W poniższej tabeli zostały zebrane zadania, które udało się zrealizować do dnia 23.04.2015r.
 
 \begin{table}[h]
@@ -87,11 +97,13 @@ W poniższej tabeli zostały zebrane zadania, które udało się zrealizować do
 	\caption{Tabela prac nad aplikacją}
 \end{table}
 
+\subsection{Drugi termin kontrolny prac nad aplikacją - rezultaty prawie końcowe}
+
 \section{Szczegółowy opis wykonanych zadań}
 
-\subsection{Kwiecień}
+\subsection{Pierwszy termin kontrolny prac nad aplikacją - wstępne rezultaty}
 
-\subsection{Opracowanie architektury aplikacji}
+\subsubsection{Opracowanie architektury aplikacji}
 Program będzie opierać się na bibliotekach \textit{Qt5} i \textit{QCustomPlot}, które posłużą do prezentacji danych oraz autorskiej biblioteki, która została opisane w następnych punktach - \textit{SystemMonitoringLib}. Biblioteki monitorujące będą komunikować się z warstwą prezentacji za pomocą odpowiedniej klasy pośredniczącej. Diagram budowy aplikacji został przedstawiony na rysunku \ref{diagram_budowy_aplikacji}, a diagramy klas zostały przedstawione na rysunkach \ref{diagram_klas_system_monitoring} oraz \ref{diagram_klas_gui}, a diagram przypadków użycia na rysunku \ref{diagram_przypadkow_uzycia}.
 
 \begin{figure}[h]
@@ -123,7 +135,7 @@ Program będzie opierać się na bibliotekach \textit{Qt5} i \textit{QCustomPlot
 	\label{diagram_przypadkow_uzycia}
 \end{figure}
 
-\subsection{Stworzenie zalążka aplikacji}
+\subsubsection{Stworzenie zalążka aplikacji}
 
 Zalążek aplikacji wymagał kilku pomniejszych kroków do wykonania:
 \begin{itemize}
@@ -168,18 +180,37 @@ W widoku tabelki mamy możliwość podglądania aktualnych wartości odczytanych
 	\label{wygladAplikacji}
 \end{figure}
 
-\subsection{Maj}
+\subsection{Drugi termin kontrolny prac nad aplikacją - rezultaty prawie końcowe}
 
 \subsubsection{Dokończenie prac nad biblioteką do monitorowania komputera}
 
-Zostały poczynione duże kroki w tym kierunku. Dodano klasy \texttt{ProcessInfo}, \texttt{ProcessorInfo}, \texttt{RamInfo} oraz \texttt{AllProcessesInfo}.
+Zostały poczynione duże kroki w tym kierunku. Dodano klasy \texttt{ProcessInfo}, \texttt{ProcessorInfo}, \texttt{RamInfo} oraz \texttt{AllProcessesInfo}. Są one odpowiedzialne za śledzenie procesów, informacji o procesorze, informacji o pamięci
+RAM oraz informacji o wszystkich procesach. Biblioteka została napisana na system Linux. Nie jest kompatybilna na komputerach z systemem Windows, tak jak zakładano to na samym początku. 
 
 \subsubsection{Kontynuacja implementacji interfejsu użytkownika}
 
+Zaimplementowanie wielu funckjonalności biblioteki \textit{SystemMonitoringLib} umożliwiło dalszą implementację
+prezentacji danych zebranych przez tę bibliotekę w przejrzysty i atrakcyjny dla oka sposób. Postanowiono, że aplikacja
+będzie mieć spójny interfejs dla każdego monitorowanego komponentu. Dzięki temu możemy zobaczyć, że każda strona ma podobny wygląd - po lewej stronie mamy do wyboru element poszczególnego komponentu (np. dla procesora jest to rdzeń). Po prawej stronie mamy wykres monitorowanej wielkości, którą możemy wybrać (jeśli jest taka możliwość) za pomocą listy rozwijalnej. Wygląd aplikacji został przedstawiony na rysunku \ref{wygladAplikacji}.
 
 \section{Opis zrealizowanych, planowanych i zaniechanych funkcjonalności}
 
+Poniżej zostały opisane wszystkie funkcjonalności aplikacji, które na początku istnienia projektu
+miały zostać zaimplementowane, jednak ze względu na ograniczenia czasowe zostały porzucone.
+
+\subsection{Pierwszy termin kontrolny prac nad aplikacją - wstępne rezultaty}
+
 Na dzień 23.04.2015 została zrealizowana funkcjonalność wizualizacji danych z czujników. Planowane funkcjonalności nie zmieniły się - są zgodne z tym co można znaleźć w założeniach projektu. Niestety ze względu na niedostateczną ilość czasu wersja na system \textit{Windows} została wstrzymana.
+
+\subsection{Drugi termin kontrolny prac nad aplikacją - rezultaty prawie końcowe}
+Na dzień 14.05.2015r została zrealizowana funkcjonalność wizualizacji \textsc{wszystkich} komponentów monitorowanych przez bibliotekę \textit{SystemMonitoringLib} tj:
+	\begin{itemize}
+		\item Procesor
+		\item Pamięć \textsc{RAM}
+		\item Uruchomione procesy
+		\item Czujniki
+	\end{itemize}
+Oznacza to, że zostały zakończone prace nad biblioteką \textit{SystemMonitoringLib} oraz wykonano wiele pracy nad interfejsem użytkownika.
 
 \section{Następne zadania do wykonania - aktualizacja planu pracy}
 Ze względu na to, że niektóre zadania zostały wykonane ponad plan, a pewna część zadań z planu została nie zrealizowana należało zastosować poprawki w planie pracy nad aplikacją. Tabela \ref{tabela_harmonogram} przedstawia zaktualizowany plan pracy.
@@ -189,7 +220,7 @@ Ze względu na to, że niektóre zadania zostały wykonane ponad plan, a pewna c
 				\hline
 				Lp. & Opis \\ \hline
 				1 & Stworzenie biblioteki, która pozwoli na pobieranie informacji o stanie komputera \\ \hline
-				2. & Zaprogramowanie biblioteki służącej do komunikacji komputerów w siecie w celu wysyłania informacji zgromadzonych przez bibliotekę z pkt 1 \\ \hline
+				2. & Zaprogramowanie klas służących do komunikacji komputerów w sieci w celu wysyłania informacji zgromadzonych przez bibliotekę z pkt 1 \\ \hline
 				3. & Zaprojektowanie oraz oprogramowanie interfejsu użytkownika \\ \hline
 				4. & Połączenie pracy bibliotek z interfejsem użytkownika \\ \hline
 			\end{tabularx}
@@ -199,17 +230,13 @@ Ze względu na to, że niektóre zadania zostały wykonane ponad plan, a pewna c
 			\centering
 			\begin{tabularx}{\linewidth}{|c|c|c|X|}
 				\hline
-				Od & Do & Osiągnięty kamień milowy & Opis \\ \hline
-				20.04 & 26.04 &  & Zapoznanie się z metodami programowania sieciowego i dostępnymi bibliotekami oraz  rozpoczęcie implementacji biblioteki sieciowej, Prace nad biblioteką monitorującą\\ \hline
-				27.04 & 03.05 & 1 & Początki implementacji biblioteki sieciowej oraz finalizacja prac nad biblioteką monitorującą \\ \hline
-				04.05 & 10.05 &  & Prace nad klasami do komunikacji sieciowej \\ \hline
-				11.05 & 17.05 & 2  & Zakończenie prac nad komunikacją sieciową  \\ \hline
-				18.05 & 24.05 &  & Dalsze projektowanie interfejsu użytkownika oraz jego implementacja \\ \hline
-				25.03 & 31.03 & 3 & Implementacja interfejsu użytkownika oraz połączenie logiki programu z interfejsem \\ \hline
+				11.05 & 17.05 & 2  & Kontynuacja prac nad komunikacją sieciową  \\ \hline
+				18.05 & 24.05 &  & Zakończenie prac nad komunikacją sieciową \\ \hline
+				25.03 & 31.03 & 3 & Implementacja interfejsu użytkownika dla komunikacji sieciowej \\ \hline
 				01.06 & 07.06 & 4 & Ostateczne połączenie aplikacji graficznej z bibliotekami oraz początek testów aplikacji \\ \hline
-				07.06 & 13.06 &  & Ostateczne testy aplikacji \\ \hline
+				07.06 & 11.06 &  & Ostateczne testy aplikacji \\ \hline
 			\end{tabularx}
-			\caption{Tabela przedstawiająca uaktualniony harmonogram przyszyłych prac nad aplikacją}
+			\caption{Tabela przedstawiająca harmonogram zadań prac nad aplikacją od 11.05.2015}
 			\label{tabela_harmonogram}
 		\end{table}
 Dla porównania umieściłem również stary harmonogram z zaznaczeniem, które podpunkty zostały do tej pory zakończone lub rozpoczęte. Przedstawia go tabela \ref{tabela_harmonogram_stary}.
@@ -221,23 +248,22 @@ Dla porównania umieściłem również stary harmonogram z zaznaczeniem, które 
 				Od & Do & Osiągnięty kamień milowy & Opis & Status \\ \hline
 				23.03 & 29.03 &  & Zaprojektowanie interfejsu biblioteki do monitorowania komputera & Ukończono  \\ \hline
 				30.03 & 05.04 &  & Zapoznanie się z metodami dostępu do informacji o komputerze oraz rozpoczęcie implementacji powyższej biblioteki & Ukończono \\ \hline
-				06.04 & 12.04 & 1 & Ukończenie biblioteki monitorującej komputer & W trakcie \\ \hline
+				06.04 & 12.04 & 1 & Ukończenie biblioteki monitorującej komputer & Ukończono \\ \hline
 				13.04 & 19.04 &   & Rozpoczęcie projektowania interfejsu biblioteki do komunikacji sieciowej & Rozpoczęto\\ \hline
-				20.04 & 26.04 &  & Zapoznanie się z metodami programowania sieciowego i dostępnymi bibliotekami oraz  rozpoczęcie implementacji biblioteki sieciowej & --------- \\ \hline
+				20.04 & 26.04 &  & Zapoznanie się z metodami programowania sieciowego i dostępnymi bibliotekami oraz  rozpoczęcie implementacji biblioteki sieciowej & Rozpoczęto \\ \hline
 				27.04 & 03.05 &  & Implementacja biblioteki sieciowej & --------- \\ \hline
-				04.05 & 10.05 & 2 & Zakończenie prac nad biblioteką sieciową oraz rozpoczęcie projektowania interfejsu użytkownika & Rozpoczęto \\ \hline
-				11.05 & 17.05 &    & Kontynuacja projektowania interfejsu użytkownika oraz jego implementacja & Rozpoczęto\\ \hline
-				18.05 & 24.05 &  & Implementacja interfejsu użytkownika & Rozpoczęto\\ \hline
+				04.05 & 10.05 &  & Prace nad klasami do komunikacji sieciowej & Rozpoczęto \\ \hline
+				11.05 & 17.05 & 2  & Zakończenie prac nad komunikacją sieciową & --------- \\ \hline
+				18.05 & 24.05 &  & Dalsze projektowanie interfejsu użytkownika oraz jego implementacja & Rozpoczęto \\ \hline
 				25.03 & 31.03 & 3 & Implementacja interfejsu użytkownika oraz połączenie logiki programu z interfejsem & Rozpoczęto \\ \hline
-				01.06 & 07.06 & 4 & Łączenie aplikacji graficznej z bibliotekami oraz początek testów aplikacji & Rozpoczęto \\ \hline
-				07.06 & 13.06 &  & Ostateczne testy aplikacji & --------- \\ \hline
+				01.06 & 07.06 & 4 & Ostateczne połączenie aplikacji graficznej z bibliotekami oraz początek testów aplikacji & --------- \\ \hline
+				07.06 & 13.06 &  & Ostateczne testy aplikacji & Rozpoczęto \\ \hline
 			\end{tabularx}
-			\caption{Tabela przedstawiająca stary harmonogram ze statusem zadania}
+			\caption{Tabela przedstawiająca wcześniejszy harmonogram ze statusem zadania na dzień 14.05.2015}
 			\label{tabela_harmonogram_stary}
 		\end{table}
 
 \section{Podsumowanie}
-Ze względu na dużą liczbę innych projektów, prace nad aplikacją są lekko opóźnione - około tygodnia, jednak zostaną poczynione wszelkie starania aby do następnego terminu oddania prac wszystko zostało nadrobione. 
-Pozytywną informacją jest fakt, że zostały już rozpoczęte prace nad interfejsem użytkownika, czego początkowy plan pracy nie uwzględniał.
+Ze względu na dużą liczbę innych projektów, prace nad aplikacją są lekko opóźnione - około tygodnia. Do tej pory nie udało się zrealizować komunikacji sieciowej, co jest największym brakiem w programie. Szacuję, że prace nad komunikacją będą trwać około 1,5 tygodnia tak jak napisano w harmonogramie - tabela \ref{tabela_harmonogram}. Oprócz komunikacji, prace idą nawet szybciej niż zakładał harmonogram, dlatego wszystkie zadania zostaną wykonane a aplikacja będzie w pełni funkcjonalna.
 
 \end{document}
