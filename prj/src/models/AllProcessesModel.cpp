@@ -86,8 +86,7 @@ void AllProcessesModel::dataUpdated()
     }
   }
 
-  emit dataChanged(index(0, 0),
-      index(compInfo().allProcesses().size(), COLUMNS_NUM));
+  emit dataChanged(index(0, 0), index(m_allProcessesId.size(), COLUMNS_NUM));
 }
 
 unsigned AllProcessesModel::processIdByIndex(unsigned index) const

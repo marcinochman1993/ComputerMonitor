@@ -74,7 +74,7 @@
 
 \section{Wstęp raportu}
 
-W ciągu miesiąca tj. 23.04.2015-14.05.2015 zostało wykonanych wiele prac nad aplikacją. W tym dokumencie opisano wykonane i przewidywane na następny miesiąc zadania oraz komentarz autora na temat postępów prac nad aplikacją.
+W ciągu miesiąca, tj. 23.04.2015-14.05.2015, zostało wykonanych wiele prac nad aplikacją. W tym dokumencie opisano wykonane i przewidywane na następny miesiąc zadania oraz komentarz autora na temat postępów prac nad aplikacją.
 
 \section{Lista wykonanych zadań w projekcie}
 
@@ -104,7 +104,7 @@ W poniższej tabeli zostały zebrane zadania, które udało się zrealizować do
 \subsection{Pierwszy termin kontrolny prac nad aplikacją - wstępne rezultaty}
 
 \subsubsection{Opracowanie architektury aplikacji}
-Program będzie opierać się na bibliotekach \textit{Qt5} i \textit{QCustomPlot}, które posłużą do prezentacji danych oraz autorskiej biblioteki, która została opisane w następnych punktach - \textit{SystemMonitoringLib}. Biblioteki monitorujące będą komunikować się z warstwą prezentacji za pomocą odpowiedniej klasy pośredniczącej. Diagram budowy aplikacji został przedstawiony na rysunku \ref{diagram_budowy_aplikacji}, a diagramy klas zostały przedstawione na rysunkach \ref{diagram_klas_system_monitoring} oraz \ref{diagram_klas_gui}, a diagram przypadków użycia na rysunku \ref{diagram_przypadkow_uzycia}.
+Program będzie opierać się na bibliotekach \textit{Qt5} i \textit{QCustomPlot}, które posłużą do prezentacji danych oraz autorskiej biblioteki, która została opisane w następnych punktach - \textit{SystemMonitoringLib}. Biblioteki monitorujące będą komunikować się z warstwą prezentacji za pomocą odpowiedniej klasy pośredniczącej. Diagram budowy aplikacji został przedstawiony na rysunku \ref{diagram_budowy_aplikacji},  diagram klas został przedstawiony na rysunku \ref{diagram_klas}, a diagram przypadków użycia na rysunku \ref{diagram_przypadkow_uzycia}.
 
 \begin{figure}[h]
 	\centering
@@ -116,16 +116,9 @@ Program będzie opierać się na bibliotekach \textit{Qt5} i \textit{QCustomPlot
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.75\paperheight, angle=90]{img/diagramKlas.png}
-	\caption{Diagram UML stworzonych klas niezwiązanych z interfejsem użytkownika}
-	\label{diagram_klas_system_monitoring}
-\end{figure}
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=0.75\paperheight, angle=90]{img/diagramKlasGui.png}
-	\caption{Diagram UML klas związanych z interfejsem użytkownika}
-	\label{diagram_klas_gui}
+	\includegraphics[height=0.75\paperheight]{img/diagramKlas.png}
+	\caption{Diagram UML stworzonych klas}
+	\label{diagram_klas}
 \end{figure}
 
 \begin{figure}[h]
@@ -203,7 +196,7 @@ miały zostać zaimplementowane, jednak ze względu na ograniczenia czasowe zost
 Na dzień 23.04.2015 została zrealizowana funkcjonalność wizualizacji danych z czujników. Planowane funkcjonalności nie zmieniły się - są zgodne z tym co można znaleźć w założeniach projektu. Niestety ze względu na niedostateczną ilość czasu wersja na system \textit{Windows} została wstrzymana.
 
 \subsection{Drugi termin kontrolny prac nad aplikacją - rezultaty prawie końcowe}
-Na dzień 14.05.2015r została zrealizowana funkcjonalność wizualizacji \textsc{wszystkich} komponentów monitorowanych przez bibliotekę \textit{SystemMonitoringLib} tj:
+Na dzień 14.05.2015r została zrealizowana funkcjonalność wizualizacji \textsc{wszystkich} komponentów monitorowanych przez bibliotekę \textit{SystemMonitoringLib}:
 	\begin{itemize}
 		\item Procesor
 		\item Pamięć \textsc{RAM}
@@ -230,8 +223,8 @@ Ze względu na to, że niektóre zadania zostały wykonane ponad plan, a pewna c
 			\centering
 			\begin{tabularx}{\linewidth}{|c|c|c|X|}
 				\hline
-				11.05 & 17.05 & 2  & Kontynuacja prac nad komunikacją sieciową  \\ \hline
-				18.05 & 24.05 &  & Zakończenie prac nad komunikacją sieciową \\ \hline
+				11.05 & 17.05 &   & Kontynuacja prac nad komunikacją sieciową  \\ \hline
+				18.05 & 24.05 & 2 & Zakończenie prac nad komunikacją sieciową \\ \hline
 				25.03 & 31.03 & 3 & Implementacja interfejsu użytkownika dla komunikacji sieciowej \\ \hline
 				01.06 & 07.06 & 4 & Ostateczne połączenie aplikacji graficznej z bibliotekami oraz początek testów aplikacji \\ \hline
 				07.06 & 11.06 &  & Ostateczne testy aplikacji \\ \hline
@@ -256,14 +249,14 @@ Dla porównania umieściłem również stary harmonogram z zaznaczeniem, które 
 				11.05 & 17.05 & 2  & Zakończenie prac nad komunikacją sieciową & --------- \\ \hline
 				18.05 & 24.05 &  & Dalsze projektowanie interfejsu użytkownika oraz jego implementacja & Rozpoczęto \\ \hline
 				25.03 & 31.03 & 3 & Implementacja interfejsu użytkownika oraz połączenie logiki programu z interfejsem & Rozpoczęto \\ \hline
-				01.06 & 07.06 & 4 & Ostateczne połączenie aplikacji graficznej z bibliotekami oraz początek testów aplikacji & --------- \\ \hline
-				07.06 & 13.06 &  & Ostateczne testy aplikacji & Rozpoczęto \\ \hline
+				01.06 & 07.06 & 4 & Ostateczne połączenie aplikacji graficznej z bibliotekami oraz testy aplikacji & --------- \\ \hline
+				07.06 & 13.06 &  & Testy aplikacji & Rozpoczęto \\ \hline
 			\end{tabularx}
 			\caption{Tabela przedstawiająca wcześniejszy harmonogram ze statusem zadania na dzień 14.05.2015}
 			\label{tabela_harmonogram_stary}
 		\end{table}
 
 \section{Podsumowanie}
-Ze względu na dużą liczbę innych projektów, prace nad aplikacją są lekko opóźnione - około tygodnia. Do tej pory nie udało się zrealizować komunikacji sieciowej, co jest największym brakiem w programie. Szacuję, że prace nad komunikacją będą trwać około 1,5 tygodnia tak jak napisano w harmonogramie - tabela \ref{tabela_harmonogram}. Oprócz komunikacji, prace idą nawet szybciej niż zakładał harmonogram, dlatego wszystkie zadania zostaną wykonane a aplikacja będzie w pełni funkcjonalna.
+Ze względu na dużą liczbę innych projektów, prace nad aplikacją są lekko opóźnione - około tygodnia. Do tej pory nie udało się zrealizować komunikacji sieciowej, co jest największym brakiem w programie. Szacuję, że prace nad komunikacją będą trwać około 1,5 tygodnia tak jak napisano w harmonogramie - tabela \ref{tabela_harmonogram}. Oprócz komunikacji, prace idą nawet szybciej niż zakładał harmonogram, dlatego wszystkie zadania zostaną wykonane, a aplikacja będzie w pełni funkcjonalna.
 
 \end{document}

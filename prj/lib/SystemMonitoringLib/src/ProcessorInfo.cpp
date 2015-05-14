@@ -106,6 +106,8 @@ bool ProcessorInfo::parseCpuStatFile()
       m_lastTotalTime[coreId] = totalTime;
       if (m_usage.size() == 0)
         m_usage.resize(coresNumber());
+      if (usagePercent > 100.0)
+        usagePercent = 100;
       m_usage[coreId] = usagePercent;
       coreId++;
       if (coreId >= coresNumber())

@@ -69,9 +69,6 @@
     </widget>
    </item>
   </layout>
-  <zorder>groupBox</zorder>
-  <zorder>groupBox_2</zorder>
-  <zorder>horizontalSpacer</zorder>
  </widget>
  <customwidgets>
   <customwidget>

@@ -73,6 +73,7 @@ QVariant ProcessorModel::headerData(int section, Qt::Orientation orientation,
 void ProcessorModel::computerInfoData(
     ComputerInfoDataContainerWrapper* compInfo)
 {
+  std::cout<<"HAHAH\n";
   beginResetModel();
   m_computerInfoData = compInfo;
   connect(m_computerInfoData, SIGNAL(dataUpdated()), this, SLOT(dataUpdated()));

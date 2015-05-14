@@ -46,7 +46,10 @@ void ProcessorWidget::computerInfoData(
 void ProcessorWidget::onSelectionRowChanged(const QItemSelection & selected,
     const QItemSelection &)
 {
-  drawPlot(selected.indexes()[0].row());
+  m_currentRow = selected.indexes()[0].row();
+  std::cout << m_currentRow << std::endl;
+
+  drawPlot();
 }
 
 void ProcessorWidget::updatePlot()
@@ -61,8 +64,8 @@ void ProcessorWidget::updatePlot()
       x = m_compInfo->dataContainer()->frequency(m_currentRow).size();
       break;
     case 1:
-      y = m_compInfo->dataContainer()->cpuUsage(m_currentRow).back();
-      x = m_compInfo->dataContainer()->cpuUsage(m_currentRow).size();
+      y = m_compInfo->dataContainer()->coreUsage(m_currentRow).back();
+      x = m_compInfo->dataContainer()->coreUsage(m_currentRow).size();
       break;
   }
   customPlot->graph(0)->addData(x, y);
@@ -72,33 +75,29 @@ void ProcessorWidget::updatePlot()
 
 void ProcessorWidget::on_dataTypeCombo_currentIndexChanged(int index)
 {
-  std::cout << "on_dataType_combo...\n";
-  if (m_currentRow >= 0 && m_compInfo != nullptr
-    && m_compInfo->dataContainer() != nullptr)
-    drawPlot(index);
+  if (m_currentRow >= 0 && m_compInfo != nullptr)
+    drawPlot();
 }
 
-void ProcessorWidget::drawPlot(unsigned index)
+void ProcessorWidget::drawPlot()
 {
   if (m_compInfo == nullptr)
     return;
-
   customPlot->clearGraphs();
   customPlot->addGraph();
   customPlot->graph(0)->setPen(QPen(Qt::blue));
   customPlot->addGraph();
 
-  m_currentRow = index;
   QVector<double> y0, x;
   switch (dataTypeCombo->currentIndex())
   {
     case 0:
       y0 = QVector<double>::fromStdVector(
-          m_compInfo->dataContainer()->frequency(index));
+          m_compInfo->dataContainer()->frequency(m_currentRow));
       break;
     case 1:
       y0 = QVector<double>::fromStdVector(
-          m_compInfo->dataContainer()->coreUsage(index));
+          m_compInfo->dataContainer()->coreUsage(m_currentRow));
       break;
   }
 

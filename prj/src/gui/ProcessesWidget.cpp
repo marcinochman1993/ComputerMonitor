@@ -24,13 +24,6 @@ void ProcessesWidget::addDataTypeToCombo()
     m_ui.dataTypeCombo->addItem(dataTypesString[i]);
 }
 
-void ProcessesWidget::adjustPlotBound()
-{
-  auto customPlot = customPlotWidget();
-  customPlot->graph(0)->rescaleAxes();
-  //todo zaimplementować
-}
-
 void ProcessesWidget::computerInfoData(
     ComputerInfoDataContainerWrapper* compInfo)
 {
@@ -61,7 +54,6 @@ void ProcessesWidget::onSelectionRowChanged(const QItemSelection & selected,
   customPlot->addGraph();
 
   m_currentRow = selected.indexes()[0].row();
-  std::cout << m_currentRow << std::endl;
   QVector<double> y0 = QVector<double>::fromStdVector(
       m_compInfo->dataContainer()->cpuUsage(
           m_model->processIdByIndex(m_currentRow))), x;
@@ -82,8 +74,6 @@ void ProcessesWidget::updatePlot()
       m_compInfo->dataContainer()->cpuUsage(processId).size(),
       m_compInfo->dataContainer()->cpuUsage(processId).back());
 
-  adjustPlotBound();
-
-  adjustPlotBound();
+  customPlot->graph(0)->rescaleAxes();
   customPlot->replot();
 }

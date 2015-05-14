@@ -29,7 +29,6 @@ void SensorsWidget::computerInfoData(ComputerInfoDataContainerWrapper* compInfo)
 void SensorsWidget::onSelectionRowChanged(const QItemSelection & selected,
     const QItemSelection &)
 {
-  auto customPlot = customPlotWidget();
   if (customPlot->graphCount() <= 0)
     customPlot->addGraph();
   customPlot->graph(0)->setPen(QPen(Qt::blue));

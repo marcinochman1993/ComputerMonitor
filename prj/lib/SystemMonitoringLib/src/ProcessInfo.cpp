@@ -30,11 +30,11 @@ bool ProcessInfo::update()
   uptimeFile >> upTime;
   double cpuUsage = 0.0;
 
-  if (m_lastUpTime > 0)
+  if (m_lastUpTime > 0 && upTime - m_lastUpTime > 0)
     cpuUsage = (uTime + sTime - m_lastSUTime) / TICKS_PER_SEC
       / (upTime - m_lastUpTime) * 100.0;
 
-  m_lastSUTime = uTime+sTime;
+  m_lastSUTime = uTime + sTime;
   m_lastUpTime = upTime;
   m_cpuUsage = cpuUsage;
 

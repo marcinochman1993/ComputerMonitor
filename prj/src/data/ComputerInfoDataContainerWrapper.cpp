@@ -9,6 +9,8 @@
 
 bool ComputerInfoDataContainerWrapper::update()
 {
+  if (m_dataContainer == nullptr)
+    return false;
   if (m_dataContainer->update() && Info::update())
   {
     emit dataUpdated();

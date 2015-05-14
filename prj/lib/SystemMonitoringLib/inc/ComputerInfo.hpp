@@ -52,6 +52,11 @@ class ComputerInfo: public Info
      */
     const AllProcessesInfo& allProcesses() const { return m_allProcesses; }
 
+  /*!
+   * \brief Metoda pozwalająca pobrać informacje
+   *
+   * \return Zwracany jest obiekt przechowujący informacje o procesorze
+   */
     const ProcessorInfo& processor() const { return m_processor; }
 
   private:
@@ -65,6 +70,9 @@ class ComputerInfo: public Info
      */
     AllProcessesInfo m_allProcesses;
 
+    /*!
+     * \brief Pole przechowujące informacje o procesorze
+     */
     ProcessorInfo m_processor;
 };
 

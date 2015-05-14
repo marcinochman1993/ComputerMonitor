@@ -30,8 +30,8 @@ class AllProcessesInfo: public Info
     /*!
      * \brief Metoda pozwala sprawdzić czy w kontenerze znajduje się proces o podanym id
      *
-     * @param id - numer identyfikacyjny procesu
-     * @return Zwraca true jeśli w kontenerze znajduje się proces o podanym id
+     * \param id - numer identyfikacyjny procesu
+     * \return Zwraca true jeśli w kontenerze znajduje się proces o podanym id
      */
     bool containsProcess(unsigned int id) const;
 
@@ -56,7 +56,7 @@ class AllProcessesInfo: public Info
      * Metoda aktualizuje informacje o procesach, które już były w kontenerze oraz
      * dodaje te które się pojawiły się w systemie
      *
-     * @return true jeśli informacje o wszystkich procesach zostaną odczytane, w.p.p. false
+     * \return true jeśli informacje o wszystkich procesach zostaną odczytane, w.p.p. false
      */
     bool update() override;
 
@@ -69,8 +69,18 @@ class AllProcessesInfo: public Info
      */
     const std::map<unsigned, ProcessInfo> processesMap() const { return m_processesMap; }
 
+    /*!
+     * \brief Metoda pozwalająca pobrać wektor ostatnio utworzonych procesów
+     *
+     * \return Zwracane są ostatnio utworzone procesy
+     */
     const std::vector<unsigned> lastAddedProcesses() const { return m_lastAddedProcesses; }
 
+    /*!
+     * \brief Metoda pozwalająca pobrać wektor ostatnio usuniętych procesów
+     *
+     * \return Zwracane są ostatnio usunięte procesy
+     */
     const std::vector<unsigned>& lastDeletedProcesses() const { return m_lastDeletedProcesses; }
   private:
 
@@ -84,11 +94,15 @@ class AllProcessesInfo: public Info
      */
     std::map<unsigned, ProcessInfo> m_processesMap;
 
+    /*!
+     * \brief Pole przechowujące ostatnio utworzone procesy
+     */
     std::vector<unsigned> m_lastAddedProcesses;
 
+    /*!
+     * \brief Pole przechowujące ostatnio usunięte procesy
+     */
     std::vector<unsigned> m_lastDeletedProcesses;
 };
-
-
 
 #endif /* PROCESSESVECTOR_HPP_ */

@@ -40,15 +40,37 @@ class ComputerInfoDataContainer: public Info
      */
     const std::vector<std::chrono::system_clock::time_point>& time() const { return m_time; }
 
+    /*!
+     * \brief Metoda pozwala pobrać wektor zarejestrowanych wartości zużycia procesora
+     *
+     * Metoda pobiera zużycia procesora odpowiedniego procesu. Jeżeli nie znajdzie informacji
+     * dla podanego procesu zostanie zgłoszony wyjątek typu const char*
+     *
+     * \param processId - numer identyfikacyjny procesu, dla którego mają zostać pobrane dane
+     * \return Zwraca wektor zarejestrowanych wartości zużycia procesora dla podanego procesu
+     */
     const std::vector<double>& cpuUsage(unsigned processId) const;
 
+    /*!
+     * \brief Metoda pozwala pobrać wektor zarejestrowanych wartości zużycia rdzenia
+     *
+     * Metoda pobiera zużycia rdzenia. Jeżeli nie znajdzie informacji
+     * dla podanego rdzenia zostanie zgłoszony wyjątek typu const char*
+     *
+     * \param coreId - numer identyfikacyjny procesu, dla którego mają zostać pobrane dane
+     * \return Zwraca wektor zarejestrowanych wartości zużycia rdzenia
+     */
     const std::vector<double>& coreUsage(unsigned coreId) const;
 
+    /*!
+     * \brief Metoda pozwala pobrać wektor zarejestrowane wartości częstotliwości
+     * Metoda pobiera częstotliwości dla odpowiedniego rdzenia. Jeżeli nie znajdzie informacji
+     * dla podanego procesu zostanie zgłoszony wyjątek typu const char*
+     *
+     * \param coreId - numer identyfikacyjny procesu, dla którego mają zostać pobrane dane
+     * \return Zwraca wektor zarejestrowanych wartości częstotliwości dla podanego rdzenia
+     */
     const std::vector<double>& frequency(unsigned coreId) const;
-
-    const std::vector<std::chrono::system_clock::time_point>& ramTime(unsigned processId) const;
-
-    void clear(); //todo do zaimplementowania
 
 
     /*!
@@ -74,8 +96,19 @@ class ComputerInfoDataContainer: public Info
      */
     void init();
 
+    /*!
+     * \brief Metoda do zapamiętywania informacji o czujnikach
+     */
     void saveUpdatedSensorsValueInVec();
+
+    /*!
+     * \brief Metoda do zapamiętywania informacji o procesach
+     */
     void saveUpdatedProcessesValuesInVec();
+
+    /*!
+     * \brief Metoda do zapamiętywania informacji o procesorze
+     */
     void saveUpdatedProcessorValues();
 
     /*!
@@ -118,10 +151,29 @@ class ComputerInfoDataContainer: public Info
      */
     ComputerInfo* m_computerInfo;
 
+    /*!
+     * \brief Indeks wektora zużycia procesora przez proces
+     */
     static const unsigned CPU_INDEX = 0;
+
+    /*!
+     * \brief Indeks wektora częstotliwości procesora
+     */
     static const unsigned PROCESSOR_FREQ_INDEX = 0;
+
+    /*!
+     * \brief Indeks wektora zużycia procesora
+     */
     static const unsigned PROCESSOR_COREUSAGE_INDEX = 1;
+
+    /*!
+     * \brief Ilość monitorowanych wartości związanych z procesorem
+     */
     static const unsigned PROCESSOR_MONITORED_VALUES_NUM = 2;
+
+    /*!
+     * \brief Ilość monitorowanych wartości związanych z procesami
+     */
     static const unsigned MONITORED_VALUES_NUM = 1;
 };
 

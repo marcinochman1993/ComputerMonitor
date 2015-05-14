@@ -132,7 +132,9 @@ const std::vector<double>& ComputerInfoDataContainer::frequency(
 {
   auto it = m_processorValues.find(coreId);
   if (it != m_processorValues.end())
+  {
     return it->second[PROCESSOR_FREQ_INDEX];
+  }
 
   throw "There's no core with that id";
 }
