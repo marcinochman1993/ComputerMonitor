@@ -39,6 +39,8 @@ class ComputerMonitorMainWindow: public QMainWindow, Ui::ComputerMonitorMainWind
      */
     void computerInfoData(ComputerInfoDataContainerWrapper* compInfo);
 
+    void closeEvent(QCloseEvent * closeEventData) override;
+
 };
 
 #endif /* COMPUTERMONITORMAINWINDOW_HPP_ */

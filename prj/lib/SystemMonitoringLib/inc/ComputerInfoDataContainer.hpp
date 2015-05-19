@@ -72,6 +72,10 @@ class ComputerInfoDataContainer: public Info
      */
     const std::vector<double>& frequency(unsigned coreId) const;
 
+/*!
+ * \brief Metoda pozwala pobrać wektor zarejestrowanym danych dotyczących zużycia pamięci RAM
+ */
+    const std::vector<double>& totalRamUsage() const { return m_totalRamUsage; }
 
     /*!
      * \brief Metoda aktualizująca wpisy w kontenerach danych
@@ -137,8 +141,19 @@ class ComputerInfoDataContainer: public Info
     std::map<unsigned, std::pair<std::vector<std::vector<double>>,
         std::vector<std::chrono::system_clock::time_point>>> m_processes;
 
-
+    /*!
+     * \brief Kontener asocjacyjny monitorujący informacje o procesorze
+     *
+     *  Kluczem jest nr rdzenia, a wartościa wektor wektorów danych.
+     *  Rodzaj danych przechowywanych w poszczególnych wektorach jest
+     *  zależny od indeksu. Patrz \see PROCESSOR_FREQ_INDEX oraz PROCESSOR_COREUSAGE_INDEX
+     */
     std::map<unsigned, std::vector<std::vector<double>>> m_processorValues;
+
+    /*!
+     * \brief Wektor  przechowujący dane o całkowitym zużyciu pamięci
+     */
+    std::vector<double> m_totalRamUsage;
 
     /*!
      * \brief Pole przechowujące czasy, kiedy zostały dokonane pomiary

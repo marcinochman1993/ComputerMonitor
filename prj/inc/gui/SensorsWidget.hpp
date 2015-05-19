@@ -39,7 +39,7 @@ class SensorsWidget: public QWidget, Ui::UiSensorsWidget
      * Metoda jednocześnie ustawia wszystkie sygnały oraz sloty aby
      * aktualizacja informacji była automatyczna
      *
-     * @param compInfo - wskaźnik na obiekt informacji, który ma zostać ustawiony
+     * \param computerInfoData - wskaźnik na obiekt informacji, który ma zostać ustawiony
      */
     void computerInfoData(ComputerInfoDataContainerWrapper* computerInfoData);
 

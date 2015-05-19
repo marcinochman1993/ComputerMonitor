@@ -10,21 +10,41 @@
 
 #include <QWidget>
 #include "ui_RamWidget.h"
+#include "ComputerInfoDataContainerWrapper.hpp"
 
 /*!
  * \brief Klasa prezentująca informacje o pamięci RAM
  */
 class RamWidget: public QWidget, Ui::UiRamWidget
 {
+    Q_OBJECT
   public:
     /*!
      * \brief Konstruktor klasy RamWidget
      *
      *  Inicjalizuje wygląd kontrolki
      *
-     * @param parent - rodzic kontrolki, domyślnie nullptr
+     * \param parent - rodzic kontrolki, domyślnie nullptr
      */
     RamWidget(QWidget* parent = nullptr): QWidget(parent) { init(); }
+
+    /*!
+     * \brief Metoda ustawia wskaźnik na obiekt informacji o komputerze
+     *
+     * Metoda jednocześnie ustawia wszystkie sygnały oraz sloty aby
+     * aktualizacja informacji była automatyczna
+     *
+     * \param computerInfoData - wskaźnik na obiekt informacji, który ma zostać ustawiony
+     */
+    void computerInfoData(ComputerInfoDataContainerWrapper* computerInfoData);
+
+  private slots:
+  /*!
+   * \brief Slot obsługi aktualizacji danych
+   *
+   * Aktualizuje dane na wykresie
+   */
+    void updatePlot();
   private:
 
     /*!
@@ -33,7 +53,16 @@ class RamWidget: public QWidget, Ui::UiRamWidget
      * Jest wywoływana w konstruktorze
      */
     void init();
-};
 
+    /*!
+     * brief Metoda odpowiedzialna za rysowanie i inicjację wykresu
+     */
+    void drawPlot();
+
+    /*!
+     * \brief Pole przechowujące wskaźnik na obiekt odpowiedzialny za informacje o komputerze
+     */
+    const ComputerInfoDataContainerWrapper* m_compInfo;
+};
 
 #endif /* RAMWIDGET_HPP_ */

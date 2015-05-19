@@ -15,6 +15,8 @@ bool ComputerInfo::update()
     return false;
   if (!m_processor.update())
     return false;
+  if (!m_ram.update())
+    return false;
   return Info::update();
 }
 

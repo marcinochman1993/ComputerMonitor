@@ -22,7 +22,7 @@ bool ComputerInfoDataContainer::update()
   saveUpdatedSensorsValueInVec();
   saveUpdatedProcessesValuesInVec();
   saveUpdatedProcessorValues();
-
+  m_totalRamUsage.push_back(m_computerInfo->ram().totalUsage());
   return Info::update();
 }
 
@@ -63,7 +63,7 @@ void ComputerInfoDataContainer::saveUpdatedProcessesValuesInVec()
 void ComputerInfoDataContainer::saveUpdatedProcessorValues()
 {
   const ProcessorInfo& processor = m_computerInfo->processor();
-  for (int i = 0; i < m_computerInfo->processor().coresNumber(); i++)
+  for (unsigned i = 0; i < m_computerInfo->processor().coresNumber(); i++)
   {
     auto it = m_processorValues.find(i);
     if (it != m_processorValues.end())

@@ -36,7 +36,7 @@ class ProcessorWidget: public QWidget, Ui::UiProcessorWidget
      * Metoda jednocześnie ustawia wszystkie sygnały oraz sloty aby
      * aktualizacja informacji była automatyczna
      *
-     * @param compInfo - wskaźnik na obiekt informacji, który ma zostać ustawiony
+     * \param computerInfoData - wskaźnik na obiekt informacji, który ma zostać ustawiony
      */
     void computerInfoData(ComputerInfoDataContainerWrapper* computerInfoData);
 
@@ -57,7 +57,7 @@ class ProcessorWidget: public QWidget, Ui::UiProcessorWidget
     /*!
      * \brief Slot obsługi zmiany elementu na liście rozwijalnej
      *
-     * @param index - indeks wybranego elementu w liście rozwijalnej
+     * \param index - indeks wybranego elementu w liście rozwijalnej
      */
     void on_dataTypeCombo_currentIndexChanged(int index);
 

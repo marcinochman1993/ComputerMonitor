@@ -63,7 +63,7 @@ class AllSensorsModel: public QAbstractTableModel
      * Metoda jednocześnie ustawia wszystkie sygnały oraz sloty aby
      * aktualizacja informacji była automatyczna
      *
-     * \param compInfo - wskaźnik na obiekt informacji, który ma zostać ustawiony
+     * \param compInfoData - wskaźnik na obiekt informacji, który ma zostać ustawiony
      */
     void computerInfoData(ComputerInfoDataContainerWrapper* compInfoData);
   private:

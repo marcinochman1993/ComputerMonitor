@@ -20,7 +20,7 @@ void ProcessorWidget::init()
 void ProcessorWidget::addDataTypeToCombo()
 {
   vector<QString> dataTypesString = { tr("Frequency [MHz]"), tr("Usage [%]") };
-  for (int i = 0; i < dataTypesString.size(); i++)
+  for (unsigned i = 0; i < dataTypesString.size(); i++)
     dataTypeCombo->addItem(dataTypesString[i]);
 }
 
@@ -47,8 +47,6 @@ void ProcessorWidget::onSelectionRowChanged(const QItemSelection & selected,
     const QItemSelection &)
 {
   m_currentRow = selected.indexes()[0].row();
-  std::cout << m_currentRow << std::endl;
-
   drawPlot();
 }
 
