@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="images">
+    <file>images/speedometerIndicator.png</file>
+    <file>images/speedometer.png</file>
     <file>images/splash.png</file>
   </qresource>
 </RCC>

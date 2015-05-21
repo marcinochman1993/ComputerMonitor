@@ -27,7 +27,7 @@ class ProcessorInfo: public HardwareInfo
      * Inicjalizując obiekt jednocześnie aktualizuje informacje
      * o procesorze komputera
      */
-    ProcessorInfo() { update(); }
+    ProcessorInfo():m_totalCpuUsage(0.0), m_lastTotalCpuBusyTime(0.0), m_lastTotalCpuTime(0.0) { update(); }
     /*!
      *\brief Metoda pozwala odczytać częstotliwość odpowiedniego rdzenia
      *
@@ -52,6 +52,10 @@ class ProcessorInfo: public HardwareInfo
      * \return Zwracane jest procentowe zużycie zasobów odpowiedniego rdzenia
      */
     double usage(unsigned int coreNum) const;
+
+
+
+    double totalUsage() const { return m_totalCpuUsage; }
     /*!
      * \brief Metoda pozwala określić ilość rdzeni procesora
      *
@@ -109,6 +113,12 @@ class ProcessorInfo: public HardwareInfo
      * \brief Pole przechowujące zużycie procentowe poszczególnych rdzeni
      */
     std::vector<double> m_usage;
+
+    double m_totalCpuUsage;
+
+    double m_lastTotalCpuBusyTime;
+
+    double m_lastTotalCpuTime;
 
     /*!
      * \brief Pole przechowujące ilość rdzeni procesora

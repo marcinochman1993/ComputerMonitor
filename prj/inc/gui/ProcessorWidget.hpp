@@ -53,7 +53,7 @@ class ProcessorWidget: public QWidget, Ui::UiProcessorWidget
      *
      * Aktualizuje dane na wykresie
      */
-    void updatePlot();
+    void dataUpdated();
     /*!
      * \brief Slot obsługi zmiany elementu na liście rozwijalnej
      *

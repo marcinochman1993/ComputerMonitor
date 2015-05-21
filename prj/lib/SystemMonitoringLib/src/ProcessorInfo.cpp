@@ -80,19 +80,38 @@ bool ProcessorInfo::parseCpuStatFile()
   bool toRead = true;
   std::set<int> repeatedCores;
   unsigned coreId = 0;
-  while (statFile && toRead)
+  string line, type;
+  getline(statFile, line);
+  istringstream isTotalCpuInfo(line);
+  unsigned user, nice, system, idle;
+  isTotalCpuInfo >> type;
+  isTotalCpuInfo >> user >> nice >> system >> idle;
+  unsigned totalTime = user + nice + system + idle, busyTime = user + nice
+    + system;
+  if (m_lastTotalCpuTime == 0)
   {
-    string line;
+    m_totalCpuUsage = 0.0;
+  }
+  else
+  {
+    if (totalTime - m_lastTotalCpuTime <= 0)
+      m_totalCpuUsage = 0.0;
+    else
+      m_totalCpuUsage = (busyTime - m_lastTotalCpuBusyTime)
+        / (totalTime - m_lastTotalCpuTime) * 100.0;
+  }
+  m_lastTotalCpuBusyTime = busyTime;
+  m_lastTotalCpuTime = totalTime;
+
+  while (statFile && toRead) // czyta informacje o rdzeniach
+  {
     getline(statFile, line);
     istringstream is(line);
-    unsigned user, nice, system, idle;
-    string type;
     is >> type;
     if (type.find("cpu") == 0 && type != "cpu") // wykryto wpis o cpu
     {
       is >> user >> nice >> system >> idle;
-      unsigned totalTime = user + nice + system + idle, busyTime = user + nice
-        + system;
+      totalTime = user + nice + system + idle, busyTime = user + nice + system;
       double usagePercent = 0;
       if (m_lastBusyTime.size() == 0)
         m_lastBusyTime.resize(coresNumber(), 0);

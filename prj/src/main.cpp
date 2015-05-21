@@ -18,37 +18,46 @@
 #include <thread>
 #include "AllProcessesInfo.hpp"
 
+#include <boost/asio.hpp>
+#include <boost/date_time/posix_time/posix_time.hpp>
+
 int main(int argc, char* argv[])
 {
-  const int SPLASH_SCREEN_TIME_MS = 2500;
-  QApplication app(argc, argv);
-
-  QSplashScreen* splashScreen = new QSplashScreen();
-  splashScreen->setPixmap(QPixmap(":/images/images/splash.png"));
-
-  ComputerMonitorMainWindow mainWindow;
-  ComputerInfo computerInfo;
-  ComputerInfoDataContainer dataContainer(&computerInfo);
-  ComputerInfoDataContainerWrapper* dataWrapper =
-    new ComputerInfoDataContainerWrapper();
-  dataWrapper->data(&dataContainer);
-
-  mainWindow.computerInfoData(dataWrapper);
-  ModeSelectionDialog dialog;
-  dialog.exec();
-
-  QTimer::singleShot(SPLASH_SCREEN_TIME_MS, splashScreen, SLOT(close()));
-  QTimer::singleShot(SPLASH_SCREEN_TIME_MS, &mainWindow, SLOT(show()));
-
-  std::thread updateThread([&dataWrapper]()
+  try
   {
-    while(true)
+    const int SPLASH_SCREEN_TIME_MS = 2500;
+    QApplication app(argc, argv);
+
+    QSplashScreen* splashScreen = new QSplashScreen();
+    splashScreen->setPixmap(QPixmap(":/images/images/splash.png"));
+
+    ComputerMonitorMainWindow mainWindow;
+    ComputerInfo computerInfo;
+    ComputerInfoDataContainer dataContainer(&computerInfo);
+    ComputerInfoDataContainerWrapper* dataWrapper =
+      new ComputerInfoDataContainerWrapper();
+    dataWrapper->data(&dataContainer);
+
+    mainWindow.computerInfoData(dataWrapper);
+    ModeSelectionDialog dialog;
+    dialog.exec();
+
+    QTimer::singleShot(SPLASH_SCREEN_TIME_MS, splashScreen, SLOT(close()));
+    QTimer::singleShot(SPLASH_SCREEN_TIME_MS, &mainWindow, SLOT(show()));
+
+    std::thread updateThread([&dataWrapper]()
     {
-      dataWrapper->update();
-      std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-    }
-  });
-  updateThread.detach();
-  splashScreen->show();
-  return app.exec();
+      while(true)
+      {
+        dataWrapper->update();
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+      }
+    });
+    updateThread.detach();
+    splashScreen->show();
+    app.exec();
+  } catch (const char* c)
+  {
+    std::cout << c << std::endl;
+  }
 }

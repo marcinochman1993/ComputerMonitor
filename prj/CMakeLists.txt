@@ -14,7 +14,7 @@ add_subdirectory(lib)
 
 # -------- znajdowanie potrzebnych bibliotek ---------
 find_package(Qt5 COMPONENTS ${QT5_COMPONENTS})
-find_package(Boost COMPONENTS filesystem REQUIRED)
+find_package(Boost COMPONENTS system REQUIRED)
 # -------- ustawienia kompilacji  ---------
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(QT5_WRAP_UI_DIR ${UI_INC_DIR})

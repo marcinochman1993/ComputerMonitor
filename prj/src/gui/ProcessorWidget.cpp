@@ -40,7 +40,7 @@ void ProcessorWidget::computerInfoData(
       this,
       SLOT(
           onSelectionRowChanged(const QItemSelection &, const QItemSelection &)));
-  connect(compInfo, SIGNAL(dataUpdated()), this, SLOT(updatePlot()));
+  connect(compInfo, SIGNAL(dataUpdated()), this, SLOT(dataUpdated()));
 }
 
 void ProcessorWidget::onSelectionRowChanged(const QItemSelection & selected,
@@ -50,7 +50,7 @@ void ProcessorWidget::onSelectionRowChanged(const QItemSelection & selected,
   drawPlot();
 }
 
-void ProcessorWidget::updatePlot()
+void ProcessorWidget::dataUpdated()
 {
   if (customPlot->graphCount() == 0 || m_currentRow < 0)
     return;
@@ -69,6 +69,10 @@ void ProcessorWidget::updatePlot()
   customPlot->graph(0)->addData(x, y);
   customPlot->graph(0)->rescaleAxes();
   customPlot->replot();
+
+  cpuTotalUsageRadialIndicatorWidget->valuePercent(
+      m_compInfo->dataContainer()->computerInfo().processor().totalUsage());
+
 }
 
 void ProcessorWidget::on_dataTypeCombo_currentIndexChanged(int index)
