@@ -70,7 +70,7 @@ void ProcessorWidget::dataUpdated()
   customPlot->graph(0)->rescaleAxes();
   customPlot->replot();
 
-  cpuTotalUsageRadialIndicatorWidget->valuePercent(
+  cpuTotalUsageRadialIndicatorWidget->setValuePercent(
       m_compInfo->dataContainer()->computerInfo().processor().totalUsage());
 
 }

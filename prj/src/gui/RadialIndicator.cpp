@@ -15,31 +15,24 @@
 
 void RadialIndicator::init()
 {
-  m_timeLine = new QTimeLine(500, this);
-  m_timeLine->setUpdateInterval(1);
-  connect(m_timeLine, SIGNAL(frameChanged(int)), this, SLOT(repaint()));
+  m_propertyAnimation = new QPropertyAnimation(this, "angle");
 }
 
-void RadialIndicator::valuePercent(double newValue)
+void RadialIndicator::setValuePercent(double newValue)
 {
 
   int startFrame = -45 + 300 * m_valuePercent / 100.0, stopFrame = -45
     + 300 * newValue / 100.0;
-
-  if (startFrame > stopFrame)
-    m_timeLine->setDirection(QTimeLine::Forward);
-  else
-    m_timeLine->setDirection(QTimeLine::Backward);
-
-  m_timeLine->setFrameRange(startFrame, stopFrame);
-  m_timeLine->start();
+  m_propertyAnimation->setDuration(500);
+  m_propertyAnimation->setStartValue(startFrame);
+  m_propertyAnimation->setEndValue(stopFrame);
+  m_propertyAnimation->start();
   m_valuePercent = newValue;
   m_angle = stopFrame;
 }
 
 void RadialIndicator::paintEvent(QPaintEvent * pEvent)
 {
-  std::cout << "JEST: " << m_timeLine->currentFrame() << std::endl;
   QPainter painter(this);
   int areaWidth = pEvent->rect().width(), areaHeight = pEvent->rect().height(),
       radiusBig = areaWidth < areaHeight ? areaWidth / 2 : areaHeight / 2,

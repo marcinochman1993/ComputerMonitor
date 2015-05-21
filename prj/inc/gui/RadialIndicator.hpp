@@ -9,23 +9,34 @@
 #define RADIALINDICATOR_HPP_
 
 #include <QWidget>
-#include <QTimeLine>
+#include <QPropertyAnimation>
 
 
 class RadialIndicator: public QWidget
 {
     Q_OBJECT
+
+
   public:
     RadialIndicator(QWidget* parent = nullptr): QWidget(parent) { init(); }
     void paintEvent(QPaintEvent * event) override;
 
-    void valuePercent(double newValue);
+    void setValuePercent(double newValue);
     double valuePercent() const { return m_valuePercent; }
+
+
+
   private:
+
+    int getAngle() const { return m_angle; }
+    void setAngle(int newAngle ) { m_angle = newAngle; repaint(); }
+
     void init();
     double m_valuePercent;
-    QTimeLine* m_timeLine;
     int m_angle;
+    QPropertyAnimation* m_propertyAnimation;
+
+    Q_PROPERTY(int angle  READ getAngle WRITE setAngle)
 };
 
 #endif /* RADIALINDICATOR_HPP_ */
