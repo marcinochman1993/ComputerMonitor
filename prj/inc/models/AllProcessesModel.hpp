@@ -85,7 +85,7 @@ class AllProcessesModel: public QAbstractTableModel
     /*!
      * \brief Stała określająca ilość kolumn w modelu
      */
-    static const int COLUMNS_NUM = 2;
+    static const int COLUMNS_NUM = 3;
 
     /*!
      *\brief Pole przechowujące obiekt pośredniczący do obiektu o informacji o komputerze

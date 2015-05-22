@@ -16,15 +16,12 @@ class RadialIndicator: public QWidget
 {
     Q_OBJECT
 
-
   public:
     RadialIndicator(QWidget* parent = nullptr): QWidget(parent) { init(); }
     void paintEvent(QPaintEvent * event) override;
 
     void setValuePercent(double newValue);
     double valuePercent() const { return m_valuePercent; }
-
-
 
   private:
 

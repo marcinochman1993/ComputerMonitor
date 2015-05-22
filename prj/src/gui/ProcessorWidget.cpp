@@ -7,6 +7,7 @@
 
 #include "ProcessorWidget.hpp"
 #include "ProcessorModel.hpp"
+#include "UsageDelegate.hpp"
 
 using namespace std;
 
@@ -32,6 +33,9 @@ void ProcessorWidget::computerInfoData(
 
   auto model = new ProcessorModel(this);
   model->computerInfoData(compInfo);
+  auto delegate = new UsageDelegate(this);
+  delegate->addColumnUsage(2);
+  coresTable->setItemDelegate(delegate);
   coresTable->setModel(model);
   QItemSelectionModel *selectionModel = coresTable->selectionModel();
   m_compInfo = compInfo;
@@ -52,6 +56,15 @@ void ProcessorWidget::onSelectionRowChanged(const QItemSelection & selected,
 
 void ProcessorWidget::dataUpdated()
 {
+
+  if (m_compInfo == nullptr)
+    return;
+  cpuTotalUsageRadialIndicatorWidget->setValuePercent(
+      m_compInfo->dataContainer()->computerInfo().processor().totalUsage());
+  processorNameLabel->setText(
+      QString(
+          m_compInfo->dataContainer()->computerInfo().processor().name().c_str()));
+
   if (customPlot->graphCount() == 0 || m_currentRow < 0)
     return;
   double x, y;
@@ -69,9 +82,9 @@ void ProcessorWidget::dataUpdated()
   customPlot->graph(0)->addData(x, y);
   customPlot->graph(0)->rescaleAxes();
   customPlot->replot();
-
-  cpuTotalUsageRadialIndicatorWidget->setValuePercent(
-      m_compInfo->dataContainer()->computerInfo().processor().totalUsage());
+//  std::cout
+//      << m_compInfo->dataContainer()->computerInfo().processor().totalUsage()
+//      << std::endl;
 
 }
 

@@ -52,6 +52,8 @@ class ProcessInfo: public Info
      * \return true jeśli odczyty się powiodą, w.p.p. false
      */
     bool update() override;
+
+    const std::string& name() const { return m_name; }
   private:
     /*!
      * \brief Pole przechowujące id procesu
@@ -74,6 +76,8 @@ class ProcessInfo: public Info
      * \brief Pole przechowujące ostatnio pobrany całkowity czas działania systemu
      */
     double m_lastUpTime;
+
+    std::string m_name;
 };
 
 #endif /* PROCESSINFO_HPP_ */

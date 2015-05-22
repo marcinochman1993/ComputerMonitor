@@ -97,6 +97,15 @@
     <property name="title">
      <string>Options</string>
     </property>
+    <widget class="QMenu" name="menuTheme">
+     <property name="title">
+      <string>Theme</string>
+     </property>
+     <addaction name="actionBlack"/>
+     <addaction name="actionWhite"/>
+     <addaction name="separator"/>
+    </widget>
+    <addaction name="menuTheme"/>
    </widget>
    <widget class="QMenu" name="menuMode">
     <property name="title">
@@ -144,6 +153,22 @@
   <action name="actionReporting">
    <property name="text">
     <string>Reporting</string>
+   </property>
+  </action>
+  <action name="actionBlack">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Black</string>
+   </property>
+  </action>
+  <action name="actionWhite">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>White</string>
    </property>
   </action>
  </widget>

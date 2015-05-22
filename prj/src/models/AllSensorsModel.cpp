@@ -38,7 +38,8 @@ QVariant AllSensorsModel::data(const QModelIndex &index, int role) const
 QVariant AllSensorsModel::headerData(int section, Qt::Orientation orientation,
     int role) const
 {
-  const vector<QString> HEADER_TITLES = { tr("Sensor name"), tr("Value") };
+  const vector<QString> HEADER_TITLES = { tr("Sensor name"), tr("Value"), tr(
+      "Unit") };
 
   if (role == Qt::DisplayRole)
   {
@@ -70,6 +71,9 @@ QVariant AllSensorsModel::getData(int row, int column) const
       break;
     case 1:
       result = compInfo().allSensors()[row].value();
+      break;
+    case 2:
+      result = "haha";
       break;
   }
 

@@ -6,6 +6,7 @@
  */
 
 #include "ProcessesWidget.hpp"
+#include "UsageDelegate.hpp"
 
 using namespace std;
 
@@ -33,6 +34,9 @@ void ProcessesWidget::computerInfoData(
   m_model = new AllProcessesModel(this);
   m_model->computerInfoData(compInfo);
   m_ui.allProcessesTable->setModel(m_model);
+  auto delegate = new UsageDelegate(this);
+  delegate->addColumnUsage(2);
+  m_ui.allProcessesTable->setItemDelegate(delegate);
   QItemSelectionModel *selectionModel =
     m_ui.allProcessesTable->selectionModel();
   connect(selectionModel,

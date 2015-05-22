@@ -1,6 +1,6 @@
 # -------- definicja zmiennych  ---------
 set(UI_INC_DIR ${CMAKE_CURRENT_BINARY_DIR}/ui/inc/)
-set(INC_DIR inc/ inc/gui/ inc/models inc/data
+set(INC_DIR inc/ inc/gui/ inc/models inc/data inc/delegates
   ${CMAKE_CURRENT_BINARY_DIR}/${UI_INC_DIR}
   lib/SystemMonitoringLib/inc
   lib/SystemMonitoringNetworkLib/inc
@@ -28,7 +28,7 @@ include_directories(${INC_DIR})
 file(GLOB_RECURSE SOURCES src/*.cpp)
 file(GLOB_RECURSE FORMS ui/*.ui)
 file(GLOB_RECURSE RSRCS rsrc/*.qrc)
-file(GLOB QOBJECT_HEADERS inc/gui/*.hpp inc/data/*.hpp inc/models/*.hpp)
+file(GLOB QOBJECT_HEADERS inc/gui/*.hpp inc/data/*.hpp inc/models/*.hpp inc/delegates/*.hpp)
 
 # -------- uruchomienie moc, uic, rcc  ---------
 qt5_wrap_cpp(computer_monitor_HEADERS_MOC ${QOBJECT_HEADERS} )

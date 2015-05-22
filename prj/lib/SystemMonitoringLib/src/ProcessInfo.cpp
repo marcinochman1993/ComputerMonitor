@@ -23,7 +23,13 @@ bool ProcessInfo::update()
   double upTime;
 
   string temp;
-  for (int i = 1; i < 14; i++)
+  statusFile >> temp; // id
+
+  statusFile >> m_name;
+  if (m_name.length() > 2)
+    m_name = m_name.substr(1, m_name.length() - 2);
+
+  for (int i = 1; i < 12; i++)
     statusFile >> temp;
 
   statusFile >> uTime >> sTime;

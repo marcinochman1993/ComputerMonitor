@@ -15,12 +15,12 @@
 
 void RadialIndicator::init()
 {
+  setAutoFillBackground(true);
   m_propertyAnimation = new QPropertyAnimation(this, "angle");
 }
 
 void RadialIndicator::setValuePercent(double newValue)
 {
-
   int startFrame = -45 + 300 * m_valuePercent / 100.0, stopFrame = -45
     + 300 * newValue / 100.0;
   m_propertyAnimation->setDuration(500);
@@ -48,16 +48,16 @@ void RadialIndicator::paintEvent(QPaintEvent * pEvent)
     speedometerImg = speedometerImg.scaledToHeight(areaWidth,
         Qt::SmoothTransformation);
   QPalette palette = this->palette();
-  palette.setColor(QPalette::Window, QColor(255, 255, 255));
 
   setPalette(palette);
   double angle = m_angle;
-  QImage* image = new QImage(areaWidth, areaHeight, QImage::Format_ARGB32);
-  painter.setRenderHints(QPainter::SmoothPixmapTransform);
-  QPainter bitmapPainter(image);
+  QImage image = QImage(areaWidth, areaHeight, QImage::Format_ARGB32);
+  image.fill(Qt::transparent);
+  QPainter bitmapPainter(&image);
   bitmapPainter.setRenderHints(
       QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
-  bitmapPainter.fillRect(0, 0, areaWidth, areaHeight, Qt::transparent);
+  painter.setRenderHints(
+      QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
   bitmapPainter.translate(QPoint(centerX, centerY));
   bitmapPainter.rotate(-angle);
   bitmapPainter.drawPixmap(-speedometerImg.width() / 2,
@@ -69,7 +69,7 @@ void RadialIndicator::paintEvent(QPaintEvent * pEvent)
       -speedometerIndicatorImg.height() / 2, speedometerIndicatorImg);
   painter.translate(centerX, centerY);
   painter.rotate(angle);
-  painter.drawImage(-centerX, -centerY, *image);
+  painter.drawImage(-centerX, -centerY, image);
 
   QWidget::paintEvent(pEvent);
 }

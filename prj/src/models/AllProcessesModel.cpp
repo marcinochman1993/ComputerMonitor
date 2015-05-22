@@ -34,7 +34,7 @@ QVariant AllProcessesModel::data(const QModelIndex &index, int role) const
 QVariant AllProcessesModel::headerData(int section, Qt::Orientation orientation,
     int role) const
 {
-  const vector<QString> HEADER_TITLES = { tr("Id"), tr("Cpu Usage [%]") };
+  const vector<QString> HEADER_TITLES = {tr("Name"), tr("Id"), tr("Cpu Usage [%]") };
 
   if (role == Qt::DisplayRole)
   {
@@ -107,8 +107,10 @@ QVariant AllProcessesModel::getData(unsigned row, unsigned column) const
       switch (column)
       {
         case 0:
-          return proc.id();
+          return QString(proc.name().c_str());
         case 1:
+          return proc.id();
+        case 2:
           return proc.cpuUsage();
       }
 
