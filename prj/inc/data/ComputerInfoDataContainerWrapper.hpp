@@ -40,6 +40,7 @@ class ComputerInfoDataContainerWrapper: public QObject, public Info
      */
     const ComputerInfoDataContainer* dataContainer() const { return m_dataContainer; }
 
+    public slots:
     /*!
      * \brief Umożliwia aktualizację informacji o komputerze
      */

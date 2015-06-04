@@ -12,6 +12,16 @@ using namespace std;
 
 vector<SensorInfo> SensorInfo::s_sensorsVector;
 
+
+std::string convertTypeToString(const SensorType& sensorType)
+{
+  int i = static_cast<int>(sensorType);
+  std::string texts[]= {"V", "deg C"};
+
+  return texts[i];
+}
+
+
 const vector<SensorInfo>& SensorInfo::allSensors()
 {
   static bool initialized = false;
@@ -50,12 +60,24 @@ bool SensorInfo::initAllSensors()
           &subfeatureNum)) != 0)
       {
         if ((subfeature->flags & SENSORS_MODE_R)
-            && (((subfeature->type == SENSORS_SUBFEATURE_TEMP_INPUT)
-                || (subfeature->type == SENSORS_SUBFEATURE_IN_INPUT))
+          && (((subfeature->type == SENSORS_SUBFEATURE_TEMP_INPUT)
+            || (subfeature->type == SENSORS_SUBFEATURE_IN_INPUT))
             || (subfeature->type == SENSORS_SUBFEATURE_POWER_INPUT)
             || (subfeature->type == SENSORS_SUBFEATURE_FAN_INPUT))) // sprawdzenie czy wartość można odczytać
         {
-            s_sensorsVector.push_back(SensorInfo(chipName, subfeature));
+          SensorType sensorType;
+          switch (subfeature->type)
+          {
+            case SENSORS_SUBFEATURE_TEMP_INPUT:
+              sensorType = SensorType::TEMP;
+              break;
+            case SENSORS_SUBFEATURE_IN_INPUT:
+              sensorType = SensorType::VOLTAGE;
+              break;
+            default:
+              break;
+          }
+          s_sensorsVector.push_back(SensorInfo(chipName, subfeature, sensorType));
         }
       }
     }

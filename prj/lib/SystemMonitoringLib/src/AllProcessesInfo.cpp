@@ -75,3 +75,11 @@ void AllProcessesInfo::getAllKeys(std::map<unsigned, bool>& keysVec) const
   for (const auto& processPair : m_processesMap)
     keysVec.insert(make_pair(processPair.first, true));
 }
+
+std::string AllProcessesInfo::toString() const
+{
+  std::string toStringValue;
+
+  return toStringValue;
+}
+

@@ -35,6 +35,9 @@ class Info
      * \return Metoda zwraca punkt w czasie, kiedy ostatni raz zostały zaktualizowane informacje.
      */
     virtual const std::chrono::system_clock::time_point & lastUpdated() const { return m_lastUpdated; };
+
+
+    virtual std::string toString() const { return std::string(); }
 //    virtual std::string name() const { return std::string(); }
 
     /*!

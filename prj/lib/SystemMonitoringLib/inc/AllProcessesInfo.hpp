@@ -82,6 +82,9 @@ class AllProcessesInfo: public Info
      * \return Zwracane są ostatnio usunięte procesy
      */
     const std::vector<unsigned>& lastDeletedProcesses() const { return m_lastDeletedProcesses; }
+
+    std::string toString() const override;
+
   private:
 
     void getAllKeys(std::map<unsigned,bool>& keysVec) const;

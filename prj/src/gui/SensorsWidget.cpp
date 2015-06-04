@@ -41,6 +41,10 @@ void SensorsWidget::onSelectionRowChanged(const QItemSelection & selected,
     x.push_back(i);
   customPlot->graph(0)->setData(x, y0);
   customPlot->graph(0)->rescaleAxes();
+  customPlot->yAxis->setLabel(
+      QString("Sensor %1 [%2]").arg(m_currentRow).arg(
+          m_compInfo->dataContainer()->computerInfo().allSensors()[m_currentRow].unit().c_str()));
+  customPlot->xAxis->setLabel("t");
   customPlot->replot();
 }
 

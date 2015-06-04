@@ -26,3 +26,14 @@ void ComputerMonitorMainWindow::closeEvent(QCloseEvent * closeEventData)
   if (chosenButton == QMessageBox::No)
     closeEventData->ignore();
 }
+
+void ComputerMonitorMainWindow::init()
+{
+  setupUi(this);
+  m_dataWrapper = new ComputerInfoDataContainerWrapper();
+  m_dataWrapper->data(&m_dataContainer);
+  computerInfoData(m_dataWrapper);
+  m_timer=new QTimer(this);
+  m_timer->start(1000);
+  connect(m_timer, SIGNAL(timeout()),m_dataWrapper,SLOT(update()));
+}

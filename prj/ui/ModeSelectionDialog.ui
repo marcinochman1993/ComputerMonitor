@@ -28,7 +28,7 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <widget class="QRadioButton" name="radioButton">
+       <widget class="QRadioButton" name="radioPresenting">
         <property name="text">
          <string>Visualisation from Other Computer</string>
         </property>
@@ -38,7 +38,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QRadioButton" name="radioButton_2">
+       <widget class="QRadioButton" name="radioSending">
         <property name="text">
          <string>Reporting</string>
         </property>
@@ -48,7 +48,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QRadioButton" name="radioButton_3">
+       <widget class="QRadioButton" name="radioMixed">
         <property name="text">
          <string>Reporting and Visualisation in this Computer</string>
         </property>

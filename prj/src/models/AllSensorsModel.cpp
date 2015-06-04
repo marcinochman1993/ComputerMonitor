@@ -73,7 +73,7 @@ QVariant AllSensorsModel::getData(int row, int column) const
       result = compInfo().allSensors()[row].value();
       break;
     case 2:
-      result = "haha";
+      result = compInfo().allSensors()[row].unit().c_str();
       break;
   }
 

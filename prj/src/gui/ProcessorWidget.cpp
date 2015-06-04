@@ -59,11 +59,14 @@ void ProcessorWidget::dataUpdated()
 
   if (m_compInfo == nullptr)
     return;
+
+  auto dataContainer = m_compInfo->dataContainer();
+  auto computerInfo = dataContainer->computerInfo();
   cpuTotalUsageRadialIndicatorWidget->setValuePercent(
       m_compInfo->dataContainer()->computerInfo().processor().totalUsage());
-  processorNameLabel->setText(
-      QString(
-          m_compInfo->dataContainer()->computerInfo().processor().name().c_str()));
+  processorNameLabel->setText(QString(computerInfo.processor().name().c_str()));
+  processorUsageLabel->setText(
+      QString::number(computerInfo.processor().totalUsage(), 'f', 2)+" %");
 
   if (customPlot->graphCount() == 0 || m_currentRow < 0)
     return;
@@ -71,21 +74,20 @@ void ProcessorWidget::dataUpdated()
   switch (dataTypeCombo->currentIndex())
   {
     case 0:
-      y = m_compInfo->dataContainer()->frequency(m_currentRow).back();
-      x = m_compInfo->dataContainer()->frequency(m_currentRow).size();
+      y = dataContainer->frequency(m_currentRow).back();
+      x = dataContainer->frequency(m_currentRow).size();
+      customPlot->yAxis->setLabel(QString("Frequency of core %1 [MHz]").arg(m_currentRow));
       break;
     case 1:
-      y = m_compInfo->dataContainer()->coreUsage(m_currentRow).back();
-      x = m_compInfo->dataContainer()->coreUsage(m_currentRow).size();
+      y = dataContainer->coreUsage(m_currentRow).back();
+      x = dataContainer->coreUsage(m_currentRow).size();
+      customPlot->yAxis->setLabel(QString("Usage of core %1 [%]").arg(m_currentRow));
       break;
   }
   customPlot->graph(0)->addData(x, y);
   customPlot->graph(0)->rescaleAxes();
+  customPlot->xAxis->setLabel("t");
   customPlot->replot();
-//  std::cout
-//      << m_compInfo->dataContainer()->computerInfo().processor().totalUsage()
-//      << std::endl;
-
 }
 
 void ProcessorWidget::on_dataTypeCombo_currentIndexChanged(int index)

@@ -14,6 +14,16 @@
 #include "HardwareInfo.hpp"
 
 
+enum class SensorType
+{
+    VOLTAGE = 0,
+    TEMP
+};
+
+
+std::string convertTypeToString(const SensorType& sensorType);
+
+
 /*!
  * \brief Klasa reprezentująca czujnik w komputerze
  *
@@ -52,8 +62,8 @@ class SensorInfo: public HardwareInfo
      * \param subfeature - wskaźnik na strukturę opisującą poszczególną cechę sensora
      */
     SensorInfo(const sensors_chip_name* chipName = nullptr,
-        const sensors_subfeature* subfeature = nullptr)
-        : m_chipName(chipName), m_subfeature(subfeature), m_value(-1.0)
+        const sensors_subfeature* subfeature = nullptr, const SensorType& type = SensorType::VOLTAGE)
+        : m_chipName(chipName), m_subfeature(subfeature), m_value(-1.0), m_type(type)
     {
     }
 
@@ -92,6 +102,15 @@ class SensorInfo: public HardwareInfo
     {
       return m_value;
     }
+
+    /*!
+     * Metoda pozwala określić rodzaj czujnika
+     *
+     * \return Zwraca rodzaj czujnika
+     */
+    const SensorType& sensorType() const { return m_type; }
+
+    std::string unit() const { return convertTypeToString(m_type); }
   private:
     /*!
      * \brief Statyczna metoda pozwalająca zainicjować sensory
@@ -125,6 +144,12 @@ class SensorInfo: public HardwareInfo
      * ta jest aktualizowana, gdy wywoła sie metodę update().
      */
     double m_value;
+
+
+    /*!
+     * \brief Pole opisujące rodzaj czujnika
+     */
+    SensorType m_type;
 
     /*!
      * \brief Statyczne pole przechowujące wszystkie czujniki.

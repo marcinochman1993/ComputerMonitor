@@ -46,3 +46,13 @@ bool ProcessInfo::update()
 
   return Info::update();
 }
+
+std::string ProcessInfo::toString() const
+{
+  ostringstream oss;
+
+  oss << "Process name: " << name() << "; Id: " << id() << "; Cpu Usage: "
+      << cpuUsage();
+
+  return oss.str();
+}
