@@ -11,13 +11,14 @@
 #include <QWidget>
 #include "ui_ProcessorWidget.h"
 #include "ComputerInfoDataContainerWrapper.hpp"
+#include "ComputerMonitorWidgetBase.hpp"
 
 /*!
  * \brief Klasa prezentująca informacje o procesorze komputera
  *
  * W przystępny sposób pokazuje informacje o procesorze - zarówno w tabeli oraz na wykresie
  */
-class ProcessorWidget: public QWidget, Ui::UiProcessorWidget
+class ProcessorWidget: public ComputerMonitorWidgetBase, Ui::UiProcessorWidget
 {
     Q_OBJECT
   public:
@@ -26,9 +27,9 @@ class ProcessorWidget: public QWidget, Ui::UiProcessorWidget
      *
      * Ustawia wygląd kontrolki
      *
-     * @param parent - rodzic kontrolki, domyślnie nullptr
+     * \param parent - rodzic kontrolki, domyślnie nullptr
      */
-    ProcessorWidget(QWidget* parent = nullptr): QWidget(parent), m_compInfo(nullptr), m_currentRow(-1) { init(); }
+    ProcessorWidget(QWidget* parent = nullptr): ComputerMonitorWidgetBase(parent), m_compInfo(nullptr), m_currentRow(-1) { init(); }
 
     /*!
      * \brief Metoda ustawia wskaźnik na obiekt informacji o komputerze
@@ -61,6 +62,9 @@ class ProcessorWidget: public QWidget, Ui::UiProcessorWidget
      */
     void on_dataTypeCombo_currentIndexChanged(int index);
 
+    public slots:
+      void savePlot() override { ComputerMonitorWidgetBase::savePlot(customPlot); }
+
     private:
 
     /*!
@@ -92,6 +96,5 @@ class ProcessorWidget: public QWidget, Ui::UiProcessorWidget
        */
       int m_currentRow;
 };
-
 
 #endif /* PROCESSORWIDGET_HPP_ */

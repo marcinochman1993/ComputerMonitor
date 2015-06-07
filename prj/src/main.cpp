@@ -13,6 +13,7 @@
 #include "ModeSelectionDialog.hpp"
 #include "ProcessorInfo.hpp"
 #include "ComputerMonitorMainWindowSend.hpp"
+#include "DataBuffer.hpp"
 
 int main(int argc, char* argv[])
 {
@@ -49,6 +50,8 @@ int main(int argc, char* argv[])
   splashScreen->show();
 
   return app.exec();
+
+  DataBuffer<int> buffer(40);
 
   ComputerInfo ci;
 

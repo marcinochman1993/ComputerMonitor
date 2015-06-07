@@ -43,17 +43,17 @@ void ComputerInfoDataContainer::saveUpdatedProcessesValuesInVec()
     auto it = m_processes.find(procPair.first);
     if (it == m_processes.end())
     {
-      vector<vector<double>> vectorOfValues;
+      vector<DataBuffer<double>> vectorOfValues;
       vectorOfValues.resize(MONITORED_VALUES_NUM);
       vectorOfValues[CPU_INDEX].push_back(procPair.second.cpuUsage());
-      vector<system_clock::time_point> vectorOfTime;
-      vectorOfTime.push_back(computerInfo().lastUpdated());
+      DataBuffer<std::time_t> vectorOfTime;
+      vectorOfTime.push_back(computerInfo().lastUpdatedTimeT());
 
       auto innerPair = make_pair(move(vectorOfValues), move(vectorOfTime));
 
-      auto outerPait = make_pair(procPair.first, move(innerPair));
+      auto outerPair = make_pair(procPair.first, move(innerPair));
 
-      m_processes.insert(outerPait);
+      m_processes.insert(outerPair);
     }
     else
       it->second.first[CPU_INDEX].push_back(procPair.second.cpuUsage());
@@ -73,7 +73,7 @@ void ComputerInfoDataContainer::saveUpdatedProcessorValues()
     }
     else
     {
-      std::vector<std::vector<double>> vectorOfValues;
+      std::vector<DataBuffer<double>> vectorOfValues;
       vectorOfValues.resize(PROCESSOR_MONITORED_VALUES_NUM);
       vectorOfValues[PROCESSOR_COREUSAGE_INDEX].push_back(processor.usage(i));
       vectorOfValues[PROCESSOR_FREQ_INDEX].push_back(processor.frequency(i));
@@ -89,11 +89,11 @@ void ComputerInfoDataContainer::init()
   {
     m_sensorsValues.clear();
     for (unsigned i = 0; i < allSensors.size(); i++)
-      m_sensorsValues.insert(std::make_pair(i, std::vector<double>()));
+      m_sensorsValues.insert(std::make_pair(i, DataBuffer<double>()));
   }
 }
 
-const std::vector<double>& ComputerInfoDataContainer::sensorsData(
+const DataBuffer<double>& ComputerInfoDataContainer::sensorsData(
     unsigned sensorNum) const
 {
   if (sensorNum >= m_sensorsValues.size())
@@ -107,7 +107,7 @@ const std::vector<double>& ComputerInfoDataContainer::sensorsData(
   return it->second;
 }
 
-const std::vector<double>& ComputerInfoDataContainer::cpuUsage(
+const DataBuffer<double>& ComputerInfoDataContainer::cpuUsage(
     unsigned processId) const
 {
   auto it = m_processes.find(processId);
@@ -117,7 +117,7 @@ const std::vector<double>& ComputerInfoDataContainer::cpuUsage(
   throw "There's no process with that id";
 }
 
-const std::vector<double>& ComputerInfoDataContainer::coreUsage(
+const DataBuffer<double>& ComputerInfoDataContainer::coreUsage(
     unsigned coreId) const
 {
   auto it = m_processorValues.find(coreId);
@@ -127,7 +127,7 @@ const std::vector<double>& ComputerInfoDataContainer::coreUsage(
   throw "There's no core with that id";
 }
 
-const std::vector<double>& ComputerInfoDataContainer::frequency(
+const DataBuffer<double>& ComputerInfoDataContainer::frequency(
     unsigned coreId) const
 {
   auto it = m_processorValues.find(coreId);

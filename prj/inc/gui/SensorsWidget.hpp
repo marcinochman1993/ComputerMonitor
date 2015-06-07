@@ -11,6 +11,7 @@
 #include <QWidget>
 #include "ui_SensorsWidget.h"
 #include "AllSensorsModel.hpp"
+#include "ComputerMonitorWidgetBase.hpp"
 
 /*!
  * \brief Kontrolka odpowiedzalna za prezentację informacji o czujnikach
@@ -18,7 +19,7 @@
  * Pokazuje w tabeli wszystkie dostępne czujniki wraz
  * z aktualnymi odczytami oraz prezentuje odczyty na wykresie
  */
-class SensorsWidget: public QWidget, Ui::UiSensorsWidget
+class SensorsWidget: public ComputerMonitorWidgetBase, Ui::UiSensorsWidget
 {
     Q_OBJECT
 
@@ -31,7 +32,7 @@ class SensorsWidget: public QWidget, Ui::UiSensorsWidget
      * @param parent - rodzica kontrolki, domyślnie nullptr
      */
     SensorsWidget(QWidget* parent = nullptr)
-    : QWidget(parent), m_currentRow(-1) { init(); }
+    : ComputerMonitorWidgetBase(parent), m_currentRow(-1) { init(); }
 
     /*!
      * \brief Metoda ustawia wskaźnik na obiekt informacji o komputerze
@@ -42,6 +43,9 @@ class SensorsWidget: public QWidget, Ui::UiSensorsWidget
      * \param computerInfoData - wskaźnik na obiekt informacji, który ma zostać ustawiony
      */
     void computerInfoData(ComputerInfoDataContainerWrapper* computerInfoData);
+
+  public slots:
+     void savePlot() override { ComputerMonitorWidgetBase::savePlot(customPlot); }
 
   private slots:
    /*!

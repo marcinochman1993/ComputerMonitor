@@ -94,6 +94,7 @@
      <string>File</string>
     </property>
     <addaction name="separator"/>
+    <addaction name="actionExport_Plot"/>
     <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuReporting">
@@ -196,6 +197,11 @@
   <action name="actionTheme">
    <property name="text">
     <string>Theme</string>
+   </property>
+  </action>
+  <action name="actionExport_Plot">
+   <property name="text">
+    <string>Export Plot</string>
    </property>
   </action>
  </widget>

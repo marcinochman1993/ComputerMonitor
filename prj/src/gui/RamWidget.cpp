@@ -25,8 +25,8 @@ void RamWidget::drawPlot()
   customPlot->addGraph();
   customPlot->graph(0)->setPen(QPen(Qt::blue));
 
-  y0 = QVector<double>::fromStdVector(
-      m_compInfo->dataContainer()->totalRamUsage());
+  y0 = QVector<double>::fromList(QList<double>::fromStdList(
+      m_compInfo->dataContainer()->totalRamUsage().list()));
   for (int i = 0; i < y0.size(); i++)
     x.push_back(i);
   customPlot->graph(0)->setData(x, y0);

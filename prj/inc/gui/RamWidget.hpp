@@ -11,11 +11,12 @@
 #include <QWidget>
 #include "ui_RamWidget.h"
 #include "ComputerInfoDataContainerWrapper.hpp"
+#include "ComputerMonitorWidgetBase.hpp"
 
 /*!
  * \brief Klasa prezentująca informacje o pamięci RAM
  */
-class RamWidget: public QWidget, Ui::UiRamWidget
+class RamWidget: public ComputerMonitorWidgetBase, Ui::UiRamWidget
 {
     Q_OBJECT
   public:
@@ -26,7 +27,7 @@ class RamWidget: public QWidget, Ui::UiRamWidget
      *
      * \param parent - rodzic kontrolki, domyślnie nullptr
      */
-    RamWidget(QWidget* parent = nullptr): QWidget(parent) { init(); }
+    RamWidget(QWidget* parent = nullptr): ComputerMonitorWidgetBase(parent) { init(); }
 
     /*!
      * \brief Metoda ustawia wskaźnik na obiekt informacji o komputerze
@@ -38,6 +39,8 @@ class RamWidget: public QWidget, Ui::UiRamWidget
      */
     void computerInfoData(ComputerInfoDataContainerWrapper* computerInfoData);
 
+  public slots:
+    void savePlot() override { ComputerMonitorWidgetBase::savePlot(customPlot); }
   private slots:
   /*!
    * \brief Slot obsługi aktualizacji danych

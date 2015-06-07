@@ -11,6 +11,8 @@
 #include <map>
 #include <chrono>
 #include "ComputerInfo.hpp"
+#include "DataBuffer.hpp"
+
 
 /*!
  * \brief Klasa zbierająca informacje o pracy komputera
@@ -33,12 +35,12 @@ class ComputerInfoDataContainer: public Info
      * \param sensorNum - numer czujnika
      * \return Zwraca wektor danych związanych z czujnikiem o numerze sensorNum
      */
-    const std::vector<double>& sensorsData(unsigned sensorNum=0) const;
+    const DataBuffer<double>& sensorsData(unsigned sensorNum=0) const;
     /*!
      * \brief Metoda pozwala pobrać wektor czasów rejestracji danych
      * \return Zwracany jest wektor czasów, kiedy został stworzony
      */
-    const std::vector<std::time_t>& time() const { return m_time; }
+    const DataBuffer<std::time_t>& time() const { return m_time; }
 
     /*!
      * \brief Metoda pozwala pobrać wektor zarejestrowanych wartości zużycia procesora
@@ -49,7 +51,7 @@ class ComputerInfoDataContainer: public Info
      * \param processId - numer identyfikacyjny procesu, dla którego mają zostać pobrane dane
      * \return Zwraca wektor zarejestrowanych wartości zużycia procesora dla podanego procesu
      */
-    const std::vector<double>& cpuUsage(unsigned processId) const;
+    const DataBuffer<double>& cpuUsage(unsigned processId) const;
 
     /*!
      * \brief Metoda pozwala pobrać wektor zarejestrowanych wartości zużycia rdzenia
@@ -60,7 +62,7 @@ class ComputerInfoDataContainer: public Info
      * \param coreId - numer identyfikacyjny procesu, dla którego mają zostać pobrane dane
      * \return Zwraca wektor zarejestrowanych wartości zużycia rdzenia
      */
-    const std::vector<double>& coreUsage(unsigned coreId) const;
+    const DataBuffer<double>& coreUsage(unsigned coreId) const;
 
     /*!
      * \brief Metoda pozwala pobrać wektor zarejestrowane wartości częstotliwości
@@ -70,12 +72,12 @@ class ComputerInfoDataContainer: public Info
      * \param coreId - numer identyfikacyjny procesu, dla którego mają zostać pobrane dane
      * \return Zwraca wektor zarejestrowanych wartości częstotliwości dla podanego rdzenia
      */
-    const std::vector<double>& frequency(unsigned coreId) const;
+    const DataBuffer<double>& frequency(unsigned coreId) const;
 
 /*!
  * \brief Metoda pozwala pobrać wektor zarejestrowanym danych dotyczących zużycia pamięci RAM
  */
-    const std::vector<double>& totalRamUsage() const { return m_totalRamUsage; }
+    const DataBuffer<double>& totalRamUsage() const { return m_totalRamUsage; }
 
     /*!
      * \brief Metoda aktualizująca wpisy w kontenerach danych
@@ -120,14 +122,14 @@ class ComputerInfoDataContainer: public Info
      *
      * Kluczem jest numer rdzenia, a wartość to zbiór zapisanych odczytów
      */
-    std::map<unsigned, std::vector<double>> m_frequency;
+    std::map<unsigned, DataBuffer<double>> m_frequency;
 
     /*!
      * \brief Kontener przechowujący odczyty z poszczególnych czujników
      *
      * Kluczem jest numer czujnika, a wartość to zbiór zapisanych odczytów
      */
-    std::map<unsigned, std::vector<double>> m_sensorsValues;
+    std::map<unsigned, DataBuffer<double>> m_sensorsValues;
 
 
     /*!
@@ -138,8 +140,8 @@ class ComputerInfoDataContainer: public Info
      *
      * Kluczem jest id procesu, a wartość to para wektorów przechowujących wartości oraz czasy
      */
-    std::map<unsigned, std::pair<std::vector<std::vector<double>>,
-        std::vector<std::chrono::system_clock::time_point>>> m_processes;
+    std::map<unsigned, std::pair<std::vector<DataBuffer<double>>,
+    DataBuffer<std::time_t>>> m_processes;
 
     /*!
      * \brief Kontener asocjacyjny monitorujący informacje o procesorze
@@ -148,17 +150,17 @@ class ComputerInfoDataContainer: public Info
      *  Rodzaj danych przechowywanych w poszczególnych wektorach jest
      *  zależny od indeksu. Patrz \see PROCESSOR_FREQ_INDEX oraz PROCESSOR_COREUSAGE_INDEX
      */
-    std::map<unsigned, std::vector<std::vector<double>>> m_processorValues;
+    std::map<unsigned, std::vector<DataBuffer<double>>> m_processorValues;
 
     /*!
      * \brief Wektor  przechowujący dane o całkowitym zużyciu pamięci
      */
-    std::vector<double> m_totalRamUsage;
+    DataBuffer<double> m_totalRamUsage;
 
     /*!
      * \brief Pole przechowujące czasy, kiedy zostały dokonane pomiary
      */
-    std::vector<std::time_t> m_time;
+    DataBuffer<std::time_t> m_time;
 
     /*!
      * \brief Pole przechowujące wskaźnik do obiektu monitorującego komputer

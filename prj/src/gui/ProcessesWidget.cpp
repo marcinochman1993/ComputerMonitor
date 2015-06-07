@@ -12,9 +12,9 @@ using namespace std;
 
 void ProcessesWidget::init()
 {
-  m_ui.setupUi(this);
+  setupUi(this);
   addDataTypeToCombo();
-  m_ui.allProcessesTable->horizontalHeader()->setSectionResizeMode(
+  allProcessesTable->horizontalHeader()->setSectionResizeMode(
       QHeaderView::Stretch);
 }
 
@@ -22,7 +22,7 @@ void ProcessesWidget::addDataTypeToCombo()
 {
   vector<QString> dataTypesString = { tr("CpuUsage [%]") };
   for (int i = 0; i < 1; i++)
-    m_ui.dataTypeCombo->addItem(dataTypesString[i]);
+    dataTypeCombo->addItem(dataTypesString[i]);
 }
 
 void ProcessesWidget::computerInfoData(
@@ -33,12 +33,12 @@ void ProcessesWidget::computerInfoData(
 
   m_model = new AllProcessesModel(this);
   m_model->computerInfoData(compInfo);
-  m_ui.allProcessesTable->setModel(m_model);
+  allProcessesTable->setModel(m_model);
   auto delegate = new UsageDelegate(this);
   delegate->addColumnUsage(2);
-  m_ui.allProcessesTable->setItemDelegate(delegate);
+  allProcessesTable->setItemDelegate(delegate);
   QItemSelectionModel *selectionModel =
-    m_ui.allProcessesTable->selectionModel();
+    allProcessesTable->selectionModel();
   connect(selectionModel,
       SIGNAL(selectionChanged (const QItemSelection &, const QItemSelection &)),
       this,
@@ -51,16 +51,15 @@ void ProcessesWidget::computerInfoData(
 void ProcessesWidget::onSelectionRowChanged(const QItemSelection & selected,
     const QItemSelection &)
 {
-  auto customPlot = customPlotWidget();
   if (customPlot->graphCount() <= 0)
     customPlot->addGraph();
   customPlot->graph(0)->setPen(QPen(Qt::blue));
   customPlot->addGraph();
 
   m_currentRow = selected.indexes()[0].row();
-  QVector<double> y0 = QVector<double>::fromStdVector(
+  QVector<double> y0 = QVector<double>::fromList(QList<double>::fromStdList(
       m_compInfo->dataContainer()->cpuUsage(
-          m_model->processIdByIndex(m_currentRow))), x;
+          m_model->processIdByIndex(m_currentRow)).list())), x;
   for (int i = 0; i < y0.size(); i++)
     x.push_back(i);
   customPlot->graph(0)->setData(x, y0);
@@ -70,7 +69,6 @@ void ProcessesWidget::onSelectionRowChanged(const QItemSelection & selected,
 
 void ProcessesWidget::updatePlot()
 {
-  auto customPlot = customPlotWidget();
   if (customPlot->graphCount() == 0 || m_currentRow == -1)
     return;
   unsigned processId = m_model->processIdByIndex(m_currentRow);

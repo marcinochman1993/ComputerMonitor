@@ -12,17 +12,18 @@
 #include <QWidget>
 #include "ComputerInfoDataContainerWrapper.hpp"
 #include "AllProcessesModel.hpp"
+#include "ComputerMonitorWidgetBase.hpp"
 
 /*!
  * \brief Klasa odpowiedzialna za prezentację danych o wszystkich procesach w systemie
  *
  * Pokazuje w prosty sposób informacje o poszczególnych procesach w tabeli i na wykresie
  */
-class ProcessesWidget: public QWidget
+class ProcessesWidget: public ComputerMonitorWidgetBase, Ui::UiProcessesWidget
 {
     Q_OBJECT
   public:
-    ProcessesWidget(QWidget* parent = nullptr): QWidget(parent), m_currentRow(-1) { init(); }
+    ProcessesWidget(QWidget* parent = nullptr): ComputerMonitorWidgetBase(parent), m_currentRow(-1) { init(); }
 
     /*!
      * \brief Metoda ustawia wskaźnik na obiekt informacji o komputerze
@@ -30,9 +31,12 @@ class ProcessesWidget: public QWidget
      * Metoda jednocześnie ustawia wszystkie sygnały oraz sloty aby
      * aktualizacja informacji była automatyczna
      *
-     * @param compInfo - wskaźnik na obiekt informacji, który ma zostać ustawiony
+     * \param compInfo - wskaźnik na obiekt informacji, który ma zostać ustawiony
      */
     void computerInfoData(ComputerInfoDataContainerWrapper* compInfo);
+
+  public slots:
+    void savePlot() override { ComputerMonitorWidgetBase::savePlot(customPlot); }
 
   private:
     /*!
@@ -43,21 +47,9 @@ class ProcessesWidget: public QWidget
     void init();
 
     /*!
-     * \brief Pozwala pobrać kontrolkę do rysowania wykresów
-     *
-     * @return Zwraca kontrolkę odpowiedzialną za wykresy
-     */
-    QCustomPlot* customPlotWidget() { return m_ui.customPlot; }
-
-    /*!
      * \brief Metoda dodaje wpisy do wyboru rysowanej wielkości na wykresie
      */
     void addDataTypeToCombo();
-
-    /*!
-     * \brief Pole przechowujące obiekt, w który znajdują się wszystkie kontrolki okna
-     */
-    Ui::UiProcessesWidget m_ui;
 
     /*!
      * \brief Pole przechowujące wskaźnik na obiekt odpowiedzialny za informacje o komputerze

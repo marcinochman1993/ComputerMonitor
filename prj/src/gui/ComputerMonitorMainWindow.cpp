@@ -59,3 +59,12 @@ void ComputerMonitorMainWindow::initModeMenu()
   m_modeActionGroup->addAction(actionVisualisation);
   m_modeActionGroup->addAction(actionMixed);
 }
+
+void ComputerMonitorMainWindow::on_actionExport_Plot_triggered()
+{
+  std::map<int, ComputerMonitorWidgetBase*> widgetMap = { { 0, sensorsWidget },
+      { 1, processorWidget }, { 2, ramWidget }, { 3, processesWidget } };
+
+  ComputerMonitorWidgetBase* widgetToExport = widgetMap[m_selectedTabIndex];
+  widgetToExport->savePlot();
+}

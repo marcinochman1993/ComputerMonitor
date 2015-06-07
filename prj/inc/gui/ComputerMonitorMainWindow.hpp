@@ -41,7 +41,7 @@ class ComputerMonitorMainWindow: public ComputerMonitorMainWindowBase,
     ComputerMonitorMainWindow(PROGRAM_MODE mode = PROGRAM_MODE::VISUALISATION, QWidget* parent = 0)
         : ComputerMonitorMainWindowBase(parent), m_computerInfo(
             new ComputerInfo), m_dataContainer(m_computerInfo.get()),
-            m_modeActionGroup(nullptr) { init(mode); }
+            m_modeActionGroup(nullptr),m_selectedTabIndex(0) { init(mode); }
 
     /*!
      * \brief Metoda pozwala ustawić obiekt informacji o komputerze
@@ -62,6 +62,9 @@ class ComputerMonitorMainWindow: public ComputerMonitorMainWindowBase,
   private slots:
     void on_actionVisualisation_triggered() { changeModeToVisualisation(); }
     void on_actionMixed_triggered() { changeModeToMixed(); }
+    void on_tabWidget_currentChanged(int index) { m_selectedTabIndex = index; }
+    void on_actionExport_Plot_triggered();
+
   private:
     void init(PROGRAM_MODE mode);
     void initModeMenu();
@@ -71,6 +74,7 @@ class ComputerMonitorMainWindow: public ComputerMonitorMainWindowBase,
     ComputerInfoDataContainer m_dataContainer;
     QTimer* m_timer;
     QActionGroup* m_modeActionGroup;
+    int m_selectedTabIndex;
 };
 
 #endif /* COMPUTERMONITORMAINWINDOW_HPP_ */

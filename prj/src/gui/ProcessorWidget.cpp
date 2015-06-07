@@ -110,12 +110,14 @@ void ProcessorWidget::drawPlot()
   switch (dataTypeCombo->currentIndex())
   {
     case 0:
-      y0 = QVector<double>::fromStdVector(
-          m_compInfo->dataContainer()->frequency(m_currentRow));
+      y0 = QVector<double>::fromList(
+          QList<double>::fromStdList(
+              m_compInfo->dataContainer()->frequency(m_currentRow).list()));
       break;
     case 1:
-      y0 = QVector<double>::fromStdVector(
-          m_compInfo->dataContainer()->coreUsage(m_currentRow));
+      y0 = QVector<double>::fromList(
+          QList<double>::fromStdList(
+              m_compInfo->dataContainer()->coreUsage(m_currentRow).list()));
       break;
   }
 

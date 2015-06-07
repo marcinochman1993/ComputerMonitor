@@ -35,8 +35,8 @@ void SensorsWidget::onSelectionRowChanged(const QItemSelection & selected,
   customPlot->addGraph();
 
   m_currentRow = selected.indexes()[0].row();
-  QVector<double> y0 = QVector<double>::fromStdVector(
-      m_compInfo->dataContainer()->sensorsData(m_currentRow)), x;
+  QVector<double> y0 = QVector<double>::fromList(QList<double>::fromStdList(
+      m_compInfo->dataContainer()->sensorsData(m_currentRow).list())), x;
   for (int i = 0; i < y0.size(); i++)
     x.push_back(i);
   customPlot->graph(0)->setData(x, y0);
