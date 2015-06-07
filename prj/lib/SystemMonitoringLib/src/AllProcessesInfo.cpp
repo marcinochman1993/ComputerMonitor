@@ -9,6 +9,7 @@
 #include <boost/filesystem.hpp>
 #include <cstdlib>
 #include <utility>
+#include <sstream>
 
 using namespace boost::filesystem;
 using namespace std;
@@ -76,10 +77,16 @@ void AllProcessesInfo::getAllKeys(std::map<unsigned, bool>& keysVec) const
     keysVec.insert(make_pair(processPair.first, true));
 }
 
-std::string AllProcessesInfo::toString() const
+std::string AllProcessesInfo::toString(unsigned flags) const
 {
-  std::string toStringValue;
+  std::ostringstream oss;
 
-  return toStringValue;
+  for(const auto& procPair: processesMap())
+  {
+    const ProcessInfo& procInfo = procPair.second;
+    oss<<"|"<<procInfo.toString()<<"|";
+  }
+
+  return oss.str();
 }
 

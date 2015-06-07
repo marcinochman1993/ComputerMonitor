@@ -17,10 +17,13 @@
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <widget class="QTabWidget" name="tabWidget">
-      <property name="currentIndex">
-       <number>2</number>
+      <property name="enabled">
+       <bool>true</bool>
       </property>
-      <widget class="QWidget" name="tab_2">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="sensorsTab">
        <attribute name="title">
         <string>Sensors Info</string>
        </attribute>
@@ -30,7 +33,7 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="tab">
+      <widget class="QWidget" name="processorTab">
        <attribute name="title">
         <string>Processor Info</string>
        </attribute>
@@ -40,7 +43,7 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="tab_3">
+      <widget class="QWidget" name="memoryTab">
        <attribute name="title">
         <string>Memory Info</string>
        </attribute>
@@ -50,13 +53,26 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="tab_4">
+      <widget class="QWidget" name="processesTab">
        <attribute name="title">
         <string>Processes</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_5">
         <item>
          <widget class="ProcessesWidget" name="processesWidget" native="true"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="connectionTab">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <attribute name="title">
+        <string>Connection</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_6">
+        <item>
+         <widget class="DataSendWidget" name="widget" native="true"/>
         </item>
        </layout>
       </widget>
@@ -80,9 +96,9 @@
     <addaction name="separator"/>
     <addaction name="actionExit"/>
    </widget>
-   <widget class="QMenu" name="menuReports">
+   <widget class="QMenu" name="menuReporting">
     <property name="title">
-     <string>Reports</string>
+     <string>Reporting</string>
     </property>
     <addaction name="actionStart_reporting"/>
     <addaction name="actionStop_Reporting"/>
@@ -97,25 +113,17 @@
     <property name="title">
      <string>Options</string>
     </property>
-    <widget class="QMenu" name="menuTheme">
-     <property name="title">
-      <string>Theme</string>
-     </property>
-     <addaction name="actionBlack"/>
-     <addaction name="actionWhite"/>
-     <addaction name="separator"/>
-    </widget>
-    <addaction name="menuTheme"/>
+    <addaction name="actionPreferences"/>
    </widget>
    <widget class="QMenu" name="menuMode">
     <property name="title">
      <string>Mode</string>
     </property>
     <addaction name="actionVisualisation"/>
-    <addaction name="actionReporting"/>
+    <addaction name="actionMixed"/>
    </widget>
    <addaction name="menuExit"/>
-   <addaction name="menuReports"/>
+   <addaction name="menuReporting"/>
    <addaction name="menuMode"/>
    <addaction name="menuOptions"/>
    <addaction name="menuHelp"/>
@@ -142,17 +150,26 @@
   </action>
   <action name="actionStop_Reporting">
    <property name="text">
-    <string>Stop Reporting</string>
+    <string>Stop</string>
    </property>
   </action>
   <action name="actionVisualisation">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>Visualisation</string>
    </property>
   </action>
-  <action name="actionReporting">
+  <action name="actionMixed">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
-    <string>Reporting</string>
+    <string>Mixed</string>
    </property>
   </action>
   <action name="actionBlack">
@@ -171,8 +188,24 @@
     <string>White</string>
    </property>
   </action>
+  <action name="actionPreferences">
+   <property name="text">
+    <string>Preferences</string>
+   </property>
+  </action>
+  <action name="actionTheme">
+   <property name="text">
+    <string>Theme</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>DataSendWidget</class>
+   <extends>QWidget</extends>
+   <header>DataSendWidget.hpp</header>
+   <container>1</container>
+  </customwidget>
   <customwidget>
    <class>SensorsWidget</class>
    <extends>QWidget</extends>

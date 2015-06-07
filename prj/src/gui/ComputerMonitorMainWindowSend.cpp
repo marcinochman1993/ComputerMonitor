@@ -12,18 +12,7 @@
 void ComputerMonitorMainWindowSend::init()
 {
   setupUi(this);
-  initValidation();
-}
-
-void ComputerMonitorMainWindowSend::initValidation()
-{
-  QString ipSegment = "(?:[0-1]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])";
-  QRegExp ipRegex(
-      "^" + ipSegment + "\\." + ipSegment + "\\." + ipSegment + "\\."
-        + ipSegment + "$");
-  QRegExpValidator *ipValidator = new QRegExpValidator(ipRegex, this);
-
-  ipAddressLineEdit->setValidator(ipValidator);
+  initThemeActions(menuOptions);
 }
 
 void ComputerMonitorMainWindowSend::closeEvent(QCloseEvent* closeEventArgs)
@@ -35,3 +24,5 @@ void ComputerMonitorMainWindowSend::closeEvent(QCloseEvent* closeEventArgs)
   if (chosenButton == QMessageBox::No)
     closeEventArgs->ignore();
 }
+
+

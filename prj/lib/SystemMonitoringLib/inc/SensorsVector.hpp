@@ -31,6 +31,8 @@ class SensorsVector: public std::vector<SensorInfo>, public Info
      * \return Jeśli wszystkie odczyty powiodą się to zwracana jest wartość true, w.p.p. false
      */
     bool update() override;
+
+    std::string toString(unsigned flags = 0) const override;
 };
 
 

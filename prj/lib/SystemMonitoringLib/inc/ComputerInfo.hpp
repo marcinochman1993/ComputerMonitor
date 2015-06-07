@@ -66,6 +66,8 @@ class ComputerInfo: public Info
      * \return Zwracany jest obiekt przechowujący informacje o procesorze
      */
     const RamInfo& ram() const { return m_ram; }
+
+    std::string toString(unsigned flags = 0) const override;
   private:
     /*!
      * \brief Pole przechowujące czujniki

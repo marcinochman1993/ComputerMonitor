@@ -7,6 +7,7 @@
 
 #include <cstring>
 #include "SensorInfo.hpp"
+#include <sstream>
 
 using namespace std;
 
@@ -84,6 +85,22 @@ bool SensorInfo::initAllSensors()
   }
 
   return true;
+}
+
+std::string SensorInfo::toString(unsigned flags) const
+{
+  std::ostringstream oss;
+
+  oss<<"Component Type: "<<"Sensor; ";
+
+  if (flags == 0)
+      flags = ALL;
+  if (flags & NAME)
+    oss << "Sensor name: " << name() << "; ";
+  if (flags & VALUE)
+    oss << "Value: " << value() << "; ";
+
+  return oss.str();
 }
 
 std::ostream& operator<<(std::ostream& os, const SensorInfo& sensor)

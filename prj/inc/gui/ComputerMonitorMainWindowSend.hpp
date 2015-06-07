@@ -8,20 +8,20 @@
 #ifndef COMPUTERMONITORMAINWINDOWSEND_HPP_
 #define COMPUTERMONITORMAINWINDOWSEND_HPP_
 
-#include <QMainWindow>
+#include "ComputerMonitorMainWindowBase.hpp"
 #include "ui_ComputerMonitorMainWindowSend.h"
+#include <QTreeWidgetItem>
 
-class ComputerMonitorMainWindowSend: public QMainWindow, Ui::ComputerMonitorMainWindowSendUi
+class ComputerMonitorMainWindowSend: public ComputerMonitorMainWindowBase, Ui::ComputerMonitorMainWindowSendUi
 {
     Q_OBJECT
 
   public:
-    ComputerMonitorMainWindowSend(QWidget* parent = nullptr): QMainWindow(parent) { init(); }
+    ComputerMonitorMainWindowSend(QWidget* parent = nullptr): ComputerMonitorMainWindowBase(parent) { init(); }
     void closeEvent(QCloseEvent* closeEventArgs) override;
+
   private:
     void init();
-    void initValidation();
 };
-
 
 #endif /* COMPUTERMONITORMAINWINDOWSEND_HPP_ */

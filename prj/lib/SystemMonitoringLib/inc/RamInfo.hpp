@@ -16,6 +16,13 @@
 class RamInfo: public HardwareInfo
 {
   public:
+
+    enum ToStringFlags
+    {
+      TOTAL_USAGE = 0x01,
+      ALL = 0x01
+    };
+
     /*!
      * \brief Domyślny konstruktor klasy RamInfo
      *
@@ -33,9 +40,11 @@ class RamInfo: public HardwareInfo
     /*!
      *\brief Metoda pozwala na otrzymanie informacji o zużyciu pamięci RAM w komputerze
      *
-     * @return Zwracana jest ilość zajętej pamięci RAM
+     * \return Zwracana jest ilość zajętej pamięci RAM
      */
     double totalUsage() const { return m_totalRamUsage; }
+
+    std::string toString(unsigned flags = 0) const override;
   private:
 
     /*!

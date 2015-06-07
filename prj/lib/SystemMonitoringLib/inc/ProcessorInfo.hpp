@@ -21,6 +21,17 @@
 class ProcessorInfo: public HardwareInfo
 {
   public:
+
+    enum ToStringFlags
+    {
+      NAME = 0x01,
+      CORES_NUM = 0x02,
+      TOTAL_USAGE = 0x04,
+      CORE_FREQ = 0x08,
+      CORE_USAGE = 0x10,
+      ALL =  0x1F
+    };
+
     /*!
      * \brief Domyślny konstruktor klasy ProcessorInfo
      *
@@ -71,6 +82,8 @@ class ProcessorInfo: public HardwareInfo
      * \return true jeśli odczyty z plików powiodą się, w.p.p. false.
      */
     bool update() override;
+
+    std::string toString(unsigned flags = 0) const override;
   private:
     /*!
      * \brief Metoda parsuje plik /proc/cpuinfo

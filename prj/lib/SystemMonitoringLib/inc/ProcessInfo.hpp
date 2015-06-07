@@ -17,12 +17,21 @@
 class ProcessInfo: public Info
 {
   public:
+
+    enum Flags
+    {
+      NAME = 0x01,
+      ID = 0x02,
+      CPU_USAGE = 0x04,
+      ALL = 0x07,
+    };
+
     /*!
      * \brief Konstruktor klasy ProcessInfo
      *
      * Inicjuje informacje o procesie o podanym id
      *
-     * @param id - numer identyfikacyjny procesu
+     * \param id - numer identyfikacyjny procesu
      */
     ProcessInfo(unsigned id = 1)
       :m_id(id), m_cpuUsage(0) ,m_lastSUTime(0), m_lastUpTime(0) { update(); }
@@ -55,7 +64,7 @@ class ProcessInfo: public Info
 
     const std::string& name() const { return m_name; }
 
-    std::string toString() const override;
+    std::string toString(unsigned flags = 0) const override;
   private:
     /*!
      * \brief Pole przechowujące id procesu

@@ -9,16 +9,32 @@
 #define COMPUTERMONITORMAINWINDOWBASE_HPP_
 
 #include <QMainWindow>
-
+#include <QAction>
+#include <QActionGroup>
+#include <QMenu>
+#include <QApplication>
 
 class ComputerMonitorMainWindowBase: public QMainWindow
 {
-public:
-    ComputerMonitorMainWindowBase(QWidget* parent = nulltrp): QWidget(parent) { }
-protected:
+  Q_OBJECT
+  public:
+    ComputerMonitorMainWindowBase(QWidget* parent = nullptr)
+        : QMainWindow(parent), m_darkThemeAction(nullptr),
+          m_defaultThemeAction(nullptr), m_themeActionGroup(nullptr),
+          m_themeMenu(nullptr)
+    { }
+
+    static void defaultPalette(const QPalette& palette) { s_defaultPalette = palette; }
+  protected:
+    void initThemeActions(QMenu* optionsMenu);
+    QAction* m_darkThemeAction;
+    QAction* m_defaultThemeAction;
+    QActionGroup* m_themeActionGroup;
+    QMenu* m_themeMenu;
+    static QPalette s_defaultPalette;
+  protected slots:
     void selectDarkTheme();
     void selectBrightTheme();
 };
-
 
 #endif /* COMPUTERMONITORMAINWINDOWBASE_HPP_ */

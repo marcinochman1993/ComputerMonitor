@@ -6,6 +6,7 @@
  */
 
 #include "SensorsVector.hpp"
+#include <sstream>
 
 bool SensorsVector::update()
 {
@@ -17,3 +18,14 @@ bool SensorsVector::update()
 
 }
 
+std::string SensorsVector::toString(unsigned flags) const
+{
+  std::ostringstream oss;
+
+  for (const auto& sensor : *this)
+  {
+    oss << "|" << sensor.toString() << "|";
+  }
+
+  return oss.str();
+}

@@ -34,6 +34,13 @@ class SensorInfo: public HardwareInfo
 {
   public:
 
+    enum TO_STRING_FLAGS
+    {
+      NAME = 0x01,
+      VALUE = 0x02,
+      ALL = 0x03
+    };
+
     /*!
      * \brief Metoda zwracająca wszystkie znalezione czujniki w komputerze
      *
@@ -111,6 +118,8 @@ class SensorInfo: public HardwareInfo
     const SensorType& sensorType() const { return m_type; }
 
     std::string unit() const { return convertTypeToString(m_type); }
+
+    std::string toString(unsigned flags = 0) const override;
   private:
     /*!
      * \brief Statyczna metoda pozwalająca zainicjować sensory

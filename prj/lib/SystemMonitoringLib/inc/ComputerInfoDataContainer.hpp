@@ -38,7 +38,7 @@ class ComputerInfoDataContainer: public Info
      * \brief Metoda pozwala pobrać wektor czasów rejestracji danych
      * \return Zwracany jest wektor czasów, kiedy został stworzony
      */
-    const std::vector<std::chrono::system_clock::time_point>& time() const { return m_time; }
+    const std::vector<std::time_t>& time() const { return m_time; }
 
     /*!
      * \brief Metoda pozwala pobrać wektor zarejestrowanych wartości zużycia procesora
@@ -158,7 +158,7 @@ class ComputerInfoDataContainer: public Info
     /*!
      * \brief Pole przechowujące czasy, kiedy zostały dokonane pomiary
      */
-    std::vector<std::chrono::system_clock::time_point> m_time;
+    std::vector<std::time_t> m_time;
 
     /*!
      * \brief Pole przechowujące wskaźnik do obiektu monitorującego komputer

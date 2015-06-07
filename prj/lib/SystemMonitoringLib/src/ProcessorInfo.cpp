@@ -87,7 +87,7 @@ bool ProcessorInfo::parseCpuStatFile()
   isTotalCpuInfo >> type;
   isTotalCpuInfo >> user >> nice >> system >> idle;
   unsigned totalTime = user + nice + system + idle, busyTime = user + nice
-    + system;
+      + system;
   if (m_lastTotalCpuTime == 0)
   {
     m_totalCpuUsage = 0.0;
@@ -98,7 +98,7 @@ bool ProcessorInfo::parseCpuStatFile()
       m_totalCpuUsage = 0.0;
     else
       m_totalCpuUsage = (busyTime - m_lastTotalCpuBusyTime)
-        / (totalTime - m_lastTotalCpuTime) * 100.0;
+          / (totalTime - m_lastTotalCpuTime) * 100.0;
   }
   m_lastTotalCpuBusyTime = busyTime;
   m_lastTotalCpuTime = totalTime;
@@ -119,7 +119,7 @@ bool ProcessorInfo::parseCpuStatFile()
         m_lastTotalTime.resize(coresNumber(), 0);
       if (m_lastBusyTime[coreId] > 0.0 && m_lastTotalTime[coreId] > 0.0)
         usagePercent = (busyTime - m_lastBusyTime[coreId])
-          / static_cast<double>(totalTime - m_lastTotalTime[coreId]) * 100.0;
+            / static_cast<double>(totalTime - m_lastTotalTime[coreId]) * 100.0;
 
       m_lastBusyTime[coreId] = busyTime;
       m_lastTotalTime[coreId] = totalTime;
@@ -136,3 +136,34 @@ bool ProcessorInfo::parseCpuStatFile()
   return true;
 }
 
+std::string ProcessorInfo::toString(unsigned flags) const
+{
+  std::ostringstream oss;
+  if (flags == 0)
+    flags = ALL;
+
+  oss<<"Component Type: Processor; ";
+
+  if (flags & NAME)
+    oss << "Processor name: " << name() << "; ";
+
+  if (flags & CORES_NUM)
+    oss << "Cores number: " << coresNumber() << "; ";
+
+  if (flags & TOTAL_USAGE)
+    oss << "Total usage: " << totalUsage() << "; ";
+
+  if (flags & CORE_FREQ)
+  {
+    for (unsigned i = 0; i < coresNumber(); i++)
+      oss << "(Core Frequency: " << i << " : " << frequency(i) << "); ";
+  }
+
+  if (flags & CORE_USAGE)
+  {
+    for (unsigned i = 0; i < coresNumber(); i++)
+      oss << "(Core Usage: " << i << " : " << usage(i) << "); ";
+  }
+
+  return oss.str();
+}

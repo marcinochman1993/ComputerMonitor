@@ -27,13 +27,35 @@ void ComputerMonitorMainWindow::closeEvent(QCloseEvent * closeEventData)
     closeEventData->ignore();
 }
 
-void ComputerMonitorMainWindow::init()
+void ComputerMonitorMainWindow::init(PROGRAM_MODE mode)
 {
   setupUi(this);
   m_dataWrapper = new ComputerInfoDataContainerWrapper();
   m_dataWrapper->data(&m_dataContainer);
   computerInfoData(m_dataWrapper);
-  m_timer=new QTimer(this);
+  m_timer = new QTimer(this);
   m_timer->start(1000);
-  connect(m_timer, SIGNAL(timeout()),m_dataWrapper,SLOT(update()));
+  connect(m_timer, SIGNAL(timeout()), m_dataWrapper, SLOT(update()));
+  initThemeActions(menuOptions);
+  initModeMenu();
+
+  if (mode == PROGRAM_MODE::VISUALISATION)
+    changeModeToVisualisation();
+}
+
+void ComputerMonitorMainWindow::changeModeToMixed()
+{
+  tabWidget->addTab(connectionTab, tr("Connection"));
+}
+
+void ComputerMonitorMainWindow::changeModeToVisualisation()
+{
+  tabWidget->removeTab(CONNECTION_TAB_INDEX);
+}
+
+void ComputerMonitorMainWindow::initModeMenu()
+{
+  m_modeActionGroup = new QActionGroup(this);
+  m_modeActionGroup->addAction(actionVisualisation);
+  m_modeActionGroup->addAction(actionMixed);
 }

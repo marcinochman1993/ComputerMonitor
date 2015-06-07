@@ -83,7 +83,7 @@ class AllProcessesInfo: public Info
      */
     const std::vector<unsigned>& lastDeletedProcesses() const { return m_lastDeletedProcesses; }
 
-    std::string toString() const override;
+    std::string toString(unsigned flags = 0) const override;
 
   private:
 

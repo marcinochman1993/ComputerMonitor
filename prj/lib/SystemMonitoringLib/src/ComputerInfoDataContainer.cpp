@@ -15,7 +15,7 @@ bool ComputerInfoDataContainer::update()
   if (!m_computerInfo->update())
     return false;
 
-  m_time.push_back(m_computerInfo->lastUpdated());
+  m_time.push_back(m_computerInfo->lastUpdatedTimeT());
   if (m_sensorsValues.empty())
     init();
 

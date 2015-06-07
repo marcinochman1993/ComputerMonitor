@@ -6,6 +6,7 @@
  */
 
 #include "ComputerInfo.hpp"
+#include <sstream>
 
 bool ComputerInfo::update()
 {
@@ -20,3 +21,14 @@ bool ComputerInfo::update()
   return Info::update();
 }
 
+std::string ComputerInfo::toString(unsigned flags) const
+{
+  std::ostringstream oss;
+
+  oss << processor().toString() << std::endl;
+  oss << ram().toString() << std::endl;
+  oss << allProcesses().toString() << std::endl;
+  oss << allSensors().toString() << std::endl;
+
+  return oss.str();
+}

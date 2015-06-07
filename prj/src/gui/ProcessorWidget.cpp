@@ -66,7 +66,7 @@ void ProcessorWidget::dataUpdated()
       m_compInfo->dataContainer()->computerInfo().processor().totalUsage());
   processorNameLabel->setText(QString(computerInfo.processor().name().c_str()));
   processorUsageLabel->setText(
-      QString::number(computerInfo.processor().totalUsage(), 'f', 2)+" %");
+      QString::number(computerInfo.processor().totalUsage(), 'f', 2) + " %");
 
   if (customPlot->graphCount() == 0 || m_currentRow < 0)
     return;
@@ -75,15 +75,16 @@ void ProcessorWidget::dataUpdated()
   {
     case 0:
       y = dataContainer->frequency(m_currentRow).back();
-      x = dataContainer->frequency(m_currentRow).size();
-      customPlot->yAxis->setLabel(QString("Frequency of core %1 [MHz]").arg(m_currentRow));
+      customPlot->yAxis->setLabel(
+          QString("Frequency of core %1 [MHz]").arg(m_currentRow));
       break;
     case 1:
       y = dataContainer->coreUsage(m_currentRow).back();
-      x = dataContainer->coreUsage(m_currentRow).size();
-      customPlot->yAxis->setLabel(QString("Usage of core %1 [%]").arg(m_currentRow));
+      customPlot->yAxis->setLabel(
+          QString("Usage of core %1 [%]").arg(m_currentRow));
       break;
   }
+  x = dataContainer->time().back();
   customPlot->graph(0)->addData(x, y);
   customPlot->graph(0)->rescaleAxes();
   customPlot->xAxis->setLabel("t");
@@ -119,7 +120,9 @@ void ProcessorWidget::drawPlot()
   }
 
   for (int i = 0; i < y0.size(); i++)
-    x.push_back(i);
+    x.push_back(m_compInfo->dataContainer()->time()[i]);
+  customPlot->xAxis->setTickLabelType(QCPAxis::ltDateTime);
+  customPlot->xAxis->setDateTimeFormat("h:m:s");
   customPlot->graph(0)->setData(x, y0);
   customPlot->graph(0)->rescaleAxes();
   customPlot->replot();

@@ -10,6 +10,7 @@
 #include <fstream>
 #include <unistd.h>
 #include <iostream>
+#include <iomanip>
 
 using namespace std;
 
@@ -38,7 +39,7 @@ bool ProcessInfo::update()
 
   if (m_lastUpTime > 0 && upTime - m_lastUpTime > 0)
     cpuUsage = (uTime + sTime - m_lastSUTime) / TICKS_PER_SEC
-      / (upTime - m_lastUpTime) * 100.0;
+        / (upTime - m_lastUpTime) * 100.0;
 
   m_lastSUTime = uTime + sTime;
   m_lastUpTime = upTime;
@@ -47,12 +48,18 @@ bool ProcessInfo::update()
   return Info::update();
 }
 
-std::string ProcessInfo::toString() const
+std::string ProcessInfo::toString(unsigned flags) const
 {
   ostringstream oss;
 
-  oss << "Process name: " << name() << "; Id: " << id() << "; Cpu Usage: "
-      << cpuUsage();
+  if (flags == 0)
+    flags = ALL;
+  if (flags & NAME)
+    oss << "Process name: " << name() << "; ";
+  if (flags & ID)
+    oss << "Id: " << id() << "; ";
+  if (flags & CPU_USAGE)
+    oss << "CPU_USAGE: " << setprecision(2) << cpuUsage() << "; ";
 
   return oss.str();
 }
