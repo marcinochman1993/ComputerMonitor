@@ -58,8 +58,6 @@ bool ProcessInfo::update(const std::string& strFromNet)
     getline(iss, keyName, ':');
     getline(iss, value, ';');
 
-    std::cout << keyName << "_" << value << std::endl;
-
     if (keyName == "Component Type" && value != "Process")
       return false;
 
@@ -82,7 +80,6 @@ bool ProcessInfo::update(const std::string& strFromNet)
       double numValue = strtod(value.c_str(), &pEnd);
       if (*pEnd || numValue < 0 || numValue > 100)
         return false;
-std::cout<<"WSZEDL\n";
       m_cpuUsage = numValue;
     }
 

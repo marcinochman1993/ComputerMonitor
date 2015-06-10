@@ -60,6 +60,8 @@ class AllProcessesInfo: public Info
      */
     bool update() override;
 
+    bool update(const std::string& strFromNet) override;
+
     /*!
      * \brief Metoda pozwala dostać kontener asocjacyjny, w którym przechowywane są procesy
      *

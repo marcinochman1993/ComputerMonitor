@@ -70,6 +70,24 @@ bool AllProcessesInfo::update()
   return Info::update();
 }
 
+bool AllProcessesInfo::update(const std::string& strFromNet)
+{
+  istringstream iss(strFromNet);
+
+  std::string processInfoStr;
+
+  while (iss)
+  {
+    char c;
+    iss.get();
+
+    getline(iss, processInfoStr, '|');
+
+  }
+
+  return true;
+}
+
 void AllProcessesInfo::getAllKeys(std::map<unsigned, bool>& keysVec) const
 {
   keysVec.clear();
@@ -81,10 +99,10 @@ std::string AllProcessesInfo::toString(unsigned flags) const
 {
   std::ostringstream oss;
 
-  for(const auto& procPair: processesMap())
+  for (const auto& procPair : processesMap())
   {
     const ProcessInfo& procInfo = procPair.second;
-    oss<<"|"<<procInfo.toString()<<"|";
+    oss << "|" << procInfo.toString() << "|";
   }
 
   return oss.str();
