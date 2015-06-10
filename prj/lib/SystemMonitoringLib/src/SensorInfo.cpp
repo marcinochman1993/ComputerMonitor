@@ -13,15 +13,13 @@ using namespace std;
 
 vector<SensorInfo> SensorInfo::s_sensorsVector;
 
-
 std::string convertTypeToString(const SensorType& sensorType)
 {
   int i = static_cast<int>(sensorType);
-  std::string texts[]= {"V", "deg C"};
+  std::string texts[] = { "V", "deg C" };
 
   return texts[i];
 }
-
 
 const vector<SensorInfo>& SensorInfo::allSensors()
 {
@@ -39,6 +37,67 @@ const vector<SensorInfo>& SensorInfo::allSensors()
 bool SensorInfo::update()
 {
   return sensors_get_value(m_chipName, m_subfeature->number, &m_value) >= 0;
+}
+
+bool SensorInfo::update(const string& strFromNet)
+{
+  istringstream iss(strFromNet);
+  string keyName, value;
+
+  while (iss)
+  {
+    getline(iss, keyName, ':');
+    getline(iss, value, ';');
+
+    if (keyName == "Component Type" && value != "Sensor")
+      return false;
+
+    if (keyName == "Sensor name")
+      m_nameFromNet = value;
+
+    if (keyName == "Value")
+    {
+      char * pEnd = nullptr;
+      double numValue = 0;
+      numValue = strtod(value.c_str(), &pEnd);
+      if (!*pEnd)
+        m_value = numValue;
+      else
+        return false;
+    }
+
+    if (keyName == "Type")
+    {
+      char * pEnd = nullptr;
+      long typeValue = 0;
+
+      typeValue = strtol(value.c_str(), &pEnd, 10);
+      if (!*pEnd)
+      {
+        if (typeValue < 2)
+          m_type = static_cast<SensorType>(typeValue);
+      }
+      else
+        return false;
+    }
+
+    if (keyName == "Data updated")
+      if (!updateTime(value))
+        return false;
+  }
+
+  return Info::update(iss.str()) && !iss.fail();
+}
+
+string SensorInfo::name() const
+{
+  return
+      m_nameFromNet == "" ?
+          ((m_chipName == nullptr || m_subfeature == nullptr) ?
+              "" :
+              std::string(m_chipName->prefix) + "_"
+                + std::string(m_subfeature->name)) :
+          m_nameFromNet;
 }
 
 bool SensorInfo::initAllSensors()
@@ -78,7 +137,8 @@ bool SensorInfo::initAllSensors()
             default:
               break;
           }
-          s_sensorsVector.push_back(SensorInfo(chipName, subfeature, sensorType));
+          s_sensorsVector.push_back(
+              SensorInfo(chipName, subfeature, sensorType));
         }
       }
     }
@@ -91,14 +151,18 @@ std::string SensorInfo::toString(unsigned flags) const
 {
   std::ostringstream oss;
 
-  oss<<"Component Type: "<<"Sensor; ";
+  oss << "Component Type: " << "Sensor;";
 
   if (flags == 0)
-      flags = ALL;
+    flags = ALL;
   if (flags & NAME)
-    oss << "Sensor name: " << name() << "; ";
+    oss << "Sensor name:" << name() << ";";
   if (flags & VALUE)
-    oss << "Value: " << value() << "; ";
+    oss << "Value:" << value() << ";";
+  if (flags & TYPE)
+    oss << "Type:" << static_cast<int>(m_type) << ";";
+
+  oss << HardwareInfo::toString();
 
   return oss.str();
 }

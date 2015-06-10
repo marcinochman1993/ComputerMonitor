@@ -16,11 +16,16 @@ class ComputerMonitorWidgetBase: public QWidget
 {
     Q_OBJECT
   public:
-    ComputerMonitorWidgetBase(QWidget* parent = nullptr): QWidget(parent) { }
+    ComputerMonitorWidgetBase(QWidget* parent = nullptr): QWidget(parent), m_maxPlotSize(60) { }
+    unsigned maxPlotSize() const { return m_maxPlotSize; }
+    void maxPlotSize(unsigned newMaxPlotSize) { m_maxPlotSize= newMaxPlotSize; }
   protected:
     void savePlot(QCustomPlot* plot);
+    void addToPlot(QCustomPlot* plot, double x, double y);
   public slots:
     virtual void savePlot() { }
+  private:
+  unsigned m_maxPlotSize;
 };
 
 

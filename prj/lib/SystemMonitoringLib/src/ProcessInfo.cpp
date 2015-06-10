@@ -39,7 +39,7 @@ bool ProcessInfo::update()
 
   if (m_lastUpTime > 0 && upTime - m_lastUpTime > 0)
     cpuUsage = (uTime + sTime - m_lastSUTime) / TICKS_PER_SEC
-        / (upTime - m_lastUpTime) * 100.0;
+      / (upTime - m_lastUpTime) * 100.0;
 
   m_lastSUTime = uTime + sTime;
   m_lastUpTime = upTime;
@@ -48,18 +48,68 @@ bool ProcessInfo::update()
   return Info::update();
 }
 
+bool ProcessInfo::update(const std::string& strFromNet)
+{
+  istringstream iss(strFromNet);
+  string keyName, value;
+
+  while (iss)
+  {
+    getline(iss, keyName, ':');
+    getline(iss, value, ';');
+
+    std::cout << keyName << "_" << value << std::endl;
+
+    if (keyName == "Component Type" && value != "Process")
+      return false;
+
+    if (keyName == "Process name")
+      m_name = value;
+
+    if (keyName == "Id")
+    {
+      char* pEnd = nullptr;
+      long numValue = strtol(value.c_str(), &pEnd, 10);
+      if (*pEnd || numValue < 0)
+        return false;
+
+      m_id = numValue;
+    }
+
+    if (keyName == "CPU Usage")
+    {
+      char* pEnd = nullptr;
+      double numValue = strtod(value.c_str(), &pEnd);
+      if (*pEnd || numValue < 0 || numValue > 100)
+        return false;
+std::cout<<"WSZEDL\n";
+      m_cpuUsage = numValue;
+    }
+
+    if (keyName == "Data updated")
+      if (!updateTime(value))
+        return false;
+  }
+
+  return true;
+}
+
 std::string ProcessInfo::toString(unsigned flags) const
 {
   ostringstream oss;
 
+  oss << "Component Type:Process;";
+
   if (flags == 0)
     flags = ALL;
   if (flags & NAME)
-    oss << "Process name: " << name() << "; ";
+    oss << "Process name:" << name() << ";";
   if (flags & ID)
-    oss << "Id: " << id() << "; ";
+    oss << "Id:" << id() << ";";
   if (flags & CPU_USAGE)
-    oss << "CPU_USAGE: " << setprecision(2) << cpuUsage() << "; ";
+    oss << "CPU Usage:" << setprecision(2) << cpuUsage() << ";";
+
+  oss << Info::toString();
 
   return oss.str();
 }

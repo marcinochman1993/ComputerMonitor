@@ -13,16 +13,12 @@
 #include <sensors/sensors.h>
 #include "HardwareInfo.hpp"
 
-
 enum class SensorType
 {
-    VOLTAGE = 0,
-    TEMP
+  VOLTAGE = 0, TEMP
 };
 
-
 std::string convertTypeToString(const SensorType& sensorType);
-
 
 /*!
  * \brief Klasa reprezentująca czujnik w komputerze
@@ -36,9 +32,7 @@ class SensorInfo: public HardwareInfo
 
     enum TO_STRING_FLAGS
     {
-      NAME = 0x01,
-      VALUE = 0x02,
-      ALL = 0x03
+      NAME = 0x01, VALUE = 0x02, TYPE = 0x04, ALL = 0x07
     };
 
     /*!
@@ -69,8 +63,10 @@ class SensorInfo: public HardwareInfo
      * \param subfeature - wskaźnik na strukturę opisującą poszczególną cechę sensora
      */
     SensorInfo(const sensors_chip_name* chipName = nullptr,
-        const sensors_subfeature* subfeature = nullptr, const SensorType& type = SensorType::VOLTAGE)
-        : m_chipName(chipName), m_subfeature(subfeature), m_value(-1.0), m_type(type)
+        const sensors_subfeature* subfeature = nullptr, const SensorType& type =
+          SensorType::VOLTAGE)
+        : m_chipName(chipName), m_subfeature(subfeature), m_value(-1.0), m_type(
+            type), m_nameFromNet()
     {
     }
 
@@ -83,6 +79,8 @@ class SensorInfo: public HardwareInfo
      */
     bool update() override;
 
+    bool update(const std::string& strFromNet) override;
+
     /*!
      * \brief Metoda pozwala pobrać nazwę czujnika
      *
@@ -91,11 +89,7 @@ class SensorInfo: public HardwareInfo
      *
      * \return Nazwa czujnika
      */
-    std::string name() const override
-    {
-      return std::string(m_chipName->prefix) + "_"
-          + std::string(m_subfeature->name);
-    }
+    std::string name() const override;
 
     /*!
      * \brief Metoda pobierająca wartość z czujnika
@@ -115,9 +109,15 @@ class SensorInfo: public HardwareInfo
      *
      * \return Zwraca rodzaj czujnika
      */
-    const SensorType& sensorType() const { return m_type; }
+    const SensorType& sensorType() const
+    {
+      return m_type;
+    }
 
-    std::string unit() const { return convertTypeToString(m_type); }
+    std::string unit() const
+    {
+      return convertTypeToString(m_type);
+    }
 
     std::string toString(unsigned flags = 0) const override;
   private:
@@ -154,11 +154,12 @@ class SensorInfo: public HardwareInfo
      */
     double m_value;
 
-
     /*!
      * \brief Pole opisujące rodzaj czujnika
      */
     SensorType m_type;
+
+    std::string m_nameFromNet;
 
     /*!
      * \brief Statyczne pole przechowujące wszystkie czujniki.
@@ -166,6 +167,7 @@ class SensorInfo: public HardwareInfo
      * Jest to wektor wszysktkich dostępnych czujników na danym komputerze.
      */
     static std::vector<SensorInfo> s_sensorsVector;
+
 };
 
 /*!

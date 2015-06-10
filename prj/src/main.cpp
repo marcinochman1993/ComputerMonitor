@@ -17,46 +17,45 @@
 
 int main(int argc, char* argv[])
 {
-  const int SPLASH_SCREEN_TIME_MS = 2500;
-  QApplication app(argc, argv);
+  /*const int SPLASH_SCREEN_TIME_MS = 2500;
+   QApplication app(argc, argv);
 
-  QSplashScreen* splashScreen = new QSplashScreen();
-  splashScreen->setPixmap(QPixmap(":/images/images/splash.png"));
+   QSplashScreen* splashScreen = new QSplashScreen();
+   splashScreen->setPixmap(QPixmap(":/images/images/splash.png"));
 
-  ModeSelectionDialog dialog;
-  dialog.exec();
+   splashScreen->setAttribute(Qt::WA_DeleteOnClose);
 
-  QMainWindow* mainWindow = nullptr;
+   ModeSelectionDialog dialog;
+   dialog.exec();
 
-  switch (dialog.programMode())
-  {
-    case ProgramMode::SENDING_DATA:
-      mainWindow = new ComputerMonitorMainWindowSend;
-      break;
-    case ProgramMode::PRESENTING_DATA:
-      mainWindow = new ComputerMonitorMainWindow;
-      break;
-    case ProgramMode::MIXED:
-      mainWindow = new ComputerMonitorMainWindow(
-          ComputerMonitorMainWindow::PROGRAM_MODE::MIXED);
-      break;
-  }
+   QMainWindow* mainWindow = nullptr;
 
-  ComputerMonitorMainWindowBase::defaultPalette(qApp->palette());
+   switch (dialog.programMode())
+   {
+   case ProgramMode::SENDING_DATA:
+   mainWindow = new ComputerMonitorMainWindowSend;
+   break;
+   case ProgramMode::PRESENTING_DATA:
+   mainWindow = new ComputerMonitorMainWindow;
+   break;
+   case ProgramMode::MIXED:
+   mainWindow = new ComputerMonitorMainWindow(
+   ComputerMonitorMainWindow::PROGRAM_MODE::MIXED);
+   break;
+   }
 
-  QTimer::singleShot(SPLASH_SCREEN_TIME_MS, splashScreen, SLOT(close()));
-  QTimer::singleShot(SPLASH_SCREEN_TIME_MS, mainWindow, SLOT(show()));
+   ComputerMonitorMainWindowBase::defaultPalette(qApp->palette());
 
-  splashScreen->show();
+   QTimer::singleShot(SPLASH_SCREEN_TIME_MS, splashScreen, SLOT(close()));
+   QTimer::singleShot(SPLASH_SCREEN_TIME_MS, mainWindow, SLOT(show()));
 
-  return app.exec();
+   splashScreen->show();
 
-  DataBuffer<int> buffer(40);
+   return app.exec();*/
 
-  ComputerInfo ci;
-
-  ci.update();
-  std::cout << ci.toString();
+  ProcessInfo pi;
+  pi.update("Process name:kthreadd;Id:2;CPU Usage:0.3;Data updated:1433880031;");
+  std::cout << pi.toString();
 }
 
 //#include <QTcpSocket>

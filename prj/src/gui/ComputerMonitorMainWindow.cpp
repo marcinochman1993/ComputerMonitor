@@ -41,6 +41,8 @@ void ComputerMonitorMainWindow::init(PROGRAM_MODE mode)
 
   if (mode == PROGRAM_MODE::VISUALISATION)
     changeModeToVisualisation();
+
+  connect(actionAbout, SIGNAL(triggered()), this, SLOT(showAboutDialog()));
 }
 
 void ComputerMonitorMainWindow::changeModeToMixed()

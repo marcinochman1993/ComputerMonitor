@@ -37,6 +37,9 @@ class RamInfo: public HardwareInfo
      */
     bool update() override;
 
+
+    bool update(const std::string& strFromNet) override;
+
     /*!
      *\brief Metoda pozwala na otrzymanie informacji o zużyciu pamięci RAM w komputerze
      *

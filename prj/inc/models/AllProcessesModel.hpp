@@ -81,6 +81,9 @@ class AllProcessesModel: public QAbstractTableModel
      * \param index - indeks modelu - numer wiersz
      */
     unsigned processIdByIndex(unsigned index) const;
+
+
+    std::string processNameById(unsigned id) const;
   private:
     /*!
      * \brief Stała określająca ilość kolumn w modelu

@@ -36,6 +36,94 @@ bool ProcessorInfo::update()
   return HardwareInfo::update();
 }
 
+bool ProcessorInfo::update(const std::string& strFromNet)
+{
+  istringstream iss(strFromNet);
+  string keyName, value, coreNum;
+
+  while (iss)
+  {
+    getline(iss, keyName, ':');
+    if (keyName.find('(') == 0)
+    {
+      getline(iss, coreNum, ':');
+      getline(iss, value, ')');
+      iss.get(); // skip ;
+    }
+    else
+      getline(iss, value, ';');
+
+    if (keyName.find('(') == 0)
+      parseCoreInfo(keyName.substr(1), coreNum, value);
+
+    if (keyName == "Component Type" && value != "Processor")
+      return false;
+
+    if (keyName == "Processor name")
+      m_name = value;
+
+    if (keyName == "Cores number")
+    {
+      char* pEnd = nullptr;
+      long numValue = strtol(value.c_str(), &pEnd, 10);
+      if (!*pEnd)
+      {
+        m_coresNum = numValue;
+        m_freq.resize(m_coresNum);
+        m_usage.resize(m_coresNum);
+      }
+      else
+        return false;
+    }
+
+    if (keyName == "Total usage")
+    {
+      char* pEnd = nullptr;
+      double numValue = strtod(value.c_str(), &pEnd);
+      if (!*pEnd)
+        m_totalCpuUsage = numValue;
+    }
+
+    if (keyName == "Data updated")
+      if (!updateTime(value))
+        return false;
+  }
+
+  return true;
+}
+
+bool ProcessorInfo::parseCoreInfo(const std::string& componentName,
+    const std::string& coreNumStr, const std::string& value)
+{
+  char* pEnd = nullptr;
+  long coreNum = strtol(coreNumStr.c_str(), &pEnd, 10);
+  if (*pEnd)
+    return false;
+
+  pEnd = nullptr;
+  double numValue = strtold(value.c_str(), &pEnd);
+  if (*pEnd)
+    return false;
+
+  if (componentName == "Core Frequency")
+  {
+    if (coreNum < coresNumber())
+      m_freq[coreNum] = numValue;
+    else
+      return false;
+  }
+
+  if (componentName == "Core Usage")
+  {
+    if (coreNum < coresNumber())
+      m_usage[coreNum] = numValue;
+    else
+      return false;
+  }
+
+  return true;
+}
+
 bool ProcessorInfo::parseCpuInfoFile()
 {
   ifstream procInfoFile("/proc/cpuinfo");
@@ -87,7 +175,7 @@ bool ProcessorInfo::parseCpuStatFile()
   isTotalCpuInfo >> type;
   isTotalCpuInfo >> user >> nice >> system >> idle;
   unsigned totalTime = user + nice + system + idle, busyTime = user + nice
-      + system;
+    + system;
   if (m_lastTotalCpuTime == 0)
   {
     m_totalCpuUsage = 0.0;
@@ -98,7 +186,7 @@ bool ProcessorInfo::parseCpuStatFile()
       m_totalCpuUsage = 0.0;
     else
       m_totalCpuUsage = (busyTime - m_lastTotalCpuBusyTime)
-          / (totalTime - m_lastTotalCpuTime) * 100.0;
+        / (totalTime - m_lastTotalCpuTime) * 100.0;
   }
   m_lastTotalCpuBusyTime = busyTime;
   m_lastTotalCpuTime = totalTime;
@@ -119,7 +207,7 @@ bool ProcessorInfo::parseCpuStatFile()
         m_lastTotalTime.resize(coresNumber(), 0);
       if (m_lastBusyTime[coreId] > 0.0 && m_lastTotalTime[coreId] > 0.0)
         usagePercent = (busyTime - m_lastBusyTime[coreId])
-            / static_cast<double>(totalTime - m_lastTotalTime[coreId]) * 100.0;
+          / static_cast<double>(totalTime - m_lastTotalTime[coreId]) * 100.0;
 
       m_lastBusyTime[coreId] = busyTime;
       m_lastTotalTime[coreId] = totalTime;
@@ -142,28 +230,30 @@ std::string ProcessorInfo::toString(unsigned flags) const
   if (flags == 0)
     flags = ALL;
 
-  oss<<"Component Type: Processor; ";
+  oss << "Component Type:Processor;";
 
   if (flags & NAME)
-    oss << "Processor name: " << name() << "; ";
+    oss << "Processor name:" << name() << ";";
 
   if (flags & CORES_NUM)
-    oss << "Cores number: " << coresNumber() << "; ";
+    oss << "Cores number:" << coresNumber() << ";";
 
   if (flags & TOTAL_USAGE)
-    oss << "Total usage: " << totalUsage() << "; ";
+    oss << "Total usage:" << totalUsage() << ";";
 
   if (flags & CORE_FREQ)
   {
     for (unsigned i = 0; i < coresNumber(); i++)
-      oss << "(Core Frequency: " << i << " : " << frequency(i) << "); ";
+      oss << "(Core Frequency:" << i << ":" << frequency(i) << ");";
   }
 
   if (flags & CORE_USAGE)
   {
     for (unsigned i = 0; i < coresNumber(); i++)
-      oss << "(Core Usage: " << i << " : " << usage(i) << "); ";
+      oss << "(Core Usage:" << i << " :" << usage(i) << ");";
   }
+
+  oss << HardwareInfo::toString();
 
   return oss.str();
 }

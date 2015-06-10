@@ -62,6 +62,8 @@ class ProcessInfo: public Info
      */
     bool update() override;
 
+    bool update(const std::string& strFromNet) override;
+
     const std::string& name() const { return m_name; }
 
     std::string toString(unsigned flags = 0) const override;

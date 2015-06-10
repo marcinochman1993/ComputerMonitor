@@ -34,7 +34,8 @@ QVariant AllProcessesModel::data(const QModelIndex &index, int role) const
 QVariant AllProcessesModel::headerData(int section, Qt::Orientation orientation,
     int role) const
 {
-  const vector<QString> HEADER_TITLES = {tr("Name"), tr("Id"), tr("Cpu Usage [%]") };
+  const vector<QString> HEADER_TITLES = { tr("Name"), tr("Id"), tr(
+      "Cpu Usage [%]") };
 
   if (role == Qt::DisplayRole)
   {
@@ -94,6 +95,11 @@ unsigned AllProcessesModel::processIdByIndex(unsigned index) const
   if (index < m_allProcessesId.size())
     return m_allProcessesId[index];
   throw "There's no process with that index";
+}
+
+std::string AllProcessesModel::processNameById(unsigned id) const
+{
+  return compInfo().allProcesses().process(id).name();
 }
 
 QVariant AllProcessesModel::getData(unsigned row, unsigned column) const

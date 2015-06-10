@@ -25,10 +25,14 @@ void RamWidget::drawPlot()
   customPlot->addGraph();
   customPlot->graph(0)->setPen(QPen(Qt::blue));
 
-  y0 = QVector<double>::fromList(QList<double>::fromStdList(
-      m_compInfo->dataContainer()->totalRamUsage().list()));
+  y0 = QVector<double>::fromList(
+      QList<double>::fromStdList(
+          m_compInfo->dataContainer()->totalRamUsage().list()));
   for (int i = 0; i < y0.size(); i++)
-    x.push_back(i);
+    x.push_back(m_compInfo->dataContainer()->time()[i]);
+  customPlot->yAxis->setLabel("Ram Usage [%]");
+  customPlot->xAxis->setTickLabelType(QCPAxis::ltDateTime);
+  customPlot->xAxis->setDateTimeFormat("hh:mm:ss");
   customPlot->graph(0)->setData(x, y0);
   customPlot->graph(0)->rescaleAxes();
 }
@@ -42,9 +46,9 @@ void RamWidget::updatePlot()
     drawPlot();
   else
   {
-    customPlot->graph(0)->addData(
-        m_compInfo->dataContainer()->totalRamUsage().size(),
-        m_compInfo->dataContainer()->totalRamUsage().back());
+    double x = m_compInfo->dataContainer()->time().back(), y =
+      m_compInfo->dataContainer()->totalRamUsage().back();
+    addToPlot(customPlot, x, y);
     customPlot->graph(0)->rescaleAxes();
   }
   customPlot->replot();

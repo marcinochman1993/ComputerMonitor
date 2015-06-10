@@ -16,6 +16,9 @@
 class Info
 {
   public:
+
+    Info():m_updateFromNet(false) { }
+
     /*!
      * \brief Metoda służy do uaktualnienia przechowywanej informacji
      *
@@ -40,14 +43,20 @@ class Info
     virtual const std::time_t lastUpdatedTimeT() const { return std::chrono::system_clock::to_time_t(m_lastUpdated); }
 
     virtual std::string toString(unsigned flags = 0) const;
-//    virtual std::string name() const { return std::string(); }
+
+    virtual bool updateFromNet() const { return m_updateFromNet; }
+
+    virtual void updateFromNet(bool newUpdateFromNet) { m_updateFromNet = newUpdateFromNet; }
 
     /*!
      * \brief Domyślny destruktor
      */
     virtual ~Info() { }
+  protected:
+    bool updateTime(const std::string& time);
   private:
 
+    bool m_updateFromNet;
     /*!
      * \brief Pole przechowujące punkt w czasie, kiedy ostatni raz zostały zaktualizowane informacje.
      */

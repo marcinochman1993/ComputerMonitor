@@ -7,6 +7,7 @@
 
 #include <QApplication>
 #include "ComputerMonitorMainWindowBase.hpp"
+#include "AboutDialog.hpp"
 
 QPalette ComputerMonitorMainWindowBase::s_defaultPalette;
 
@@ -66,4 +67,20 @@ void ComputerMonitorMainWindowBase::initThemeActions(QMenu* optionsMenu)
       SLOT(selectBrightTheme()));
   connect(m_darkThemeAction, SIGNAL(triggered()), this,
       SLOT(selectDarkTheme()));
+}
+
+void ComputerMonitorMainWindowBase::init()
+{
+  setAttribute(Qt::WA_DeleteOnClose);
+}
+
+void ComputerMonitorMainWindowBase::showAboutDialog()
+{
+  AboutDialog dialog(this);
+
+  dialog.author("Marcin Ochman");
+  dialog.version("0.1.0");
+  dialog.programName("Computer Monitor");
+
+  dialog.exec();
 }

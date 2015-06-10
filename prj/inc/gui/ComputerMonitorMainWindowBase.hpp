@@ -22,7 +22,7 @@ class ComputerMonitorMainWindowBase: public QMainWindow
         : QMainWindow(parent), m_darkThemeAction(nullptr),
           m_defaultThemeAction(nullptr), m_themeActionGroup(nullptr),
           m_themeMenu(nullptr)
-    { }
+    { init(); }
 
     static void defaultPalette(const QPalette& palette) { s_defaultPalette = palette; }
   protected:
@@ -35,6 +35,9 @@ class ComputerMonitorMainWindowBase: public QMainWindow
   protected slots:
     void selectDarkTheme();
     void selectBrightTheme();
+    void showAboutDialog();
+  private:
+    void init();
 };
 
 #endif /* COMPUTERMONITORMAINWINDOWBASE_HPP_ */

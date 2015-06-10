@@ -85,7 +85,7 @@ void ProcessorWidget::dataUpdated()
       break;
   }
   x = dataContainer->time().back();
-  customPlot->graph(0)->addData(x, y);
+  addToPlot(customPlot, x, y);
   customPlot->graph(0)->rescaleAxes();
   customPlot->xAxis->setLabel("t");
   customPlot->replot();
@@ -124,7 +124,7 @@ void ProcessorWidget::drawPlot()
   for (int i = 0; i < y0.size(); i++)
     x.push_back(m_compInfo->dataContainer()->time()[i]);
   customPlot->xAxis->setTickLabelType(QCPAxis::ltDateTime);
-  customPlot->xAxis->setDateTimeFormat("h:m:s");
+  customPlot->xAxis->setDateTimeFormat("hh:mm:ss");
   customPlot->graph(0)->setData(x, y0);
   customPlot->graph(0)->rescaleAxes();
   customPlot->replot();

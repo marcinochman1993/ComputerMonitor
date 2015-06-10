@@ -39,3 +39,18 @@ void ComputerMonitorWidgetBase::savePlot(QCustomPlot* plot)
   }
 }
 
+void ComputerMonitorWidgetBase::addToPlot(QCustomPlot* plot, double x, double y)
+{
+  if (plot == nullptr)
+    return;
+  if (plot->graph(0) == nullptr)
+    return;
+
+  auto graphPlot = plot->graph(0);
+
+  if (graphPlot->data()->size() > maxPlotSize())
+    graphPlot->removeData(graphPlot->data()->firstKey());
+
+  graphPlot->addData(x, y);
+
+}

@@ -37,8 +37,7 @@ void ProcessesWidget::computerInfoData(
   auto delegate = new UsageDelegate(this);
   delegate->addColumnUsage(2);
   allProcessesTable->setItemDelegate(delegate);
-  QItemSelectionModel *selectionModel =
-    allProcessesTable->selectionModel();
+  QItemSelectionModel *selectionModel = allProcessesTable->selectionModel();
   connect(selectionModel,
       SIGNAL(selectionChanged (const QItemSelection &, const QItemSelection &)),
       this,
@@ -53,15 +52,21 @@ void ProcessesWidget::onSelectionRowChanged(const QItemSelection & selected,
 {
   if (customPlot->graphCount() <= 0)
     customPlot->addGraph();
-  customPlot->graph(0)->setPen(QPen(Qt::blue));
-  customPlot->addGraph();
 
   m_currentRow = selected.indexes()[0].row();
-  QVector<double> y0 = QVector<double>::fromList(QList<double>::fromStdList(
-      m_compInfo->dataContainer()->cpuUsage(
-          m_model->processIdByIndex(m_currentRow)).list())), x;
+  QVector<double> y0 = QVector<double>::fromList(
+      QList<double>::fromStdList(
+          m_compInfo->dataContainer()->cpuUsage(
+              m_model->processIdByIndex(m_currentRow)).list())), x;
   for (int i = 0; i < y0.size(); i++)
-    x.push_back(i);
+    x.push_back(m_compInfo->dataContainer()->time()[i]);
+  customPlot->yAxis->setLabel(
+      tr("Cpu Usage of %1 [%]").arg(
+          QString::fromStdString(
+              m_model->processNameById(
+                  m_model->processIdByIndex(m_currentRow)))));
+  customPlot->xAxis->setTickLabelType(QCPAxis::ltDateTime);
+  customPlot->xAxis->setDateTimeFormat("hh:mm:ss");
   customPlot->graph(0)->setData(x, y0);
   customPlot->graph(0)->rescaleAxes();
   customPlot->replot();
@@ -72,10 +77,9 @@ void ProcessesWidget::updatePlot()
   if (customPlot->graphCount() == 0 || m_currentRow == -1)
     return;
   unsigned processId = m_model->processIdByIndex(m_currentRow);
-  customPlot->graph(0)->addData(
-      m_compInfo->dataContainer()->cpuUsage(processId).size(),
-      m_compInfo->dataContainer()->cpuUsage(processId).back());
-
+  double y = m_compInfo->dataContainer()->cpuUsage(processId).back(), x =
+    m_compInfo->dataContainer()->time().back();
+  addToPlot(customPlot, x, y);
   customPlot->graph(0)->rescaleAxes();
   customPlot->replot();
 }

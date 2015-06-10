@@ -38,7 +38,7 @@ class ProcessorInfo: public HardwareInfo
      * Inicjalizując obiekt jednocześnie aktualizuje informacje
      * o procesorze komputera
      */
-    ProcessorInfo():m_totalCpuUsage(0.0), m_lastTotalCpuBusyTime(0.0), m_lastTotalCpuTime(0.0) { update(); }
+    ProcessorInfo():m_totalCpuUsage(0.0), m_lastTotalCpuBusyTime(0.0), m_lastTotalCpuTime(0.0) { }
     /*!
      *\brief Metoda pozwala odczytać częstotliwość odpowiedniego rdzenia
      *
@@ -64,8 +64,6 @@ class ProcessorInfo: public HardwareInfo
      */
     double usage(unsigned int coreNum) const;
 
-
-
     double totalUsage() const { return m_totalCpuUsage; }
     /*!
      * \brief Metoda pozwala określić ilość rdzeni procesora
@@ -82,6 +80,8 @@ class ProcessorInfo: public HardwareInfo
      * \return true jeśli odczyty z plików powiodą się, w.p.p. false.
      */
     bool update() override;
+
+    bool update(const std::string& strFromNet) override;
 
     std::string toString(unsigned flags = 0) const override;
   private:
@@ -102,6 +102,8 @@ class ProcessorInfo: public HardwareInfo
      * \return true jeśli odczyt pliku się powiedzie, w.p.p. false
      */
     bool parseCpuStatFile();
+
+    bool parseCoreInfo(const std::string& componentName, const std::string& coreNum, const std::string& value);
 
     /*!
      * \brief Pole przechowujące nazwę procesora
