@@ -19,6 +19,9 @@
 class SensorsVector: public std::vector<SensorInfo>, public Info
 {
   public:
+
+    SensorsVector() {}
+
     /*!
      * \brief Konstruktor klasy dodający czujniki
      *
@@ -31,6 +34,8 @@ class SensorsVector: public std::vector<SensorInfo>, public Info
      * \return Jeśli wszystkie odczyty powiodą się to zwracana jest wartość true, w.p.p. false
      */
     bool update() override;
+
+    bool update(const std::string& strFromNet) override;
 
     std::string toString(unsigned flags = 0) const override;
 };

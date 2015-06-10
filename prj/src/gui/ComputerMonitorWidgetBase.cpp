@@ -52,5 +52,4 @@ void ComputerMonitorWidgetBase::addToPlot(QCustomPlot* plot, double x, double y)
     graphPlot->removeData(graphPlot->data()->firstKey());
 
   graphPlot->addData(x, y);
-
 }

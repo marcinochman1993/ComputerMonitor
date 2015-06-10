@@ -36,7 +36,8 @@ const vector<SensorInfo>& SensorInfo::allSensors()
 
 bool SensorInfo::update()
 {
-  return sensors_get_value(m_chipName, m_subfeature->number, &m_value) >= 0;
+  return sensors_get_value(m_chipName, m_subfeature->number, &m_value) >= 0
+      && Info::update();
 }
 
 bool SensorInfo::update(const string& strFromNet)
@@ -86,7 +87,7 @@ bool SensorInfo::update(const string& strFromNet)
         return false;
   }
 
-  return Info::update(iss.str()) && !iss.fail();
+  return true;
 }
 
 string SensorInfo::name() const
@@ -96,7 +97,7 @@ string SensorInfo::name() const
           ((m_chipName == nullptr || m_subfeature == nullptr) ?
               "" :
               std::string(m_chipName->prefix) + "_"
-                + std::string(m_subfeature->name)) :
+                  + std::string(m_subfeature->name)) :
           m_nameFromNet;
 }
 
@@ -120,10 +121,10 @@ bool SensorInfo::initAllSensors()
           &subfeatureNum)) != 0)
       {
         if ((subfeature->flags & SENSORS_MODE_R)
-          && (((subfeature->type == SENSORS_SUBFEATURE_TEMP_INPUT)
-            || (subfeature->type == SENSORS_SUBFEATURE_IN_INPUT))
-            || (subfeature->type == SENSORS_SUBFEATURE_POWER_INPUT)
-            || (subfeature->type == SENSORS_SUBFEATURE_FAN_INPUT))) // sprawdzenie czy wartość można odczytać
+            && (((subfeature->type == SENSORS_SUBFEATURE_TEMP_INPUT)
+                || (subfeature->type == SENSORS_SUBFEATURE_IN_INPUT))
+                || (subfeature->type == SENSORS_SUBFEATURE_POWER_INPUT)
+                || (subfeature->type == SENSORS_SUBFEATURE_FAN_INPUT))) // sprawdzenie czy wartość można odczytać
         {
           SensorType sensorType;
           switch (subfeature->type)
@@ -151,7 +152,7 @@ std::string SensorInfo::toString(unsigned flags) const
 {
   std::ostringstream oss;
 
-  oss << "Component Type: " << "Sensor;";
+  oss << "Component Type:" << "Sensor;";
 
   if (flags == 0)
     flags = ALL;

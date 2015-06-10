@@ -31,8 +31,6 @@ bool Info::update(const std::string& strFromNet)
 
   std::time_t lastDataUpdated;
 
-  std::cout << value << std::endl;
-
   if (keyName == "Data updated")
   {
     char* pEnd = nullptr;
@@ -52,8 +50,10 @@ bool Info::updateTime(const std::string& time)
 {
   char* pEnd = nullptr;
   long numTime = strtol(time.c_str(), &pEnd, 10);
-  if (!*pEnd)
-    m_lastUpdated = std::chrono::system_clock::from_time_t(
-        static_cast<std::time_t>(numTime));
+  if (*pEnd)
+    return false;
+  m_lastUpdated = std::chrono::system_clock::from_time_t(
+      static_cast<std::time_t>(numTime));
 
+  return true;
 }

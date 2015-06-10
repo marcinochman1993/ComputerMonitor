@@ -76,13 +76,24 @@ bool AllProcessesInfo::update(const std::string& strFromNet)
 
   std::string processInfoStr;
 
+  std::cout << "JEST" << std::endl;
+
   while (iss)
   {
-    char c;
-    iss.get();
-
+    if (iss.get() != '|')
+      return false;
     getline(iss, processInfoStr, '|');
+    ProcessInfo procInfo;
 
+    std::cout << processInfoStr << std::endl;
+
+    if (!procInfo.update(processInfoStr))
+      return false;
+
+    if (containsProcess(procInfo.id()))
+      removeProcess(procInfo.id());
+
+    m_processesMap.insert(make_pair(procInfo.id(), procInfo));
   }
 
   return true;

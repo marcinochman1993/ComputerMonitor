@@ -39,6 +39,9 @@ class ComputerInfo: public Info
      * \return Zwraca true, jeśli wszystko się powiedzie. Jeśli pojawi się błąd zwróci false.
      */
     bool update() override;
+
+    bool update(const std::string& strFromNet);
+
     /*!
      * \brief Pozwala dostać się do zbioru wszystkich czujników
      *
