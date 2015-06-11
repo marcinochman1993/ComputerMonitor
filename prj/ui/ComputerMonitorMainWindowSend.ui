@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Computer Monitor - Send data</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -47,15 +47,7 @@
     </property>
     <addaction name="actionPreferences"/>
    </widget>
-   <widget class="QMenu" name="menuReporting">
-    <property name="title">
-     <string>Reporting</string>
-    </property>
-    <addaction name="actionStart"/>
-    <addaction name="actionPause"/>
-   </widget>
    <addaction name="menuFile"/>
-   <addaction name="menuReporting"/>
    <addaction name="menuOptions"/>
    <addaction name="menuHelp"/>
   </widget>

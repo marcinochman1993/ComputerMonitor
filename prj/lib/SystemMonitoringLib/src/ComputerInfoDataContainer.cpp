@@ -122,8 +122,6 @@ void ComputerInfoDataContainer::init()
 const DataBuffer<double>& ComputerInfoDataContainer::sensorsData(
     unsigned sensorNum) const
 {
-  std::cout << "size of m_sensorsValues: " << m_sensorsValues.size()
-      << std::endl;
   if (sensorNum >= m_sensorsValues.size())
     throw "There's no sensor with that index";
 

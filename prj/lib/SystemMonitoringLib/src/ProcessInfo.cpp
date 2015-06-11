@@ -81,10 +81,7 @@ bool ProcessInfo::update(const std::string& strFromNet)
       issValue >> numValue;
 
       if (issValue.fail() || numValue < 0 || numValue > 100)
-      {
-        std::cout << "numValue: " << numValue << std::endl;
         return false;
-      }
       m_cpuUsage = numValue;
     }
 

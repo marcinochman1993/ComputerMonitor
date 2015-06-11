@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1126</width>
+    <width>1498</width>
     <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Computer Monitor</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -21,7 +21,7 @@
        <bool>true</bool>
       </property>
       <property name="currentIndex">
-       <number>5</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="sensorsTab">
        <attribute name="title">
@@ -95,7 +95,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1126</width>
+     <width>1498</width>
      <height>20</height>
     </rect>
    </property>
@@ -106,13 +106,6 @@
     <addaction name="separator"/>
     <addaction name="actionExport_Plot"/>
     <addaction name="actionExit"/>
-   </widget>
-   <widget class="QMenu" name="menuReporting">
-    <property name="title">
-     <string>Reporting</string>
-    </property>
-    <addaction name="actionStart_reporting"/>
-    <addaction name="actionStop_Reporting"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -134,7 +127,6 @@
     <addaction name="actionMixed"/>
    </widget>
    <addaction name="menuExit"/>
-   <addaction name="menuReporting"/>
    <addaction name="menuMode"/>
    <addaction name="menuOptions"/>
    <addaction name="menuHelp"/>

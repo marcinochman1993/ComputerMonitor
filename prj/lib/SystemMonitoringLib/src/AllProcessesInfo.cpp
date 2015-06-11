@@ -41,7 +41,7 @@ bool AllProcessesInfo::update()
   m_lastAddedProcesses.clear();
   m_lastDeletedProcesses.clear();
   map<unsigned, bool> processesMapDeletedStatus;
-  getAllKeys(processesMapDeletedStatus);
+  getAllProcessesIdWithStatus(processesMapDeletedStatus);
   for (auto it = directory_iterator(procDir); it != directory_iterator(); it++)
   {
     char* errorPtr = nullptr;
@@ -76,11 +76,16 @@ bool AllProcessesInfo::update(const std::string& strFromNet)
   std::string processInfoStr;
 
   char c;
+  map<unsigned, bool> processesMapDeletedStatus;
+  getAllProcessesIdWithStatus(processesMapDeletedStatus);
+  m_lastAddedProcesses.clear();
+  m_lastDeletedProcesses.clear();
+
   while (iss)
   {
     c = iss.get();
     if (iss.eof())
-      return true;
+      break;
 
     if (c != '|')
       return false;
@@ -89,21 +94,35 @@ bool AllProcessesInfo::update(const std::string& strFromNet)
     ProcessInfo procInfo;
 
     if (!procInfo.update(processInfoStr))
-    {
-      std::cout<<"procinfo.update(process) - '"<<processInfoStr<<"'"<<std::endl;
       return false;
-    }
+
+    unsigned procId = procInfo.id();
 
     if (containsProcess(procInfo.id()))
-      removeProcess(procInfo.id());
-
-    m_processesMap.insert(make_pair(procInfo.id(), procInfo));
+    {
+      ProcessInfo& procFromMap = m_processesMap[procId];
+      processesMapDeletedStatus[procId] = false;
+      procFromMap.update(processInfoStr);
+    }
+    else
+    {
+      m_processesMap.insert(make_pair(procId, procInfo));
+      m_lastAddedProcesses.push_back(procId);
+    }
   }
+
+  for (const auto& it : processesMapDeletedStatus)
+    if (it.second)
+    {
+      m_lastDeletedProcesses.push_back(it.first);
+      m_processesMap.erase(it.first);
+    }
 
   return true;
 }
 
-void AllProcessesInfo::getAllKeys(std::map<unsigned, bool>& keysVec) const
+void AllProcessesInfo::getAllProcessesIdWithStatus(
+    std::map<unsigned, bool>& keysVec) const
 {
   keysVec.clear();
   for (const auto& processPair : m_processesMap)

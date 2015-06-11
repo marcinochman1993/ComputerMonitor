@@ -27,6 +27,9 @@ void ComputerMonitorMainWindow::closeEvent(QCloseEvent * closeEventData)
 
   if (chosenButton == QMessageBox::No)
     closeEventData->ignore();
+  else
+    saveSettings();
+
 }
 
 void ComputerMonitorMainWindow::init(PROGRAM_MODE mode)
@@ -137,7 +140,8 @@ void ComputerMonitorMainWindow::initSocket()
 void ComputerMonitorMainWindow::startServer()
 {
   m_tcpServer->close();
-  if (m_tcpServer->listen(QHostAddress::Any, 9998))
+  if (m_tcpServer->listen(QHostAddress(dataSendWidget->ipAddress()),
+      dataSendWidget->port()))
     dataSendWidget->startedServer();
 }
 
@@ -160,8 +164,9 @@ void ComputerMonitorMainWindow::sendData()
 
   if (m_tcpSocketServer->state() == QTcpSocket::ConnectedState)
   {
-    std::cout << m_dataContainer.computerInfo().toString().c_str() << std::endl;
-    QByteArray array(m_dataContainer.computerInfo().toString().c_str());
+    QByteArray array(
+        m_dataContainer.computerInfo().toString(
+            dataSendWidget->toStringStruct()).c_str());
     m_tcpSocketServer->write(array);
   }
   else
@@ -203,9 +208,10 @@ void ComputerMonitorMainWindow::startReceiving()
   QString ipAddress = dataReceiveWidget->ipAddress();
   unsigned port = dataReceiveWidget->port();
 
-  std::cout << ipAddress.toStdString() << " " << port << std::endl;
-
   m_tcpSocket->connectToHost(ipAddress, port);
   if (m_tcpSocket->waitForConnected(3000))
+  {
+    clear();
     dataReceiveWidget->connectionEstablished();
+  }
 }

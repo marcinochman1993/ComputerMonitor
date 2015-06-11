@@ -49,7 +49,6 @@ bool ProcessorInfo::update(const std::string& strFromNet)
       getline(iss, coreNum, ':');
       getline(iss, value, ')');
       iss.get(); // skip ;
-      std::cout << keyName << " " << value << std::endl;
     }
     else
       getline(iss, value, ';');
@@ -103,8 +102,6 @@ bool ProcessorInfo::parseCoreInfo(const std::string& componentName,
   if (!*pEnd)
     return false;
 
-  std::cout << componentName<< " " << value << std::endl;
-
   istringstream issValue(value);
   double numValue;
   issValue >> numValue;
@@ -113,7 +110,6 @@ bool ProcessorInfo::parseCoreInfo(const std::string& componentName,
 
   if (componentName == "Core Frequency")
   {
-    std::cout << value << std::endl;
     if (coreNum < coresNumber())
       m_freq[coreNum] = numValue;
     else

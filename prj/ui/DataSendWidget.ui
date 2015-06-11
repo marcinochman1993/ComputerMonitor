@@ -112,6 +112,9 @@
       <property name="text">
        <string>Processes</string>
       </property>
+      <property name="flags">
+       <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
+      </property>
       <item>
        <property name="text">
         <string>Name</string>
@@ -239,6 +242,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../rsrc/AppResources.qrc"/>
+ </resources>
  <connections/>
 </ui>

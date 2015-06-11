@@ -91,7 +91,7 @@ class AllProcessesInfo: public Info
 
   private:
 
-    void getAllKeys(std::map<unsigned,bool>& keysVec) const;
+    void getAllProcessesIdWithStatus(std::map<unsigned,bool>& keysVec) const;
 
     /*!
      * \brief Kontener asocjacyjny

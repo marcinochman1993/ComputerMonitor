@@ -38,11 +38,12 @@ bool RamInfo::update(const std::string& strFromNet)
 
     if (keyName == "Total usage")
     {
+      istringstream issValue(value);
       double numValue;
-      char* pEnd = nullptr;
-      numValue = strtod(value.c_str(), &pEnd);
-      if (!*pEnd)
-        m_totalRamUsage = numValue;
+      issValue >> numValue;
+      if (issValue.fail())
+        return false;
+      m_totalRamUsage = numValue;
     }
 
     if (keyName == "Data updated")

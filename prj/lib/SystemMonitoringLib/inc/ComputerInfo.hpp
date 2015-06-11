@@ -24,6 +24,17 @@
 class ComputerInfo: public Info
 {
   public:
+
+
+    struct ToStringStruct
+    {
+      ToStringStruct(): processesFlags(0),processorFlags(0),ramFlags(0),sensorsFlags(0) { }
+      int processesFlags;
+      int processorFlags;
+      int ramFlags;
+      int sensorsFlags;
+    };
+
     /*!
      * \brief Domyślny konstruktor klasy ComputerInfo
      *
@@ -71,6 +82,8 @@ class ComputerInfo: public Info
     const RamInfo& ram() const { return m_ram; }
 
     std::string toString(unsigned flags = 0) const override;
+
+    std::string toString(const ToStringStruct& toStringParams) const;
 
     void clear();
 

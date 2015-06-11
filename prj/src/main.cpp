@@ -20,6 +20,8 @@ int main(int argc, char* argv[])
   const int SPLASH_SCREEN_TIME_MS = 2500;
   QApplication app(argc, argv);
 
+  ComputerMonitorMainWindowBase::defaultPalette(qApp->palette());
+
   QSplashScreen* splashScreen = new QSplashScreen();
   splashScreen->setPixmap(QPixmap(":/images/images/splash.png"));
 
@@ -43,8 +45,6 @@ int main(int argc, char* argv[])
           ComputerMonitorMainWindow::PROGRAM_MODE::MIXED);
       break;
   }
-
-  ComputerMonitorMainWindowBase::defaultPalette(qApp->palette());
 
   QTimer::singleShot(SPLASH_SCREEN_TIME_MS, splashScreen, SLOT(close()));
   QTimer::singleShot(SPLASH_SCREEN_TIME_MS, mainWindow, SLOT(show()));

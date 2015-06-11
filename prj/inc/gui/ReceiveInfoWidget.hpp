@@ -27,6 +27,7 @@ class ReceiveInfoWidget: public QWidget, Ui::ReceiveInfoWidget
 
   private slots:
     void on_ipLineEdit_textChanged(const QString & text) { changeConnectButtonStatus(); }
+    void on_portLineEdit_textChanged(const QString & text) { changeConnectButtonStatus(); }
 
   private:
     void init();

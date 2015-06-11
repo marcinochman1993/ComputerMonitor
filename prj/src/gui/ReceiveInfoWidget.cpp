@@ -46,7 +46,7 @@ void ReceiveInfoWidget::changeConnectButtonStatus()
 {
   QRegExp ipRegEx("[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}");
 
-  if (ipRegEx.exactMatch(ipLineEdit->text()))
+  if (ipRegEx.exactMatch(ipLineEdit->text()) && !portLineEdit->text().isEmpty())
     connectButton->setEnabled(true);
   else
     connectButton->setEnabled(false);

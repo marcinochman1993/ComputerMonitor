@@ -16,6 +16,7 @@
 #include <QTcpSocket>
 #include <QTimer>
 
+
 class ComputerMonitorMainWindowBase: public QMainWindow
 {
   Q_OBJECT
@@ -40,8 +41,13 @@ class ComputerMonitorMainWindowBase: public QMainWindow
     void selectDarkTheme();
     void selectBrightTheme();
     void showAboutDialog();
+
+    virtual void saveSettings();
+    virtual void loadSettings();
+    void selectTheme(QString themeName);
   private:
     void init();
+    QString m_paletteSelected;
 };
 
 #endif /* COMPUTERMONITORMAINWINDOWBASE_HPP_ */

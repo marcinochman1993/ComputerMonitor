@@ -13,6 +13,7 @@
 #include <QTreeWidgetItem>
 #include <QTcpServer>
 #include "ComputerInfo.hpp"
+#include <QSystemTrayIcon>
 
 class ComputerMonitorMainWindowSend: public ComputerMonitorMainWindowBase, Ui::ComputerMonitorMainWindowSendUi
 {
@@ -22,18 +23,24 @@ class ComputerMonitorMainWindowSend: public ComputerMonitorMainWindowBase, Ui::C
     ComputerMonitorMainWindowSend(QWidget* parent = nullptr): ComputerMonitorMainWindowBase(parent) { init(); }
     void closeEvent(QCloseEvent* closeEventArgs) override;
 
+  protected:
+    void changeEvent(QEvent* event) override;
+
   private slots:
-    void on_connectButton_clicked();
+    void on_serverButton_clicked();
     void onConnected();
     void onDisconnected();
     void initSocket();
     void sendData();
+    void onTrayIconActivated(QSystemTrayIcon::ActivationReason);
   private:
     void init();
     void startServer();
+    void stopServer();
+    void initSystemTrayIcon();
     QTcpServer* m_tcpServer;
     ComputerInfo m_compInfo;
-
+    QSystemTrayIcon* m_trayIcon;
 };
 
 #endif /* COMPUTERMONITORMAINWINDOWSEND_HPP_ */

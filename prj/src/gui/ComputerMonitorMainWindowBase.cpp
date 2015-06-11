@@ -6,8 +6,10 @@
  */
 
 #include <QApplication>
+#include <QSettings>
 #include "ComputerMonitorMainWindowBase.hpp"
 #include "AboutDialog.hpp"
+#include <iostream>
 
 QPalette ComputerMonitorMainWindowBase::s_defaultPalette;
 
@@ -31,11 +33,13 @@ void ComputerMonitorMainWindowBase::selectDarkTheme()
   palette.setColor(QPalette::Disabled, QPalette::Text, Qt::darkGray);
   palette.setColor(QPalette::Disabled, QPalette::ButtonText, Qt::darkGray);
   qApp->setPalette(palette);
+  m_paletteSelected = "Dark";
 }
 
 void ComputerMonitorMainWindowBase::selectBrightTheme()
 {
   qApp->setPalette(s_defaultPalette);
+  m_paletteSelected = "Default";
 }
 
 void ComputerMonitorMainWindowBase::initThemeActions(QMenu* optionsMenu)
@@ -72,6 +76,8 @@ void ComputerMonitorMainWindowBase::initThemeActions(QMenu* optionsMenu)
 void ComputerMonitorMainWindowBase::init()
 {
   setAttribute(Qt::WA_DeleteOnClose);
+  loadSettings();
+  selectTheme(m_paletteSelected);
 }
 
 void ComputerMonitorMainWindowBase::showAboutDialog()
@@ -81,6 +87,33 @@ void ComputerMonitorMainWindowBase::showAboutDialog()
   dialog.author("<h2>Marcin Ochman</h2>");
   dialog.version("<h3>0.1.0</h3>");
   dialog.programName("<h1>Computer Monitor</h1>");
-
   dialog.exec();
+}
+
+void ComputerMonitorMainWindowBase::saveSettings()
+{
+  QSettings settings;
+  settings.beginGroup("Theme");
+
+  settings.setValue("Palette", m_paletteSelected);
+
+  settings.endGroup();
+}
+
+void ComputerMonitorMainWindowBase::loadSettings()
+{
+  QSettings settings;
+  settings.beginGroup("Theme");
+
+  m_paletteSelected = settings.value("Palette", "Default").toString();
+
+  settings.endGroup();
+}
+
+void ComputerMonitorMainWindowBase::selectTheme(QString themeName)
+{
+  if (themeName == "Dark")
+    selectDarkTheme();
+  if (themeName == "Default")
+    selectBrightTheme();
 }

@@ -9,12 +9,13 @@
 #include <QCloseEvent>
 #include <QMessageBox>
 #include <QHostAddress>
-#include <iostream>
+
 void ComputerMonitorMainWindowSend::init()
 {
   m_tcpSocket = nullptr;
   setupUi(this);
   initThemeActions(menuOptions);
+  initSystemTrayIcon();
 
   m_tcpServer = new QTcpServer(this);
   m_timer = new QTimer(this);
@@ -24,6 +25,52 @@ void ComputerMonitorMainWindowSend::init()
   connect(m_tcpServer, SIGNAL(newConnection()), this, SLOT(initSocket()));
   connect(m_timer, SIGNAL(timeout()), this, SLOT(sendData()));
   connect(actionAbout, SIGNAL(triggered()), this, SLOT(showAboutDialog()));
+
+}
+
+void ComputerMonitorMainWindowSend::initSystemTrayIcon()
+{
+  m_trayIcon = new QSystemTrayIcon(this);
+  connect(m_trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
+      this, SLOT(onTrayIconActivated(QSystemTrayIcon::ActivationReason)));
+  m_trayIcon->setIcon(QIcon(":/images/images/tray.png"));
+  m_trayIcon->setToolTip(tr("Computer Monitor - stopped server"));
+}
+
+void ComputerMonitorMainWindowSend::onTrayIconActivated(
+    QSystemTrayIcon::ActivationReason reason)
+{
+  switch (reason)
+  {
+    case QSystemTrayIcon::DoubleClick:
+      show();
+      m_trayIcon->hide();
+      break;
+
+    default:
+      break;
+  }
+}
+
+void ComputerMonitorMainWindowSend::changeEvent(QEvent* event)
+{
+  switch (event->type())
+  {
+    case QEvent::WindowStateChange:
+    {
+      if (windowState() & Qt::WindowMinimized)
+      {
+        QTimer::singleShot(0, this, SLOT(hide()));
+        m_trayIcon->show();
+      }
+      break;
+    }
+    default:
+      break;
+  }
+
+  QMainWindow::changeEvent(event);
+
 }
 
 void ComputerMonitorMainWindowSend::initSocket()
@@ -43,17 +90,16 @@ void ComputerMonitorMainWindowSend::closeEvent(QCloseEvent* closeEventArgs)
 
   if (chosenButton == QMessageBox::No)
     closeEventArgs->ignore();
+  else
+    saveSettings();
 }
 
-void ComputerMonitorMainWindowSend::on_connectButton_clicked()
+void ComputerMonitorMainWindowSend::on_serverButton_clicked()
 {
   if (m_tcpServer == nullptr || !m_tcpServer->isListening())
     startServer();
   else
-  {
-    m_tcpServer->close();
-    dataSendWidget->stoppedServer();
-  }
+    stopServer();
 }
 
 void ComputerMonitorMainWindowSend::sendData()
@@ -65,7 +111,8 @@ void ComputerMonitorMainWindowSend::sendData()
 
   if (m_tcpSocket->state() == QTcpSocket::ConnectedState)
   {
-    QByteArray array(m_compInfo.toString().c_str());
+    QByteArray array(
+        m_compInfo.toString(dataSendWidget->toStringStruct()).c_str());
     m_tcpSocket->write(array);
   }
   else
@@ -77,8 +124,17 @@ void ComputerMonitorMainWindowSend::sendData()
 void ComputerMonitorMainWindowSend::startServer()
 {
   m_tcpServer->close();
-  m_tcpServer->listen(QHostAddress::Any, 9998);
+  m_tcpServer->listen(QHostAddress(dataSendWidget->ipAddress()),
+      dataSendWidget->port());
   dataSendWidget->startedServer();
+  m_trayIcon->setToolTip(tr("Computer Monitor - running server"));
+}
+
+void ComputerMonitorMainWindowSend::stopServer()
+{
+  m_tcpServer->close();
+  dataSendWidget->stoppedServer();
+  m_trayIcon->setToolTip(tr("Computer Monitor - stopped server"));
 }
 
 void ComputerMonitorMainWindowSend::onConnected()
@@ -91,5 +147,4 @@ void ComputerMonitorMainWindowSend::onDisconnected()
   dataSendWidget->connectionLost();
   m_tcpSocket = nullptr;
 }
-
 
