@@ -73,7 +73,6 @@ bool AllProcessesInfo::update()
 bool AllProcessesInfo::update(const std::string& strFromNet)
 {
   istringstream iss(strFromNet);
-
   std::string processInfoStr;
 
   char c;
@@ -90,7 +89,10 @@ bool AllProcessesInfo::update(const std::string& strFromNet)
     ProcessInfo procInfo;
 
     if (!procInfo.update(processInfoStr))
+    {
+      std::cout<<"procinfo.update(process) - '"<<processInfoStr<<"'"<<std::endl;
       return false;
+    }
 
     if (containsProcess(procInfo.id()))
       removeProcess(procInfo.id());

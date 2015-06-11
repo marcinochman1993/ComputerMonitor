@@ -49,6 +49,7 @@ bool ProcessorInfo::update(const std::string& strFromNet)
       getline(iss, coreNum, ':');
       getline(iss, value, ')');
       iss.get(); // skip ;
+      std::cout << keyName << " " << value << std::endl;
     }
     else
       getline(iss, value, ';');
@@ -78,9 +79,11 @@ bool ProcessorInfo::update(const std::string& strFromNet)
 
     if (keyName == "Total usage")
     {
-      char* pEnd = nullptr;
-      double numValue = strtod(value.c_str(), &pEnd);
-      if (!*pEnd)
+      istringstream issValue(value);
+      double numValue;
+      issValue >> numValue;
+
+      if (!issValue.fail())
         m_totalCpuUsage = numValue;
     }
 
@@ -97,16 +100,20 @@ bool ProcessorInfo::parseCoreInfo(const std::string& componentName,
 {
   char* pEnd = nullptr;
   long coreNum = strtol(coreNumStr.c_str(), &pEnd, 10);
-  if (*pEnd)
+  if (!*pEnd)
     return false;
 
-  pEnd = nullptr;
-  double numValue = strtold(value.c_str(), &pEnd);
-  if (*pEnd)
+  std::cout << componentName<< " " << value << std::endl;
+
+  istringstream issValue(value);
+  double numValue;
+  issValue >> numValue;
+  if (issValue.fail())
     return false;
 
   if (componentName == "Core Frequency")
   {
+    std::cout << value << std::endl;
     if (coreNum < coresNumber())
       m_freq[coreNum] = numValue;
     else
@@ -243,7 +250,7 @@ std::string ProcessorInfo::toString(unsigned flags) const
   if (flags & CORE_FREQ)
   {
     for (unsigned i = 0; i < coresNumber(); i++)
-      oss << "(Core Frequency:" << i << ":" << frequency(i) << ");";
+      oss << "(Core Frequency:" << i << " :" << frequency(i) << ");";
   }
 
   if (flags & CORE_USAGE)

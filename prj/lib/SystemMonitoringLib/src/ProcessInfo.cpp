@@ -76,10 +76,15 @@ bool ProcessInfo::update(const std::string& strFromNet)
 
     if (keyName == "CPU Usage")
     {
-      char* pEnd = nullptr;
-      double numValue = strtod(value.c_str(), &pEnd);
-      if (*pEnd || numValue < 0 || numValue > 100)
+      istringstream issValue(value);
+      double numValue;
+      issValue >> numValue;
+
+      if (issValue.fail() || numValue < 0 || numValue > 100)
+      {
+        std::cout << "numValue: " << numValue << std::endl;
         return false;
+      }
       m_cpuUsage = numValue;
     }
 

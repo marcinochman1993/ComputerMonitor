@@ -55,7 +55,6 @@ void ProcessorWidget::onSelectionRowChanged(const QItemSelection & selected,
 
 void ProcessorWidget::dataUpdated()
 {
-
   if (m_compInfo == nullptr)
     return;
 

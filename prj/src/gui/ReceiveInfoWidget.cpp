@@ -41,3 +41,18 @@ void ReceiveInfoWidget::connectionLost()
   statusLabel->setText(tr("Disconnected"));
   connectButton->setText(tr("Connect"));
 }
+
+void ReceiveInfoWidget::changeConnectButtonStatus()
+{
+  QRegExp ipRegEx("[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}");
+
+  if (ipRegEx.exactMatch(ipLineEdit->text()))
+    connectButton->setEnabled(true);
+  else
+    connectButton->setEnabled(false);
+}
+
+unsigned ReceiveInfoWidget::port()
+{
+  return portLineEdit->text().toUInt();
+}

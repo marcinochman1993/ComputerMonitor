@@ -53,6 +53,9 @@ void ComputerMonitorMainWindow::init(PROGRAM_MODE mode)
   connect(m_timer, SIGNAL(timeout()), m_dataWrapper, SLOT(update()));
   connect(m_timer, SIGNAL(timeout()), this, SLOT(sendData()));
   connect(m_tcpSocket, SIGNAL(readyRead()), this, SLOT(receiveData()));
+  connect(m_tcpSocket, SIGNAL(connected()), this, SLOT(onConnectedSocket()));
+  connect(m_tcpSocket, SIGNAL(disconnected()), this,
+      SLOT(onDisconnectedSocket()));
 }
 
 void ComputerMonitorMainWindow::changeModeToMixed()
@@ -157,6 +160,7 @@ void ComputerMonitorMainWindow::sendData()
 
   if (m_tcpSocketServer->state() == QTcpSocket::ConnectedState)
   {
+    std::cout << m_dataContainer.computerInfo().toString().c_str() << std::endl;
     QByteArray array(m_dataContainer.computerInfo().toString().c_str());
     m_tcpSocketServer->write(array);
   }
@@ -177,7 +181,7 @@ void ComputerMonitorMainWindow::receiveData()
 {
   string strFromNet = QString(m_tcpSocket->readAll()).toStdString();
   if (m_dataWrapper != nullptr)
-    m_dataWrapper->update();
+    std::cout << m_dataWrapper->update(strFromNet) << std::endl;
 }
 
 void ComputerMonitorMainWindow::on_connectButton_clicked()
@@ -196,7 +200,12 @@ void ComputerMonitorMainWindow::stopReceiving()
 
 void ComputerMonitorMainWindow::startReceiving()
 {
-  m_tcpSocket->connectToHost(QHostAddress("127.0.0.1"), 9998);
+  QString ipAddress = dataReceiveWidget->ipAddress();
+  unsigned port = dataReceiveWidget->port();
+
+  std::cout << ipAddress.toStdString() << " " << port << std::endl;
+
+  m_tcpSocket->connectToHost(ipAddress, port);
   if (m_tcpSocket->waitForConnected(3000))
     dataReceiveWidget->connectionEstablished();
 }

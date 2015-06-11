@@ -62,7 +62,9 @@ class ComputerMonitorMainWindow: public ComputerMonitorMainWindowBase,
     void on_serverButton_clicked();
     void on_connectButton_clicked();
     void onConnectedServer();
+    void onConnectedSocket() { dataReceiveWidget->connectionEstablished(); }
     void onDisconnectedServer();
+    void onDisconnectedSocket() { dataReceiveWidget->connectionLost(); }
     void initSocket();
 
   private slots:

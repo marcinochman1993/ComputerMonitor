@@ -35,17 +35,30 @@ bool ComputerInfoDataContainer::update(const std::string& strFromNet)
   saveUpdatedProcessesValuesInVec();
   saveUpdatedProcessorValues();
   m_totalRamUsage.push_back(m_computerInfo->ram().totalUsage());
-
+  m_time.push_back(m_computerInfo->lastUpdatedTimeT());
   return true;
 }
 
 void ComputerInfoDataContainer::saveUpdatedSensorsValueInVec()
 {
   int i = 0;
-  for (auto& sensor : m_sensorsValues)
+  auto allSensors = computerInfo().allSensors();
+  if (m_sensorsValues.size() == allSensors.size())
+    for (auto& sensor : m_sensorsValues)
+    {
+      sensor.second.push_back(allSensors[i].value());
+      i++;
+    }
+  else
   {
-    sensor.second.push_back(computerInfo().allSensors()[i].value());
-    i++;
+    m_sensorsValues.clear();
+    for (auto& sensor : allSensors)
+    {
+      DataBuffer<double> buff;
+      buff.push_back(sensor.value());
+      m_sensorsValues.insert(make_pair(i, move(buff)));
+      i++;
+    }
   }
 }
 
@@ -109,6 +122,8 @@ void ComputerInfoDataContainer::init()
 const DataBuffer<double>& ComputerInfoDataContainer::sensorsData(
     unsigned sensorNum) const
 {
+  std::cout << "size of m_sensorsValues: " << m_sensorsValues.size()
+      << std::endl;
   if (sensorNum >= m_sensorsValues.size())
     throw "There's no sensor with that index";
 
