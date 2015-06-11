@@ -28,7 +28,7 @@ class RamInfo: public HardwareInfo
      *
      * Przy tworzeniu obiektu odczytuje informacje o pamięci RAM
      */
-    RamInfo() { update(); }
+    RamInfo(): m_totalRamUsage(0) { }
 
     /*!
      * \brief Metoda aktualizuje informacje o pamięci RAM
@@ -48,6 +48,8 @@ class RamInfo: public HardwareInfo
     double totalUsage() const { return m_totalRamUsage; }
 
     std::string toString(unsigned flags = 0) const override;
+
+    void clear() { m_totalRamUsage = 0; }
   private:
 
     /*!

@@ -38,7 +38,7 @@ class ProcessorInfo: public HardwareInfo
      * Inicjalizując obiekt jednocześnie aktualizuje informacje
      * o procesorze komputera
      */
-    ProcessorInfo():m_totalCpuUsage(0.0), m_lastTotalCpuBusyTime(0.0), m_lastTotalCpuTime(0.0) { }
+    ProcessorInfo():m_totalCpuUsage(0.0), m_lastTotalCpuBusyTime(0.0), m_lastTotalCpuTime(0.0),m_coresNum(0) { }
     /*!
      *\brief Metoda pozwala odczytać częstotliwość odpowiedniego rdzenia
      *
@@ -84,6 +84,8 @@ class ProcessorInfo: public HardwareInfo
     bool update(const std::string& strFromNet) override;
 
     std::string toString(unsigned flags = 0) const override;
+
+    void clear();
   private:
     /*!
      * \brief Metoda parsuje plik /proc/cpuinfo

@@ -6,7 +6,6 @@
  */
 
 #include "ProcessorWidget.hpp"
-#include "ProcessorModel.hpp"
 #include "UsageDelegate.hpp"
 
 using namespace std;
@@ -31,12 +30,12 @@ void ProcessorWidget::computerInfoData(
   if (compInfo == nullptr)
     return;
 
-  auto model = new ProcessorModel(this);
-  model->computerInfoData(compInfo);
+  m_processorModel = new ProcessorModel(this);
+  m_processorModel->computerInfoData(compInfo);
   auto delegate = new UsageDelegate(this);
   delegate->addColumnUsage(2);
   coresTable->setItemDelegate(delegate);
-  coresTable->setModel(model);
+  coresTable->setModel(m_processorModel);
   QItemSelectionModel *selectionModel = coresTable->selectionModel();
   m_compInfo = compInfo;
   connect(selectionModel,
@@ -128,4 +127,17 @@ void ProcessorWidget::drawPlot()
   customPlot->graph(0)->setData(x, y0);
   customPlot->graph(0)->rescaleAxes();
   customPlot->replot();
+}
+
+void ProcessorWidget::clear()
+{
+  if (m_processorModel != nullptr)
+    m_processorModel->clear();
+  customPlot->clearGraphs();
+  customPlot->clearPlottables();
+  customPlot->replot();
+  cpuTotalUsageRadialIndicatorWidget->setValuePercent(0.0);
+  processorUsageLabel->setText("");
+  processorNameLabel->setText("");
+
 }

@@ -26,6 +26,19 @@ bool ComputerInfoDataContainer::update()
   return Info::update();
 }
 
+bool ComputerInfoDataContainer::update(const std::string& strFromNet)
+{
+  if (!m_computerInfo->update(strFromNet))
+    return false;
+
+  saveUpdatedSensorsValueInVec();
+  saveUpdatedProcessesValuesInVec();
+  saveUpdatedProcessorValues();
+  m_totalRamUsage.push_back(m_computerInfo->ram().totalUsage());
+
+  return true;
+}
+
 void ComputerInfoDataContainer::saveUpdatedSensorsValueInVec()
 {
   int i = 0;
@@ -137,4 +150,15 @@ const DataBuffer<double>& ComputerInfoDataContainer::frequency(
   }
 
   throw "There's no core with that id";
+}
+
+void ComputerInfoDataContainer::clearData()
+{
+  m_frequency.clear();
+  m_sensorsValues.clear();
+  m_processes.clear();
+  m_processorValues.clear();
+  m_totalRamUsage.clear();
+  m_time.clear();
+  m_computerInfo->clear();
 }

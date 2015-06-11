@@ -19,7 +19,7 @@ class AllSensorsModel: public QAbstractTableModel
     Q_OBJECT
 
   public:
-    AllSensorsModel(QObject* parent = nullptr):QAbstractTableModel(parent),m_computerInfoData(nullptr) { }
+    AllSensorsModel(QObject* parent = nullptr):QAbstractTableModel(parent),m_computerInfoData(nullptr), m_lastNumSensors(0) { }
     /*!
      * \brief Metoda określająca ilość wierszy tabeli, do której należy model
      *
@@ -66,6 +66,8 @@ class AllSensorsModel: public QAbstractTableModel
      * \param compInfoData - wskaźnik na obiekt informacji, który ma zostać ustawiony
      */
     void computerInfoData(ComputerInfoDataContainerWrapper* compInfoData);
+
+    void clear();
   private:
 
     /*!
@@ -87,10 +89,13 @@ class AllSensorsModel: public QAbstractTableModel
      */
     ComputerInfoDataContainerWrapper* m_computerInfoData;
 
+    unsigned m_lastNumSensors;
+
     /*!
      * \brief Stała określająca ilość kolumn w modelu
      */
     static const int COLUMNS_NUM = 3;
+
   private slots:
 
   /*!

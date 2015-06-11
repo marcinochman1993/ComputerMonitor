@@ -87,6 +87,8 @@ class AllProcessesInfo: public Info
 
     std::string toString(unsigned flags = 0) const override;
 
+    void clear();
+
   private:
 
     void getAllKeys(std::map<unsigned,bool>& keysVec) const;

@@ -26,10 +26,13 @@ bool SensorsVector::update(const std::string& strFromNet)
   std::string processInfoStr;
 
   clear();
-
   while (iss)
   {
-    if (iss.get() != '|')
+    char c = iss.get();
+    if (iss.eof())
+      return true;
+
+    if (c != '|')
       return false;
 
     getline(iss, processInfoStr, '|');
@@ -54,4 +57,9 @@ std::string SensorsVector::toString(unsigned flags) const
   }
 
   return oss.str();
+}
+
+void SensorsVector::initWithAllSensors()
+{
+  *this = SensorInfo::allSensors();
 }

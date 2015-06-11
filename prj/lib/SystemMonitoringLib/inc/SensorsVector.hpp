@@ -38,6 +38,8 @@ class SensorsVector: public std::vector<SensorInfo>, public Info
     bool update(const std::string& strFromNet) override;
 
     std::string toString(unsigned flags = 0) const override;
+
+    void initWithAllSensors();
 };
 
 

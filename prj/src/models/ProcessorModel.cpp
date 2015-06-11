@@ -18,7 +18,7 @@ int ProcessorModel::rowCount(const QModelIndex &parent) const
 
 QVariant ProcessorModel::data(const QModelIndex &index, int role) const
 {
-  if (!index.isValid() || m_computerInfoData == nullptr)
+  if (m_computerInfoData == nullptr)
     return QVariant();
 
   unsigned row = index.row();
@@ -27,7 +27,7 @@ QVariant ProcessorModel::data(const QModelIndex &index, int role) const
   switch (role)
   {
     case Qt::DisplayRole:
-      if (row < compInfo().allSensors().size())
+      if (row < compInfo().processor().coresNumber())
         return getData(row, column);
   }
 
@@ -81,6 +81,25 @@ void ProcessorModel::computerInfoData(
 
 void ProcessorModel::dataUpdated()
 {
-  emit dataChanged(index(0, 0),
-      index(compInfo().processor().coresNumber(), COLUMNS_NUM));
+  int deltaNumCores = static_cast<int>(compInfo().processor().coresNumber())
+    - m_lastCoresNum;
+  if (deltaNumCores != 0)
+  {
+    beginResetModel();
+    m_lastCoresNum = compInfo().processor().coresNumber();
+    endResetModel();
+  }
+  else
+    emit dataChanged(index(0, 0),
+        index(compInfo().processor().coresNumber(), COLUMNS_NUM));
+}
+
+void ProcessorModel::clear()
+{
+  if (m_computerInfoData == nullptr)
+    return;
+  beginResetModel();
+  m_computerInfoData->clear();
+  m_lastCoresNum = 0;
+  endResetModel();
 }

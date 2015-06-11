@@ -82,6 +82,25 @@ QVariant AllSensorsModel::getData(int row, int column) const
 
 void AllSensorsModel::dataUpdated()
 {
-  emit dataChanged(index(0, 0),
-      index(compInfo().allSensors().size(), COLUMNS_NUM));
+  int deltaNumSensors = static_cast<int>(compInfo().allSensors().size())
+    - m_lastNumSensors;
+  if (deltaNumSensors != 0)
+  {
+    beginResetModel();
+    m_lastNumSensors = compInfo().allSensors().size();
+    endResetModel();
+  }
+  else
+    emit dataChanged(index(0, 0),
+        index(compInfo().allSensors().size(), COLUMNS_NUM));
+}
+
+void AllSensorsModel::clear()
+{
+  if (m_computerInfoData == nullptr)
+    return;
+  beginResetModel();
+  m_computerInfoData->clear();
+  m_lastNumSensors = 0;
+  endResetModel();
 }

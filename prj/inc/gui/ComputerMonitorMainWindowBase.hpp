@@ -13,6 +13,8 @@
 #include <QActionGroup>
 #include <QMenu>
 #include <QApplication>
+#include <QTcpSocket>
+#include <QTimer>
 
 class ComputerMonitorMainWindowBase: public QMainWindow
 {
@@ -31,6 +33,8 @@ class ComputerMonitorMainWindowBase: public QMainWindow
     QAction* m_defaultThemeAction;
     QActionGroup* m_themeActionGroup;
     QMenu* m_themeMenu;
+    QTimer* m_timer;
+    QTcpSocket* m_tcpSocket;
     static QPalette s_defaultPalette;
   protected slots:
     void selectDarkTheme();

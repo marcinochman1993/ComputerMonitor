@@ -12,6 +12,8 @@ using namespace std;
 
 bool ComputerInfo::update()
 {
+  if(!m_initialized)
+    m_sensors.initWithAllSensors();
   if (!m_sensors.update())
     return false;
   if (!m_allProcesses.update())
@@ -20,6 +22,9 @@ bool ComputerInfo::update()
     return false;
   if (!m_ram.update())
     return false;
+
+  m_initialized = true;
+
   return Info::update();
 }
 
@@ -38,17 +43,14 @@ bool ComputerInfo::update(const std::string& strFromNet)
 
     if (componentString.find("|Component Type:Process;") == 0)
       if (!m_allProcesses.update(componentString))
-      {
-        std::cout << "UPS\n";
         return false;
-      }
 
     if (componentString.find("|Component Type:Sensor;") == 0)
       if (!m_sensors.update(componentString))
         return false;
 
     if (componentString.find("Component Type:RAM;") == 0)
-      if (!m_processor.update(componentString))
+      if (!m_ram.update(componentString))
         return false;
   }
 
@@ -65,4 +67,14 @@ std::string ComputerInfo::toString(unsigned flags) const
   oss << allSensors().toString() << std::endl;
 
   return oss.str();
+}
+
+
+void ComputerInfo::clear()
+{
+  m_processor.clear();
+  m_ram.clear();
+  m_allProcesses.clear();
+  m_sensors.clear();
+  m_initialized = false;
 }

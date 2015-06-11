@@ -16,9 +16,6 @@
 class Info
 {
   public:
-
-    Info():m_updateFromNet(false) { }
-
     /*!
      * \brief Metoda służy do uaktualnienia przechowywanej informacji
      *
@@ -44,10 +41,6 @@ class Info
 
     virtual std::string toString(unsigned flags = 0) const;
 
-    virtual bool updateFromNet() const { return m_updateFromNet; }
-
-    virtual void updateFromNet(bool newUpdateFromNet) { m_updateFromNet = newUpdateFromNet; }
-
     /*!
      * \brief Domyślny destruktor
      */
@@ -56,7 +49,6 @@ class Info
     bool updateTime(const std::string& time);
   private:
 
-    bool m_updateFromNet;
     /*!
      * \brief Pole przechowujące punkt w czasie, kiedy ostatni raz zostały zaktualizowane informacje.
      */

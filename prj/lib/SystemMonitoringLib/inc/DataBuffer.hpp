@@ -41,6 +41,7 @@ class DataBuffer
       return m_data;
     }
 
+    void clear() { m_data.clear(); }
   private:
     std::list<T> m_data;
     unsigned m_maxSize;

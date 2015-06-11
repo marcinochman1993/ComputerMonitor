@@ -84,6 +84,8 @@ class AllProcessesModel: public QAbstractTableModel
 
 
     std::string processNameById(unsigned id) const;
+
+    void clear();
   private:
     /*!
      * \brief Stała określająca ilość kolumn w modelu

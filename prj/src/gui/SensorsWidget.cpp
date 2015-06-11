@@ -12,9 +12,9 @@ void SensorsWidget::computerInfoData(ComputerInfoDataContainerWrapper* compInfo)
   if (compInfo == nullptr)
     return;
 
-  auto model = new AllSensorsModel();
-  model->computerInfoData(compInfo);
-  tableView->setModel(model);
+  m_sensorsModel = new AllSensorsModel(this);
+  m_sensorsModel->computerInfoData(compInfo);
+  tableView->setModel(m_sensorsModel);
   QItemSelectionModel *selectionModel = tableView->selectionModel();
   m_compInfo = compInfo;
 
@@ -68,4 +68,13 @@ void SensorsWidget::init()
 {
   setupUi(this);
   tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+}
+
+void SensorsWidget::clear()
+{
+  m_currentRow = -1;
+  if (m_sensorsModel != nullptr)
+    m_sensorsModel->clear();
+  customPlot->clearGraphs();
+  customPlot->replot();
 }

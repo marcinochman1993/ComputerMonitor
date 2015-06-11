@@ -39,6 +39,8 @@ class RamWidget: public ComputerMonitorWidgetBase, Ui::UiRamWidget
      */
     void computerInfoData(ComputerInfoDataContainerWrapper* computerInfoData);
 
+    void clear();
+
   public slots:
     void savePlot() override { ComputerMonitorWidgetBase::savePlot(customPlot); }
   private slots:

@@ -46,6 +46,10 @@ class ComputerInfoDataContainerWrapper: public QObject, public Info
      */
     bool update();
 
+    bool update(const std::string& strFromNet);
+
+    void clear();
+
   private:
 
     /*!

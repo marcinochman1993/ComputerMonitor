@@ -88,12 +88,16 @@ class ComputerInfoDataContainer: public Info
      */
     bool update() override;
 
+    bool update(const std::string& strFromNet) override;
+
     /*!
      * \brief Metoda pozwala pobrać aktualny obiekt monitorujący komputer
      *
      * \return Stała referencja do obiektu monitorującego komputer
      */
     const ComputerInfo& computerInfo() const { return *m_computerInfo; }
+
+    void clearData();
   private:
     /*!
      * \brief Metoda inicjuje zasoby potrzebne do zbierania monitorowanych danych

@@ -32,7 +32,7 @@ class SensorsWidget: public ComputerMonitorWidgetBase, Ui::UiSensorsWidget
      * @param parent - rodzica kontrolki, domyślnie nullptr
      */
     SensorsWidget(QWidget* parent = nullptr)
-    : ComputerMonitorWidgetBase(parent), m_currentRow(-1) { init(); }
+    : ComputerMonitorWidgetBase(parent), m_currentRow(-1),m_sensorsModel(nullptr) { init(); }
 
     /*!
      * \brief Metoda ustawia wskaźnik na obiekt informacji o komputerze
@@ -43,6 +43,8 @@ class SensorsWidget: public ComputerMonitorWidgetBase, Ui::UiSensorsWidget
      * \param computerInfoData - wskaźnik na obiekt informacji, który ma zostać ustawiony
      */
     void computerInfoData(ComputerInfoDataContainerWrapper* computerInfoData);
+
+    void clear();
 
   public slots:
      void savePlot() override { ComputerMonitorWidgetBase::savePlot(customPlot); }
@@ -78,6 +80,9 @@ class SensorsWidget: public ComputerMonitorWidgetBase, Ui::UiSensorsWidget
      * \brief Pole przechowujące index aktualnie zaznaczonego wiersza w tabeli czujników
      */
     int m_currentRow;
+
+
+    AllSensorsModel* m_sensorsModel;
 };
 
 #endif /* SENSORSWIDGET_HPP_ */

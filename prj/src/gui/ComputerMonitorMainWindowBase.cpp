@@ -16,7 +16,7 @@ void ComputerMonitorMainWindowBase::selectDarkTheme()
   QPalette palette;
   palette.setColor(QPalette::Window, QColor(80, 80, 80));
   palette.setColor(QPalette::WindowText, Qt::white);
-  palette.setColor(QPalette::Base, QColor(130, 130, 130));
+  palette.setColor(QPalette::Base, QColor(110, 110, 110));
   palette.setColor(QPalette::AlternateBase, QColor(80, 80, 80));
   palette.setColor(QPalette::ToolTipBase, Qt::white);
   palette.setColor(QPalette::ToolTipText, Qt::white);
@@ -78,9 +78,9 @@ void ComputerMonitorMainWindowBase::showAboutDialog()
 {
   AboutDialog dialog(this);
 
-  dialog.author("Marcin Ochman");
-  dialog.version("0.1.0");
-  dialog.programName("Computer Monitor");
+  dialog.author("<h2>Marcin Ochman</h2>");
+  dialog.version("<h3>0.1.0</h3>");
+  dialog.programName("<h1>Computer Monitor</h1>");
 
   dialog.exec();
 }

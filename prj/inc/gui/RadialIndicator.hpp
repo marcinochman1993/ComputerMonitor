@@ -17,7 +17,7 @@ class RadialIndicator: public QWidget
     Q_OBJECT
 
   public:
-    RadialIndicator(QWidget* parent = nullptr): QWidget(parent) { init(); }
+    RadialIndicator(QWidget* parent = nullptr): QWidget(parent), m_angle(-45.0) { init(); }
     void paintEvent(QPaintEvent * event) override;
 
     void setValuePercent(double newValue);

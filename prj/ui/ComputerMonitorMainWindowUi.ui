@@ -21,7 +21,7 @@
        <bool>true</bool>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>5</number>
       </property>
       <widget class="QWidget" name="sensorsTab">
        <attribute name="title">
@@ -63,16 +63,26 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="connectionTab">
+      <widget class="QWidget" name="sendingConfigTab">
        <property name="enabled">
         <bool>true</bool>
        </property>
        <attribute name="title">
-        <string>Connection</string>
+        <string>Sending config</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_6">
         <item>
-         <widget class="DataSendWidget" name="widget" native="true"/>
+         <widget class="DataSendWidget" name="dataSendWidget" native="true"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="serverConfigTab">
+       <attribute name="title">
+        <string>Server config</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_7">
+        <item>
+         <widget class="ReceiveInfoWidget" name="dataReceiveWidget" native="true"/>
         </item>
        </layout>
       </widget>
@@ -234,6 +244,12 @@
    <class>RamWidget</class>
    <extends>QWidget</extends>
    <header>RamWidget.hpp</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ReceiveInfoWidget</class>
+   <extends>QWidget</extends>
+   <header>ReceiveInfoWidget.hpp</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

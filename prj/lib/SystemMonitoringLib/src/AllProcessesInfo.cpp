@@ -76,16 +76,18 @@ bool AllProcessesInfo::update(const std::string& strFromNet)
 
   std::string processInfoStr;
 
-  std::cout << "JEST" << std::endl;
-
+  char c;
   while (iss)
   {
-    if (iss.get() != '|')
+    c = iss.get();
+    if (iss.eof())
+      return true;
+
+    if (c != '|')
       return false;
+
     getline(iss, processInfoStr, '|');
     ProcessInfo procInfo;
-
-    std::cout << processInfoStr << std::endl;
 
     if (!procInfo.update(processInfoStr))
       return false;
@@ -119,3 +121,9 @@ std::string AllProcessesInfo::toString(unsigned flags) const
   return oss.str();
 }
 
+void AllProcessesInfo::clear()
+{
+  m_processesMap.clear();
+  m_lastAddedProcesses.clear();
+  m_lastDeletedProcesses.clear();
+}

@@ -24,23 +24,23 @@ class ProcessorModel: public QAbstractTableModel
      *
      * Inicjuje model i pozwala ustawić rodzica modelu
      *
-     * @param parent
+     * \param parent
      */
-    ProcessorModel(QObject* parent = nullptr):QAbstractTableModel(parent),m_computerInfoData(nullptr) { }
+    ProcessorModel(QObject* parent = nullptr):QAbstractTableModel(parent),m_computerInfoData(nullptr), m_lastCoresNum(0) { }
     /*!
      * \brief Metoda określająca ilość wierszy tabeli, do której należy model
      *
      * Jest ona równa ilości procesorów
      *
-     * @param parent - parametr ignorowany
-     * @return
+     * \param parent - parametr ignorowany
+     * \return
      */
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
 
     /*!
      * \brief Metoda pozwalająca określić ilość
      *
-     * @param parent - parametr ignorowany
+     * \param parent - parametr ignorowany
      *
      * @return - Ilość kolumn tabeli, do której należy model
      */
@@ -73,6 +73,8 @@ class ProcessorModel: public QAbstractTableModel
      * \param compInfo - wskaźnik na obiekt informacji, który ma zostać ustawiony
      */
     void computerInfoData(ComputerInfoDataContainerWrapper* compInfo);
+
+    void clear();
   private slots:
 
   /*!
@@ -100,6 +102,8 @@ class ProcessorModel: public QAbstractTableModel
      *\brief Pole przechowujące obiekt pośredniczący do obiektu o informacji o komputerze
      */
     ComputerInfoDataContainerWrapper* m_computerInfoData;
+
+    unsigned m_lastCoresNum;
 
     /*!
      * \brief Stała określająca ilość kolumn w modelu

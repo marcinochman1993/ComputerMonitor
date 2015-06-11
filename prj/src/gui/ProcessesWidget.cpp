@@ -83,3 +83,11 @@ void ProcessesWidget::updatePlot()
   customPlot->graph(0)->rescaleAxes();
   customPlot->replot();
 }
+
+void ProcessesWidget::clear()
+{
+  if (m_model != nullptr)
+    m_model->clear();
+  customPlot->clearGraphs();
+  customPlot->replot();
+}

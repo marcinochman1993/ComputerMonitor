@@ -12,6 +12,7 @@
 #include "ui_ProcessorWidget.h"
 #include "ComputerInfoDataContainerWrapper.hpp"
 #include "ComputerMonitorWidgetBase.hpp"
+#include "ProcessorModel.hpp"
 
 /*!
  * \brief Klasa prezentująca informacje o procesorze komputera
@@ -29,7 +30,8 @@ class ProcessorWidget: public ComputerMonitorWidgetBase, Ui::UiProcessorWidget
      *
      * \param parent - rodzic kontrolki, domyślnie nullptr
      */
-    ProcessorWidget(QWidget* parent = nullptr): ComputerMonitorWidgetBase(parent), m_compInfo(nullptr), m_currentRow(-1) { init(); }
+    ProcessorWidget(QWidget* parent = nullptr): ComputerMonitorWidgetBase(parent), m_compInfo(nullptr), m_currentRow(-1),
+                    m_processorModel(nullptr) { init(); }
 
     /*!
      * \brief Metoda ustawia wskaźnik na obiekt informacji o komputerze
@@ -40,6 +42,8 @@ class ProcessorWidget: public ComputerMonitorWidgetBase, Ui::UiProcessorWidget
      * \param computerInfoData - wskaźnik na obiekt informacji, który ma zostać ustawiony
      */
     void computerInfoData(ComputerInfoDataContainerWrapper* computerInfoData);
+
+    void clear();
 
     private slots:
 
@@ -86,6 +90,7 @@ class ProcessorWidget: public ComputerMonitorWidgetBase, Ui::UiProcessorWidget
        */
       void addDataTypeToCombo();
 
+
       /*!
        * \brief Pole przechowujące wskaźnik na obiekt odpowiedzialny za informacje o komputerze
        */
@@ -95,6 +100,8 @@ class ProcessorWidget: public ComputerMonitorWidgetBase, Ui::UiProcessorWidget
        * \brief Pole przechowujące index aktualnie zaznaczonego wiersza w tabel procesów
        */
       int m_currentRow;
+
+      ProcessorModel* m_processorModel;
 };
 
 #endif /* PROCESSORWIDGET_HPP_ */

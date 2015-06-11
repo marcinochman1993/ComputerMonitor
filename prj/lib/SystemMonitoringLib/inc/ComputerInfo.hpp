@@ -29,7 +29,7 @@ class ComputerInfo: public Info
      *
      * Inicjuje podstawowe struktury przechowujące informacje o stanie komputera.
      */
-    ComputerInfo(): m_sensors(SensorInfo::allSensors()) { }
+    ComputerInfo(): m_initialized(false) { }
 
     /*!
      * \brief Pozwala na aktualizacje informacji o komputerze
@@ -71,6 +71,9 @@ class ComputerInfo: public Info
     const RamInfo& ram() const { return m_ram; }
 
     std::string toString(unsigned flags = 0) const override;
+
+    void clear();
+
   private:
     /*!
      * \brief Pole przechowujące czujniki
@@ -91,6 +94,9 @@ class ComputerInfo: public Info
      * \brief Pole przechowujące informacje o pamięci RAM
      */
     RamInfo m_ram;
+
+
+    bool m_initialized;
 };
 
 

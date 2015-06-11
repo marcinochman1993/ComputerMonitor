@@ -67,6 +67,8 @@ class ProcessInfo: public Info
     const std::string& name() const { return m_name; }
 
     std::string toString(unsigned flags = 0) const override;
+
+    void clear();
   private:
     /*!
      * \brief Pole przechowujące id procesu

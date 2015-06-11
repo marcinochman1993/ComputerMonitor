@@ -35,6 +35,8 @@ class ProcessesWidget: public ComputerMonitorWidgetBase, Ui::UiProcessesWidget
      */
     void computerInfoData(ComputerInfoDataContainerWrapper* compInfo);
 
+    void clear();
+
   public slots:
     void savePlot() override { ComputerMonitorWidgetBase::savePlot(customPlot); }
 

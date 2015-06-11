@@ -119,9 +119,19 @@ QVariant AllProcessesModel::getData(unsigned row, unsigned column) const
         case 2:
           return proc.cpuUsage();
       }
-
     }
   }
 
   return QVariant();
+}
+
+void AllProcessesModel::clear()
+{
+  if (m_computerInfoData == nullptr)
+    return;
+
+  beginResetModel();
+  m_computerInfoData->clear();
+  m_allProcessesId.clear();
+  endResetModel();
 }

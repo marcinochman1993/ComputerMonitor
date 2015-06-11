@@ -53,3 +53,10 @@ void RamWidget::updatePlot()
   }
   customPlot->replot();
 }
+
+void RamWidget::clear()
+{
+  customPlot->clearGraphs();
+  customPlot->clearPlottables();
+  customPlot->replot();
+}

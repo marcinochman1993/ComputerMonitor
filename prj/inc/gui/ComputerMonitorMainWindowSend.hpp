@@ -11,6 +11,8 @@
 #include "ComputerMonitorMainWindowBase.hpp"
 #include "ui_ComputerMonitorMainWindowSend.h"
 #include <QTreeWidgetItem>
+#include <QTcpServer>
+#include "ComputerInfo.hpp"
 
 class ComputerMonitorMainWindowSend: public ComputerMonitorMainWindowBase, Ui::ComputerMonitorMainWindowSendUi
 {
@@ -20,8 +22,18 @@ class ComputerMonitorMainWindowSend: public ComputerMonitorMainWindowBase, Ui::C
     ComputerMonitorMainWindowSend(QWidget* parent = nullptr): ComputerMonitorMainWindowBase(parent) { init(); }
     void closeEvent(QCloseEvent* closeEventArgs) override;
 
+  private slots:
+    void on_connectButton_clicked();
+    void onConnected();
+    void onDisconnected();
+    void initSocket();
+    void sendData();
   private:
     void init();
+    void startServer();
+    QTcpServer* m_tcpServer;
+    ComputerInfo m_compInfo;
+
 };
 
 #endif /* COMPUTERMONITORMAINWINDOWSEND_HPP_ */

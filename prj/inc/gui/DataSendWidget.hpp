@@ -18,7 +18,11 @@ class DataSendWidget: public QWidget, Ui::DataSendWidgetUi
     DataSendWidget(QWidget* parent = nullptr)
         : QWidget(parent) { init(); }
 
-
+  public slots:
+    void connectionEstablished();
+    void connectionLost();
+    void startedServer();
+    void stoppedServer();
   protected slots:
     void on_dataSendTree_itemChanged(QTreeWidgetItem * item, int column);
 

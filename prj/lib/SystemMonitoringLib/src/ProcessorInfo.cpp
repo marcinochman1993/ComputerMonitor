@@ -9,7 +9,7 @@
 #include "ProcessorInfo.hpp"
 #include <map>
 #include <set>
-#include <iostream> // todo usunąć
+#include <iostream>
 using namespace std;
 
 double ProcessorInfo::frequency(unsigned int coreNum) const
@@ -153,7 +153,6 @@ bool ProcessorInfo::parseCpuInfoFile()
       }
       getline(procInfoFile, line);
     }
-
   }
   m_coresNum = repeatedCores.size();
   m_freq.resize(coresNumber());
@@ -256,4 +255,12 @@ std::string ProcessorInfo::toString(unsigned flags) const
   oss << HardwareInfo::toString();
 
   return oss.str();
+}
+
+void ProcessorInfo::clear()
+{
+  m_coresNum = 0;
+  m_freq.clear();
+  m_totalCpuUsage = 0.0;
+  m_usage.clear();
 }
