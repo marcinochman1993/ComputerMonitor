@@ -39,10 +39,17 @@ class RamWidget: public ComputerMonitorWidgetBase, Ui::UiRamWidget
      */
     void computerInfoData(ComputerInfoDataContainerWrapper* computerInfoData);
 
+    /*!
+     * \brief Usuwa wszystkie informacje prezentowane przez kontrolkę
+     */
     void clear();
 
   public slots:
-    void savePlot() override { ComputerMonitorWidgetBase::savePlot(customPlot); }
+
+  /*!
+   * \brief Metoda zapisująca aktualny wykres do pliku
+   */
+   void savePlot() {ComputerMonitorWidgetBase::savePlot(customPlot); }
   private slots:
   /*!
    * \brief Slot obsługi aktualizacji danych

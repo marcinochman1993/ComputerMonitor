@@ -101,6 +101,12 @@ void ComputerMonitorMainWindow::on_actionExport_Plot_triggered()
   std::map<int, ComputerMonitorWidgetBase*> widgetMap = { { 0, sensorsWidget },
       { 1, processorWidget }, { 2, ramWidget }, { 3, processesWidget } };
 
+  if (m_selectedTabIndex > 3)
+  {
+    QMessageBox::information(this,tr("No available plots"),tr("There's no available plots to export"));
+    return;
+  }
+
   ComputerMonitorWidgetBase* widgetToExport = widgetMap[m_selectedTabIndex];
   widgetToExport->savePlot();
 }

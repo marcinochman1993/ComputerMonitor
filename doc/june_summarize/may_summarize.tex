@@ -8,6 +8,7 @@
 \usepackage{tabularx}
 \usepackage{graphicx}
 \usepackage{hyperref}
+\usepackage{float}
 \newcounter{counter}
 \newcommand\rownumber{\stepcounter{counter}\arabic{counter}}
 
@@ -106,7 +107,7 @@ W poniższej tabeli zostały zebrane zadania, które udało się zrealizować do
 \subsubsection{Opracowanie architektury aplikacji}
 Program będzie opierać się na bibliotekach \textit{Qt5} i \textit{QCustomPlot}, które posłużą do prezentacji danych oraz autorskiej biblioteki, która została opisane w następnych punktach - \textit{SystemMonitoringLib}. Biblioteki monitorujące będą komunikować się z warstwą prezentacji za pomocą odpowiedniej klasy pośredniczącej. Diagram budowy aplikacji został przedstawiony na rysunku \ref{diagram_budowy_aplikacji},  diagram klas został przedstawiony na rysunku \ref{diagram_klas}, a diagram przypadków użycia na rysunku \ref{diagram_przypadkow_uzycia}.
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{img/diagramBudowyAplikacji.png}
 	\caption{Diagram budowy aplikacji}
@@ -114,14 +115,21 @@ Program będzie opierać się na bibliotekach \textit{Qt5} i \textit{QCustomPlot
 \end{figure}
 
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
-	\includegraphics[height=0.75\paperheight]{img/diagramKlas.png}
-	\caption{Diagram UML stworzonych klas}
+	\includegraphics[width=\linewidth]{img/diagramKlas.png}
+	\caption{Diagram UML stworzonych klas (1)}
 	\label{diagram_klas}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{img/diagramKlas2.png}
+	\caption{Diagram UML stworzonych klas (2)}
+	\label{diagram_klas_2}
+\end{figure}
+
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.75\paperheight, angle=90]{img/diagramPrzypadkowUzycia.png}
 	\caption{Diagram przypadków użycia}
@@ -166,13 +174,6 @@ Jest to biblioteka do monitorowania lokalnego komputera oraz wysyłania informac
 Roczpoczęto prace nad wizualizowaniem danych  odczytanych z czujników dostępnych na płycie głównej.
 W widoku tabelki mamy możliwość podglądania aktualnych wartości odczytanych wielkości. Zrzut ekranu przedstawiającego aktualny stan interfejsu użytkownika został pokazany na rysunku \ref{wygladAplikacji}.
 
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=\linewidth]{img/wygladAplikacji.png}
-	\caption{Wygląd aplikacji \textit{ComputerMonitor}}
-	\label{wygladAplikacji}
-\end{figure}
-
 \subsection{Drugi termin kontrolny prac nad aplikacją - rezultaty prawie końcowe}
 
 \subsubsection{Dokończenie prac nad biblioteką do monitorowania komputera}
@@ -190,6 +191,7 @@ będzie mieć spójny interfejs dla każdego monitorowanego komponentu. Dzięki 
 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %5
 
+W ostatnim miesiącu pracy nad projektem aplikacja bardzo się rozwinęła. Poniżej przedstawiono, co zostało wykonane.
 
 \subsubsection{Biblioteka \textit{SystemMonitoringLib}}
 W autorskiej bibliotece monitorującej komputer musiałem wprowadzić poprawki, aby przystosować ją
@@ -209,7 +211,7 @@ Interfejs użytkownika uległ bardzo wielu zmianom. Został on wzbogacony o:
 Zaimplementowano dwa rodzaje połączeń. Pierwsze z nich to połączenie do serwera, który wysyła dane. Drugie to postawienie serwera i wysyłanie informacji o komputerze do klienta.
 
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{img/wygladAplikacji.png}
 	\caption{Wygląd aplikacji \textit{ComputerMonitor}}
@@ -252,7 +254,77 @@ część programu, która nie została zrealizowana w taki sposób, jak zaplanow
 
 
 
+\section{Opis interfejsu użytkownika}
+
+Aplikacja na samym początku pokazuje okienko wyboru trybu aplikacji, które zostało pokazane na rysunku \ref{okno_wyboru_trybu}. Mamy do wyboru trzy tryby:
+\begin{itemize}
+			\item tryb wizualizacji
+			\item tryb raportowania
+			\item tryb łączony
+\end{itemize}
+W każdym z trybów jest możliwość wyświetlenia informacji o autorze oraz zmiany palety kolorów.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[height=0.15\paperheight]{img/oknoWyboruTrybu.png}
+	\caption{Wygląd aplikacji \textit{ComputerMonitor}}
+	\label{okno_wyboru_trybu}
+\end{figure}
+
+
+\subsection{Tryb wizualizacji}
+W tym trybie są prezentowane dane pobierane z innego komputera. Mamy do wyboru pięć zakładek:
+
+\begin{itemize}
+	\item \textit{Sensor Info} - widok odpowiedzialny za czujniki
+	\item \textit{Processor Info} - widok odpowiedzialny za procesor
+	\item \textit{Ram Info} - widok odpowiedzialny za pamięć operacyjną
+	\item \textit{Processes Info} - widok odpowiedzialny za wszystkie procesy
+	\item \textit{Server Config} - widok odpowiedzialny za połączenie z serwerem
+\end{itemize}
+Istnieje możliwość wyeksportowania aktualnie widocznego wykresu przy pomocy \textit{File}->\textit{Export Plot}. Widok tego trybu został przedstawiony na rysunku \ref{okno_trybu_wizualizacji}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[height=0.25\paperheight]{img/oknoTrybuWizualizacji.png}
+	\caption{Okno trybu wizualizacji}
+	\label{okno_trybu_wizualizacji}
+\end{figure}
+
+\subsection{Tryb raportowania}
+W tym trybie mamy jedynie możliwość uruchomienia serwera o określonych parametrach. W polach Ip address oraz Port możemy wpisać namiary klienta, do którego będziemy wysyłać dane. Ciekawostką jest zaimplementowanie ikony zasobnika systemy. Jeśli zminimalizujemy program w tym trybie, to program ukryje się i będzie działać w zasobniku.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[height=0.25\paperheight]{img/oknoTrybuRaportowania.png}
+	\caption{Okno trybu raportowania w trakcie uruchomienia serwera}
+	\label{okno_trybu_raportowania}
+\end{figure}
+
+\subsection{Tryb łączony}
+
+Jak sama nazwa wskazuje, tryb łączony, jest połączeniem dwóch poprzednich trybów. Został on przedstawiony na rysunku. Została dodana zakładka ,,Sending config'' do konfiguracji parametrów wysyłania.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[height=0.25\paperheight]{img/oknoTrybuLaczonego.png}
+	\caption{Okno trybu łączonego}
+	\label{okno_trybu_laczonego}
+\end{figure}
+
+
+\section{Przykład pracy aplikacji}
+
+Po uruchomieniu dwóch instancji programu w różnych trybach tj. w trybie raportowania oraz w trybie wizualizacji, wygenerowałem wykres, który został przedstawiony na rysunku \ref{wykres_aplikacja}. Prezentuje on taktowanie procesora podczas uruchomienia programu \texttt{stress}. Widać na wykresie, że częstotliwość rdzenia zmienia się razem z obciążeniem systemu. Okres, kiedy częstotliwość taktowania procesora wynosi 3600 \textit{MHz} to okres, w którym działał program \texttt{stress}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[height=0.25\paperheight]{img/wykres.png}
+	\caption{Wyeksportowany wykres do pliku \textit{.png}}
+	\label{wykres_aplikacja}
+\end{figure}
+
 \section{Podsumowanie}
 
-
+Praca nad aplikacją \textit{ComputerMonitor} dała mi duże doświadczenie z biblioteką \textit{Qt5}. Poznałem również podstawy programowania sieciowego. Po semestrze starań, mogę stwierdzić, że jestem zadowolony z uzyskanych efektów. Największy problem stanowił połączenie wszystkich danych z widokiem aplikacji, ale ostatecznie udało się to wykonać. Aplikacja spełnia swoje zadanie. Myślę, że w wolnej chwili będę ją dalej rozwijał.
 \end{document}

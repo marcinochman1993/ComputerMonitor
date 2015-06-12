@@ -69,6 +69,7 @@ class ProcessorWidget: public ComputerMonitorWidgetBase, Ui::UiProcessorWidget
      */
     void on_dataTypeCombo_currentIndexChanged(int index);
 
+
     public slots:
     /*!
      * \brief Metoda pozwala zapisać wykres do pliku

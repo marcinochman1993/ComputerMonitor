@@ -1,6 +1,11 @@
 \select@language {polish}
-\contentsline {figure}{\numberline {1}{\ignorespaces Diagram budowy aplikacji}}{3}{figure.1}
-\contentsline {figure}{\numberline {2}{\ignorespaces Diagram UML stworzonych klas}}{7}{figure.2}
-\contentsline {figure}{\numberline {3}{\ignorespaces Diagram przypadk\IeC {\'o}w u\IeC {\.z}ycia}}{8}{figure.3}
-\contentsline {figure}{\numberline {4}{\ignorespaces Wygl\IeC {\k a}d aplikacji \textit {ComputerMonitor}}}{9}{figure.4}
-\contentsline {figure}{\numberline {5}{\ignorespaces Wygl\IeC {\k a}d aplikacji \textit {ComputerMonitor}}}{9}{figure.5}
+\contentsline {figure}{\numberline {1}{\ignorespaces Diagram budowy aplikacji}}{4}{figure.1}
+\contentsline {figure}{\numberline {2}{\ignorespaces Diagram UML stworzonych klas (1)}}{5}{figure.2}
+\contentsline {figure}{\numberline {3}{\ignorespaces Diagram UML stworzonych klas (2)}}{6}{figure.3}
+\contentsline {figure}{\numberline {4}{\ignorespaces Diagram przypadk\IeC {\'o}w u\IeC {\.z}ycia}}{7}{figure.4}
+\contentsline {figure}{\numberline {5}{\ignorespaces Wygl\IeC {\k a}d aplikacji \textit {ComputerMonitor}}}{10}{figure.5}
+\contentsline {figure}{\numberline {6}{\ignorespaces Wygl\IeC {\k a}d aplikacji \textit {ComputerMonitor}}}{11}{figure.6}
+\contentsline {figure}{\numberline {7}{\ignorespaces Okno trybu wizualizacji}}{12}{figure.7}
+\contentsline {figure}{\numberline {8}{\ignorespaces Okno trybu raportowania w trakcie uruchomienia serwera}}{12}{figure.8}
+\contentsline {figure}{\numberline {9}{\ignorespaces Okno trybu \IeC {\l }\IeC {\k a}czonego}}{13}{figure.9}
+\contentsline {figure}{\numberline {10}{\ignorespaces Wyeksportowany wykres do pliku \textit {.png}}}{13}{figure.10}

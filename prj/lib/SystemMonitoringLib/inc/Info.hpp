@@ -54,7 +54,7 @@ class Info
     virtual const std::time_t lastUpdatedTimeT() const { return std::chrono::system_clock::to_time_t(m_lastUpdated); }
 
     /*!
-     * \brief
+     * \brief Wirtualna metoda umożliwiająca konwersję danych na łańcuch znaków
      * \param flags - parametr ignorowany
      * \return Zwracany jest łańcuch znaków opisujący dany obiekt.
      */

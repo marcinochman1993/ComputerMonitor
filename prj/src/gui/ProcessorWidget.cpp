@@ -85,7 +85,6 @@ void ProcessorWidget::dataUpdated()
   x = dataContainer->time().back();
   addToPlot(customPlot, x, y);
   customPlot->graph(0)->rescaleAxes();
-  customPlot->xAxis->setLabel("t");
   customPlot->replot();
 }
 
@@ -99,10 +98,9 @@ void ProcessorWidget::drawPlot()
 {
   if (m_compInfo == nullptr)
     return;
-  customPlot->clearGraphs();
-  customPlot->addGraph();
+  if (customPlot->graphCount() <= 0)
+    customPlot->addGraph();
   customPlot->graph(0)->setPen(QPen(Qt::blue));
-  customPlot->addGraph();
   QVector<double> y0, x;
   switch (dataTypeCombo->currentIndex())
   {
