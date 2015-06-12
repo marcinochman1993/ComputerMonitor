@@ -27,12 +27,12 @@ class ProcessorInfo: public HardwareInfo
      */
     enum ToStringFlags
     {
-      NAME = 0x01,       //!< NAME
-      CORES_NUM = 0x02,  //!< CORES_NUM
-      TOTAL_USAGE = 0x04,//!< TOTAL_USAGE
-      CORE_FREQ = 0x08,  //!< CORE_FREQ
-      CORE_USAGE = 0x10, //!< CORE_USAGE
-      ALL =  0x1F        //!< ALL
+      NAME = 0x01,       //!< Nazwa
+      CORES_NUM = 0x02,  //!< Ilość rdzeni
+      TOTAL_USAGE = 0x04,//!< Całkowite zużycie procesora
+      CORE_FREQ = 0x08,  //!< Częstotliwość rdzenia
+      CORE_USAGE = 0x10, //!< Zużycie procesora
+      ALL =  0x1F        //!< Wszystko
     };
 
     /*!
@@ -102,6 +102,7 @@ class ProcessorInfo: public HardwareInfo
      *
      * Format dla informacji o rdzeniu: (typ wielkości:nr rdzenia: wartość).
      * Format dla informacji ogólnej: (typ wielkości:wartość)
+     *
      * \param flags - określa, które elementy opisujące procesor zostaną uwzględnione w łąńuchu znaków
      * \return Zwracany jest łańcuch znaków opisujący proces.
      */

@@ -113,6 +113,9 @@ class ComputerInfo: public Info
 
     /*!
      * \brief Metoda pozwalająca uzyskać łańcuch znaków opisujący komputer.
+     *
+     * Generuje łańcuch znaków, w którym poszczególne komponenty są oddzielone znakiem nowej linii
+     *
      * \param flags - parametr ignorowany
      * \return Łańcuch znaków opisujący informacje o komputerze.
      */
@@ -120,6 +123,9 @@ class ComputerInfo: public Info
 
     /*!
      * \brief Metoda pozwalająca uzyskać łańcuch znaków opisujący komputer.
+     *
+     * Generuje łańcuch znaków, w którym poszczególne komponenty są oddzielone znakiem nowej linii
+     *
      * \param toStringParams - parametry dla metody opisujące, które elementy zostaną uwzględnione.
      * \return Łańcuch znaków opisujący informacje o komputerze.
      */

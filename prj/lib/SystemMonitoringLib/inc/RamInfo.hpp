@@ -22,8 +22,8 @@ class RamInfo: public HardwareInfo
      */
     enum ToStringFlags
     {
-      TOTAL_USAGE = 0x01,//!< TOTAL_USAGE
-      ALL = 0x01         //!< ALL
+      TOTAL_USAGE = 0x01,//!< Całkowite zużycie pamięci RAM
+      ALL = 0x01         //!< Wszystko
     };
 
     /*!
@@ -58,7 +58,7 @@ class RamInfo: public HardwareInfo
     /*!
       * \brief Metoda pozwalająca uzyskać łańcuch znaków opisujący pamięć RAM.
       *
-      * Format dla informacji: (typ wielkości:wartość)
+      * Format dla informacji: typ wielkości:wartość;
       *
       * \param flags - określa, które elementy opisujące procesor zostaną uwzględnione w łąńuchu znaków
       * \return Zwracany jest łańcuch znaków opisujący proces.

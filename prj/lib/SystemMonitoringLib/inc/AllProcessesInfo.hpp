@@ -93,6 +93,9 @@ class AllProcessesInfo: public Info
 
     /*!
      * \brief Metoda pozwalająca uzyskać łańcuch znaków opisujący wszystkie procesy.
+     *
+     * Generuje łańuch znaków typu: |informacje o procesie||informacje o procesie 2| ...
+     *
      * \param flags - parametry dla metody opisujące, które elementy zostaną uwzględnione. Takie same jak dla klasy ProcessInfo.
      * \return Łańcuch znaków opisujący wszystkie procesy.
      */

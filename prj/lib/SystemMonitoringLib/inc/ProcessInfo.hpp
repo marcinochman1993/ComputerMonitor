@@ -23,10 +23,10 @@ class ProcessInfo: public Info
      */
     enum Flags
     {
-      NAME = 0x01,     //!< NAME
-      ID = 0x02,       //!< ID
-      CPU_USAGE = 0x04,//!< CPU_USAGE
-      ALL = 0x07,      //!< ALL
+      NAME = 0x01,     //!< Nazwa
+      ID = 0x02,       //!< Id
+      CPU_USAGE = 0x04,//!< Zużycie procesora przez proces
+      ALL = 0x07,      //!< Wszystko
     };
 
     /*!
@@ -38,7 +38,6 @@ class ProcessInfo: public Info
      */
     ProcessInfo(unsigned id = 1)
       :m_id(id), m_cpuUsage(0) ,m_lastSUTime(0), m_lastUpTime(0) { update(); }
-    //todo zaimplementować double ramUsage() const { return m_ramUsage; }
     /*!
      * \brief Metoda pozwala pobrać procentowe zużycie procesora przez proces
      *
