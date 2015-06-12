@@ -74,9 +74,9 @@ class ComputerInfoDataContainer: public Info
      */
     const DataBuffer<double>& frequency(unsigned coreId) const;
 
-/*!
- * \brief Metoda pozwala pobrać wektor zarejestrowanym danych dotyczących zużycia pamięci RAM
- */
+    /*!
+     * \brief Metoda pozwala pobrać wektor zarejestrowanym danych dotyczących zużycia pamięci RAM
+     */
     const DataBuffer<double>& totalRamUsage() const { return m_totalRamUsage; }
 
     /*!
@@ -88,6 +88,14 @@ class ComputerInfoDataContainer: public Info
      */
     bool update() override;
 
+    /*!
+     * \brief Metoda aktualizuje informacje o komputerze na podstawie łańcucha znaków.
+     *
+     * Zaktualizowane dane są przechowywane w kontenerach, aby można było rejestrować historie zmian.
+     *
+     * \param strFromNet - łańcuch znaków, na podstawie którego zostaną zaktualizowane dane
+     * \return true jeśli aktualizacja się powiedzie, w.p.p false
+     */
     bool update(const std::string& strFromNet) override;
 
     /*!
@@ -97,6 +105,9 @@ class ComputerInfoDataContainer: public Info
      */
     const ComputerInfo& computerInfo() const { return *m_computerInfo; }
 
+    /*!
+     * \brief Metoda usuwa wszelkie do tej pory zgromadzone informacje oraz informacje o samym komputerze.
+     */
     void clearData();
   private:
     /*!

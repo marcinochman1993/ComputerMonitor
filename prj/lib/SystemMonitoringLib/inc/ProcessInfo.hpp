@@ -18,12 +18,15 @@ class ProcessInfo: public Info
 {
   public:
 
+    /*!
+     * \brief Typ wyliczeniowy określający flagi dla metody toString
+     */
     enum Flags
     {
-      NAME = 0x01,
-      ID = 0x02,
-      CPU_USAGE = 0x04,
-      ALL = 0x07,
+      NAME = 0x01,     //!< NAME
+      ID = 0x02,       //!< ID
+      CPU_USAGE = 0x04,//!< CPU_USAGE
+      ALL = 0x07,      //!< ALL
     };
 
     /*!
@@ -42,7 +45,7 @@ class ProcessInfo: public Info
      * Wartość ta jest obliczana na podstawie pomiaru obecnego oraz wcześniejszego na podstawie
      * czasów wykonywania i spoczynku procesu.
      *
-     * @return Zwraca chwilowe procentowe zużycie procesora przez proces
+     * \return Zwraca chwilowe procentowe zużycie procesora przez proces
      */
     double cpuUsage() const { return m_cpuUsage; }
 
@@ -62,20 +65,43 @@ class ProcessInfo: public Info
      */
     bool update() override;
 
+    /*!
+     * \brief Metoda aktualizuje informacje o procesie na podstawie łańcucha znaków.
+     *
+     * \param strFromNet - łańcuch znaków, na podstawie którego zostaną zaktualizowane dane
+     * \return true jeśli aktualizacja się powiedzie, w.p.p false
+     */
     bool update(const std::string& strFromNet) override;
 
+    /*!
+     * \brief Metoda określająca nazwę procesu
+     *
+     * \return Zwracana jest nazwa procesu
+     */
     const std::string& name() const { return m_name; }
 
+    /*!
+     * \brief Metoda pozwalająca uzyskać łańcuch znaków opisujący proces.
+     *
+     * Format dla informacji ogólnej: (typ wielkości:wartość)
+     *
+     * \param flags - określa, które elementy opisujące proces zostaną uwzględnione w łąńuchu znaków
+     * \return Zwracany jest łańcuch znaków opisujący proces.
+     */
     std::string toString(unsigned flags = 0) const override;
 
+    /*!
+     * \brief Metoda pozwalająca usunąć wszelkie dostępne informacje o procesach.
+     *
+     * Po wywołaniu metody, aby kolejny raz otrzymać informacje o procesie należy
+     * wywołać jedną z metod update.
+     */
     void clear();
   private:
     /*!
      * \brief Pole przechowujące id procesu
      */
     unsigned m_id;
-
-    //unsigned m_ramUsage; //todo do zaimplementowania
 
     /*!
      * \brief Pole przechowujące procentowe zużycie procesora przez proces

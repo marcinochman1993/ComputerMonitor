@@ -13,11 +13,22 @@
 #include <sensors/sensors.h>
 #include "HardwareInfo.hpp"
 
+
+/*!
+ * \brief Typ wyliczeniowy określający rodzaj sensora
+ */
 enum class SensorType
 {
-  VOLTAGE = 0, TEMP
+  VOLTAGE = 0, //!< Napięcie
+      TEMP     //!< Temperatura
 };
 
+/*!
+ * \brief Metoda określa jednostkę dla podanego typu czujnika
+ *
+ * \param sensorType - określa typ sensora
+ * \return Łańcuch znaków, określający jednostkę czujnika
+ */
 std::string convertTypeToString(const SensorType& sensorType);
 
 /*!
@@ -30,9 +41,16 @@ class SensorInfo: public HardwareInfo
 {
   public:
 
+    /*!
+     * \brief
+     *
+     */
     enum TO_STRING_FLAGS
     {
-      NAME = 0x01, VALUE = 0x02, TYPE = 0x04, ALL = 0x07
+      NAME = 0x01,  //!< NAzwa
+      VALUE = 0x02, //!< Wartość
+      TYPE = 0x04,  //!< Typ
+      ALL = 0x07    //!< Wszystko
     };
 
     /*!
@@ -61,6 +79,7 @@ class SensorInfo: public HardwareInfo
      *
      * \param chipName - wskaźnik na strukture opisującą układ sensora
      * \param subfeature - wskaźnik na strukturę opisującą poszczególną cechę sensora
+     * \param type - typ czujnika
      */
     SensorInfo(const sensors_chip_name* chipName = nullptr,
         const sensors_subfeature* subfeature = nullptr, const SensorType& type =
@@ -79,6 +98,12 @@ class SensorInfo: public HardwareInfo
      */
     bool update() override;
 
+    /*!
+     * \brief Metoda aktualizuje informacje o czujniku na podstawie łańcucha znaków.
+     *
+     * \param strFromNet - łańcuch znaków, na podstawie którego zostaną zaktualizowane dane, format taki sam jak generuje metoda toString
+     * \return true jeśli aktualizacja się powiedzie, w.p.p false
+     */
     bool update(const std::string& strFromNet) override;
 
     /*!
@@ -114,11 +139,24 @@ class SensorInfo: public HardwareInfo
       return m_type;
     }
 
+    /*!
+     * \brief
+     *
+     * \return Łańuch znaków określający jednostkę wielkości mierzonej przez czujnik.
+     */
     std::string unit() const
     {
       return convertTypeToString(m_type);
     }
 
+    /*!
+     * \brief Metoda pozwalająca uzyskać łańcuch znaków opisujący czujnik.
+     *
+     * Format dla informacji: (typ wielkości:wartość)
+     *
+     * \param flags - określa, które elementy opisujące procesor zostaną uwzględnione w łąńuchu znaków
+     * \return Zwracany jest łańcuch znaków opisujący proces.
+     */
     std::string toString(unsigned flags = 0) const override;
   private:
     /*!
@@ -159,6 +197,9 @@ class SensorInfo: public HardwareInfo
      */
     SensorType m_type;
 
+    /*!
+     * \brief Pole przechowujące nazwę czujnika pobranego z łańucha znakowego w metodzie update
+     */
     std::string m_nameFromNet;
 
     /*!

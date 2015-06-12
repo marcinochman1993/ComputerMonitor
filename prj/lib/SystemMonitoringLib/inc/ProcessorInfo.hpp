@@ -22,14 +22,17 @@ class ProcessorInfo: public HardwareInfo
 {
   public:
 
+    /*!
+     * \brief Typ wyliczeniowy określający flagi dla metody toString
+     */
     enum ToStringFlags
     {
-      NAME = 0x01,
-      CORES_NUM = 0x02,
-      TOTAL_USAGE = 0x04,
-      CORE_FREQ = 0x08,
-      CORE_USAGE = 0x10,
-      ALL =  0x1F
+      NAME = 0x01,       //!< NAME
+      CORES_NUM = 0x02,  //!< CORES_NUM
+      TOTAL_USAGE = 0x04,//!< TOTAL_USAGE
+      CORE_FREQ = 0x08,  //!< CORE_FREQ
+      CORE_USAGE = 0x10, //!< CORE_USAGE
+      ALL =  0x1F        //!< ALL
     };
 
     /*!
@@ -64,6 +67,11 @@ class ProcessorInfo: public HardwareInfo
      */
     double usage(unsigned int coreNum) const;
 
+    /*!
+     * \brief Metoda określająca ogólne zużycie procesora
+     *
+     * \return Wartość zużycia procesora w procentach
+     */
     double totalUsage() const { return m_totalCpuUsage; }
     /*!
      * \brief Metoda pozwala określić ilość rdzeni procesora
@@ -81,10 +89,30 @@ class ProcessorInfo: public HardwareInfo
      */
     bool update() override;
 
+    /*!
+     * \brief Metoda aktualizuje informacje o procesorze na podstawie łańcucha znaków.
+     *
+     * \param strFromNet - łańcuch znaków, na podstawie którego zostaną zaktualizowane dane, format taki sam jak generuje metoda toString
+     * \return true jeśli aktualizacja się powiedzie, w.p.p false
+     */
     bool update(const std::string& strFromNet) override;
 
+    /*!
+     * \brief Metoda pozwalająca uzyskać łańcuch znaków opisujący procesor.
+     *
+     * Format dla informacji o rdzeniu: (typ wielkości:nr rdzenia: wartość).
+     * Format dla informacji ogólnej: (typ wielkości:wartość)
+     * \param flags - określa, które elementy opisujące procesor zostaną uwzględnione w łąńuchu znaków
+     * \return Zwracany jest łańcuch znaków opisujący proces.
+     */
     std::string toString(unsigned flags = 0) const override;
 
+    /*!
+      * \brief Metoda pozwalająca usunąć wszelkie dostępne informacje o procesorze.
+      *
+      * Po wywołaniu metody, aby kolejny raz otrzymać informacje o procesorze należy
+      * wywołać jedną z metod update.
+      */
     void clear();
   private:
     /*!
@@ -105,6 +133,13 @@ class ProcessorInfo: public HardwareInfo
      */
     bool parseCpuStatFile();
 
+    /*!
+     * \brief Metoda pozwala parsować informacje o rdzeniu.
+     * \param componentName - nazwa wielkości
+     * \param coreNum - numer rdzenia procesora, które dotyczy wielkość
+     * \param value - wartość towarzysząca określonej wielkości
+     * \return true jeśli parsowanie się powiedzie, w.p.p. false
+     */
     bool parseCoreInfo(const std::string& componentName, const std::string& coreNum, const std::string& value);
 
     /*!

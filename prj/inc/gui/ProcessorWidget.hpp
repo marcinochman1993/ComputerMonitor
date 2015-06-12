@@ -43,6 +43,9 @@ class ProcessorWidget: public ComputerMonitorWidgetBase, Ui::UiProcessorWidget
      */
     void computerInfoData(ComputerInfoDataContainerWrapper* computerInfoData);
 
+    /*!
+     * \brief Usuwa wszystkie informacje prezentowane przez kontrolkę
+     */
     void clear();
 
     private slots:
@@ -67,6 +70,9 @@ class ProcessorWidget: public ComputerMonitorWidgetBase, Ui::UiProcessorWidget
     void on_dataTypeCombo_currentIndexChanged(int index);
 
     public slots:
+    /*!
+     * \brief Metoda pozwala zapisać wykres do pliku
+     */
       void savePlot() override { ComputerMonitorWidgetBase::savePlot(customPlot); }
 
     private:

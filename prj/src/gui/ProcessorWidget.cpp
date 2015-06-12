@@ -103,7 +103,6 @@ void ProcessorWidget::drawPlot()
   customPlot->addGraph();
   customPlot->graph(0)->setPen(QPen(Qt::blue));
   customPlot->addGraph();
-
   QVector<double> y0, x;
   switch (dataTypeCombo->currentIndex())
   {

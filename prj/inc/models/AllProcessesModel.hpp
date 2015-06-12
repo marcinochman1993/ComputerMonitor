@@ -83,8 +83,23 @@ class AllProcessesModel: public QAbstractTableModel
     unsigned processIdByIndex(unsigned index) const;
 
 
+    /*!
+     * \brief brief Pozwala określić nazwę procesu na podstawie jego id
+     *
+     * Jeżeli metoda nie znajdzie procesu o podanym id, zgłaszany jest wyjątek
+     * typu const char*.
+     *
+     * \param id - id poszukiwanego procesu
+     * \return Zwracana jest nazwa procesu odpowiadająca id.
+     */
     std::string processNameById(unsigned id) const;
 
+    /*!
+     * \brief Usuwa wszystkie dane modelu
+     *
+     * Są one usuwane przy pomocy usunięcia wszelkich dostępnych informacji
+     * o komputerze.
+     */
     void clear();
   private:
     /*!

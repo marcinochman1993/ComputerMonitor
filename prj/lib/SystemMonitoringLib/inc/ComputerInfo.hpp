@@ -26,12 +26,36 @@ class ComputerInfo: public Info
   public:
 
 
+    /*!
+     * \brief Struktura określająca parametry metody toString dla poszczególnych komponentów komputera
+     */
     struct ToStringStruct
     {
+      /*!
+       * \brief Kontruktor struktury ToStringStruct
+       *
+       * Inicjuje wszystkie parametry na 0.
+       */
       ToStringStruct(): processesFlags(0),processorFlags(0),ramFlags(0),sensorsFlags(0) { }
+
+      /*!
+       * \brief Pole określające parametry metody toString dla wszystkich procesów
+       */
       int processesFlags;
+
+      /*!
+       * \brief Pole określające parametry metody toString dla procesora
+       */
       int processorFlags;
+
+      /*!
+       * \brief Pole określające parametry metody toString dla pamięci RAM
+       */
       int ramFlags;
+
+      /*!
+       * \brief Pole określające parametry metody toString dla wszystkich czujników
+       */
       int sensorsFlags;
     };
 
@@ -51,6 +75,12 @@ class ComputerInfo: public Info
      */
     bool update() override;
 
+    /*!
+    * \brief Metoda aktualizuje informacje o komputerze na podstawie łańcucha znaków.
+    *
+    * \param strFromNet - łańuch znaków, na podstawie którego zostaną zaktualizowane dane
+    * \return true jeśli aktualizacja się powiedzie, w.p.p false
+    */
     bool update(const std::string& strFromNet);
 
     /*!
@@ -81,10 +111,26 @@ class ComputerInfo: public Info
      */
     const RamInfo& ram() const { return m_ram; }
 
+    /*!
+     * \brief Metoda pozwalająca uzyskać łańcuch znaków opisujący komputer.
+     * \param flags - parametr ignorowany
+     * \return Łańcuch znaków opisujący informacje o komputerze.
+     */
     std::string toString(unsigned flags = 0) const override;
 
+    /*!
+     * \brief Metoda pozwalająca uzyskać łańcuch znaków opisujący komputer.
+     * \param toStringParams - parametry dla metody opisujące, które elementy zostaną uwzględnione.
+     * \return Łańcuch znaków opisujący informacje o komputerze.
+     */
     std::string toString(const ToStringStruct& toStringParams) const;
 
+    /*!
+     * \brief Metoda pozwalająca usunąć wszelkie dostępne informacje o komputerze.
+     *
+     * Po wywołaniu metody, aby kolejny raz otrzymać informacje o komputerze należy
+     * wywołać jedną z metod update.
+     */
     void clear();
 
   private:

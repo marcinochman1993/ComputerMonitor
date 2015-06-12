@@ -17,10 +17,13 @@ class RamInfo: public HardwareInfo
 {
   public:
 
+    /*!
+     * \brief Typ wyliczeniowy określający flagi dla metody toString
+     */
     enum ToStringFlags
     {
-      TOTAL_USAGE = 0x01,
-      ALL = 0x01
+      TOTAL_USAGE = 0x01,//!< TOTAL_USAGE
+      ALL = 0x01         //!< ALL
     };
 
     /*!
@@ -37,7 +40,12 @@ class RamInfo: public HardwareInfo
      */
     bool update() override;
 
-
+    /*!
+      * \brief Metoda aktualizuje informacje o procesorze na podstawie łańcucha znaków.
+      *
+      * \param strFromNet - łańcuch znaków, na podstawie którego zostaną zaktualizowane dane, format taki sam jak generuje metoda toString
+      * \return true jeśli aktualizacja się powiedzie, w.p.p false
+      */
     bool update(const std::string& strFromNet) override;
 
     /*!
@@ -47,8 +55,22 @@ class RamInfo: public HardwareInfo
      */
     double totalUsage() const { return m_totalRamUsage; }
 
+    /*!
+      * \brief Metoda pozwalająca uzyskać łańcuch znaków opisujący pamięć RAM.
+      *
+      * Format dla informacji: (typ wielkości:wartość)
+      *
+      * \param flags - określa, które elementy opisujące procesor zostaną uwzględnione w łąńuchu znaków
+      * \return Zwracany jest łańcuch znaków opisujący proces.
+      */
     std::string toString(unsigned flags = 0) const override;
 
+    /*!
+     * \brief Metoda pozwalająca usunąć wszelkie dostępne informacje o pamięci RAM.
+     *
+     * Po wywołaniu metody, aby kolejny raz otrzymać informacje o procesorze należy
+     * wywołać jedną z metod update.
+     */
     void clear() { m_totalRamUsage = 0; }
   private:
 

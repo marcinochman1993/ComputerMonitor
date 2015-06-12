@@ -29,7 +29,7 @@ class SensorsWidget: public ComputerMonitorWidgetBase, Ui::UiSensorsWidget
      *
      * Inicjuje wygląd kontrolki oraz ustawia jej rodzica
      *
-     * @param parent - rodzica kontrolki, domyślnie nullptr
+     * \param parent - rodzica kontrolki, domyślnie nullptr
      */
     SensorsWidget(QWidget* parent = nullptr)
     : ComputerMonitorWidgetBase(parent), m_currentRow(-1),m_sensorsModel(nullptr) { init(); }
@@ -44,10 +44,16 @@ class SensorsWidget: public ComputerMonitorWidgetBase, Ui::UiSensorsWidget
      */
     void computerInfoData(ComputerInfoDataContainerWrapper* computerInfoData);
 
+    /*!
+     * \brief Usuwa wszystkie informacje prezentowane przez kontrolkę
+     */
     void clear();
 
   public slots:
-     void savePlot() override { ComputerMonitorWidgetBase::savePlot(customPlot); }
+  /*!
+   * \brief Metoda pozwala zapisać wykres do pliku
+   */
+    void savePlot() override { ComputerMonitorWidgetBase::savePlot(customPlot); }
 
   private slots:
    /*!
@@ -81,7 +87,9 @@ class SensorsWidget: public ComputerMonitorWidgetBase, Ui::UiSensorsWidget
      */
     int m_currentRow;
 
-
+    /*!
+     * \brief Pole przechowujące wskaźnik do modelu wszystkich czujników
+     */
     AllSensorsModel* m_sensorsModel;
 };
 

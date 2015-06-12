@@ -35,9 +35,15 @@ class ProcessesWidget: public ComputerMonitorWidgetBase, Ui::UiProcessesWidget
      */
     void computerInfoData(ComputerInfoDataContainerWrapper* compInfo);
 
+    /*!
+     * \brief Usuwa wszystkie informacje prezentowane przez kontrolkę
+     */
     void clear();
 
   public slots:
+  /*!
+   * \brief Metoda pozwala zapisać wykres do pliku
+   */
     void savePlot() override { ComputerMonitorWidgetBase::savePlot(customPlot); }
 
   private:

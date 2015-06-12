@@ -33,10 +33,14 @@ class ModeSelectionDialog: public QDialog, Ui::UiModeSelectionDialog
      * \brief Konstruktor klasy ModeSelectionDialog
      *
      * Inicjuje okno dialogowe oraz ustawia rodzica okna dialogowego
-     * @param parent - wskaźnik na rodzica okna, jeśli nie jest podane to domyślnie wynosi nullptr
+     * \param parent - wskaźnik na rodzica okna, jeśli nie jest podane to domyślnie wynosi nullptr
      */
     ModeSelectionDialog(QWidget* parent = nullptr):QDialog(parent), m_mode(ProgramMode::PRESENTING_DATA) { init(); }
 
+    /*!
+     * \brief Metoda pozwalająca określić rodzaj wybranego trybu pracy programu
+     * \return Zwracany jest wybrany przez użytkownika tryb pracy programu
+     */
     ProgramMode programMode() const { return m_mode; }
   private:
     /*!
@@ -46,8 +50,16 @@ class ModeSelectionDialog: public QDialog, Ui::UiModeSelectionDialog
      */
     void init();
 
+    /*!
+     * \brief Pole przechowujące wybrany tryb pracy programu
+     */
     ProgramMode m_mode;
   private slots:
+  /*!
+   * \brief Slot obsługi akceptacji okna dialogowego przez użytkownika
+   *
+   * Na podstawie ustawionego checkbox'a ustawia odpowiednią wartość m_mode
+   */
     void acceptedMode();
 
 };

@@ -59,7 +59,6 @@ bool SensorInfo::update(const string& strFromNet)
 
     if (keyName == "Value")
     {
-      char * pEnd = nullptr;
       double numValue = 0;
       istringstream issValue(value);
       issValue >> numValue;

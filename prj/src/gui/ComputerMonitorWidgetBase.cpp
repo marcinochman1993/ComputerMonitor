@@ -48,7 +48,7 @@ void ComputerMonitorWidgetBase::addToPlot(QCustomPlot* plot, double x, double y)
 
   auto graphPlot = plot->graph(0);
 
-  if (graphPlot->data()->size() > maxPlotSize())
+  if (static_cast<unsigned>(graphPlot->data()->size()) > maxPlotSize())
     graphPlot->removeData(graphPlot->data()->firstKey());
 
   graphPlot->addData(x, y);

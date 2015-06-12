@@ -35,9 +35,7 @@ void RadialIndicator::paintEvent(QPaintEvent * pEvent)
 {
   QPainter painter(this);
   int areaWidth = pEvent->rect().width(), areaHeight = pEvent->rect().height(),
-      radiusBig = areaWidth < areaHeight ? areaWidth / 2 : areaHeight / 2,
-      centerX = areaWidth / 2, centerY = areaHeight / 2, radiusSmall = 0.8
-        * radiusBig;
+      centerX = areaWidth / 2, centerY = areaHeight / 2;
 
   QPixmap speedometerImg(":/images/images/speedometer.png");
   QPixmap speedometerIndicatorImg(":/images/images/speedometerIndicator.png");

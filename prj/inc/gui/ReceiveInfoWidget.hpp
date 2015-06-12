@@ -11,11 +11,20 @@
 #include <QWidget>
 #include "ui_ReceiveInfoWidget.h"
 
+/*!
+ * \brief Klasa reprezentująca kontrolkę prezentującą stan obsługi odbierania danych przez sieć
+ *
+ * Kontrolka implementuje jedynie interfejs graficzny, sama nie obsługuje komunikacji
+ */
 class ReceiveInfoWidget: public QWidget, Ui::ReceiveInfoWidget
 {
     Q_OBJECT
 
   public:
+    /*!
+     * \brief
+     * \param parent - rodzic kontrolki
+     */
     ReceiveInfoWidget(QWidget* parent = nullptr): QWidget(parent) { init(); }
 
     QString ipAddress() const { return ipLineEdit->text(); }

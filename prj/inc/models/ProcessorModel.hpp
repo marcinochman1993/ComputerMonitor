@@ -48,19 +48,19 @@ class ProcessorModel: public QAbstractTableModel
 
     /*!
      * \brief Metoda pozwalająca pobrać dane z modelu o odpowiednim indeksie
-     * @param index - współrzedne danych w tabeli
-     * @param role - rodzaj danych
-     * @return Odpowiednie dane dla tabeli
+     * \param index - współrzedne danych w tabeli
+     * \param role - rodzaj danych
+     * \return Odpowiednie dane dla tabeli
      */
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
     /*!
      * \brief Metoda pozwala pobrać dane o nagłówku tabeli
      *
-     * @param section - numer sekcji w nagłówku
-     * @param orientation - określa rodzaj nagłówka - pionowy lub poziomy
-     * @param role - rodzaj danych
-     * @return Zwraca odpowiedni napis dla nagłówka
+     * \param section - numer sekcji w nagłówku
+     * \param orientation - określa rodzaj nagłówka - pionowy lub poziomy
+     * \param role - rodzaj danych
+     * \return Zwraca odpowiedni napis dla nagłówka
      */
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
 
@@ -74,6 +74,12 @@ class ProcessorModel: public QAbstractTableModel
      */
     void computerInfoData(ComputerInfoDataContainerWrapper* compInfo);
 
+    /*!
+     * \brief Usuwa wszystkie dane modelu
+     *
+     * Są one usuwane przy pomocy usunięcia wszelkich dostępnych informacji
+     * o komputerze.
+     */
     void clear();
   private slots:
 
@@ -103,6 +109,11 @@ class ProcessorModel: public QAbstractTableModel
      */
     ComputerInfoDataContainerWrapper* m_computerInfoData;
 
+    /*!
+     * \brief Pole określająca ilość rdzeni przy ostatniej aktualizacji.
+     *
+     * Pozwala określić czy nie zmieniono danych o komputerze (np. z lokalnego na sieciowy)
+     */
     unsigned m_lastCoresNum;
 
     /*!

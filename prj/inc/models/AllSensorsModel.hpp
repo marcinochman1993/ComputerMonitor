@@ -67,6 +67,12 @@ class AllSensorsModel: public QAbstractTableModel
      */
     void computerInfoData(ComputerInfoDataContainerWrapper* compInfoData);
 
+    /*!
+     * \brief Usuwa wszystkie dane modelu
+     *
+     * Są one usuwane przy pomocy usunięcia wszelkich dostępnych informacji
+     * o komputerze.
+     */
     void clear();
   private:
 
@@ -89,6 +95,11 @@ class AllSensorsModel: public QAbstractTableModel
      */
     ComputerInfoDataContainerWrapper* m_computerInfoData;
 
+    /*!
+     * \brief Pole określająca ilość czujników przy ostatniej aktualizacji.
+     *
+     * Pozwala określić czy nie zmieniono danych o komputerze (np. z lokalnego na sieciowy)
+     */
     unsigned m_lastNumSensors;
 
     /*!

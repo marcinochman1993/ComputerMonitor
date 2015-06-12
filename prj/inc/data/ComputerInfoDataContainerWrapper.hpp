@@ -46,8 +46,19 @@ class ComputerInfoDataContainerWrapper: public QObject, public Info
      */
     bool update();
 
+    /*!
+     * \brief Metoda pozwalająca zaktualizować informacje o komputerze z łańcucha znaków
+     *
+     * \param strFromNet - łańcuch znaków na podstawie którego zostaną zaktualizowane informacje
+     * \return Zwraca true jeśli aktualizacja się powiedzie, w.p.p. false
+     */
     bool update(const std::string& strFromNet);
 
+    /*!
+     * \brief Metoda pozwala wyczyścić dane o komputerze.
+     *
+     * Usuwane są wszystkie informacje, które były do tej pory przetrzymywane o komputerze.
+     */
     void clear();
 
   private:

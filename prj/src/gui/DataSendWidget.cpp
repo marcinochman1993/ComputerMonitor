@@ -45,42 +45,23 @@ void DataSendWidget::on_dataSendTree_itemChanged(QTreeWidgetItem * item,
   QTreeWidgetItem* parent = item->parent();
 
   if (parent == nullptr)
-    processParentDataSendOptions(item);
-  else
-  {
-    QString parentText = parent->text(column), itemText = item->text(column);
-    item->checkState(column);
+    return;
+  QString parentText = parent->text(column), itemText = item->text(column);
+  item->checkState(column);
 
-    if (parentText == "Processes")
-      processProcessesDataSendOptions(itemText,
-          item->checkState(0) == Qt::Checked);
+  if (parentText == "Processes")
+    processProcessesDataSendOptions(itemText,
+        item->checkState(0) == Qt::Checked);
 
-    if (parentText == "Processor")
-      processProcessorDataSendOptions(itemText,
-          item->checkState(0) == Qt::Checked);
+  if (parentText == "Processor")
+    processProcessorDataSendOptions(itemText,
+        item->checkState(0) == Qt::Checked);
 
-    if (parentText == "RAM")
-      processRamDataSendOptions(itemText, item->checkState(0) == Qt::Checked);
+  if (parentText == "RAM")
+    processRamDataSendOptions(itemText, item->checkState(0) == Qt::Checked);
 
-    if (parentText == "Sensors")
-      processSensorsDataSendOptions(itemText,
-          item->checkState(0) == Qt::Checked);
-  }
-}
-
-void DataSendWidget::processParentDataSendOptions(QTreeWidgetItem * parentItem)
-{
-  QList<QTreeWidgetItem*> children = parentItem->takeChildren();
-
-  for (auto& item : children)
-  {
-    if (item->checkState(0) == Qt::Checked)
-      item->setCheckState(0, Qt::Unchecked);
-    else
-      item->setCheckState(0, Qt::Checked);
-  }
-
-  parentItem->addChildren(children);
+  if (parentText == "Sensors")
+    processSensorsDataSendOptions(itemText, item->checkState(0) == Qt::Checked);
 }
 
 void DataSendWidget::processProcessorDataSendOptions(const QString& itemText,
